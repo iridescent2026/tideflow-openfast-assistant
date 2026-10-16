@@ -1,0 +1,53 @@
+[
+  {
+    "id": "missing-inflow",
+    "kind": "actual-openfast-injected-fault",
+    "expected": "missing-file",
+    "returncode": 1,
+    "file": "missing-inflow.log",
+    "sha256": "1f6b5bcb92e69228eb7a828f7a8d34421c29d5d38416aace2372fb2037bed1ae",
+    "matched": [
+      "missing-file"
+    ],
+    "engine_version": "v5.0.0"
+  },
+  {
+    "id": "invalid-wind-type",
+    "kind": "actual-openfast-injected-fault",
+    "expected": "invalid-input",
+    "returncode": 1,
+    "file": "invalid-wind-type.log",
+    "sha256": "472b0f1a3c9545610447ef29807da5ba41b6f5a1dfe6a6dc3d53b4a9172fd182",
+    "matched": [
+      "invalid-input"
+    ],
+    "engine_version": "v5.0.0"
+  },
+  {
+    "id": "missing-controller",
+    "kind": "actual-openfast-injected-fault",
+    "expected": "controller",
+    "returncode": 1,
+    "file": "missing-controller.log",
+    "sha256": "98469cb5e2f77b55c35a7039ecfe0afa8f388e7fc25f9836204f45b12113baf0",
+    "matched": [
+      "controller",
+      "aero-warning",
+      "mooring-initialization"
+    ],
+    "engine_version": "v5.0.0"
+  },
+  {
+    "id": "mismatched-radiation-step",
+    "kind": "actual-openfast-validation-failure",
+    "expected": "hydro-step",
+    "returncode": 1,
+    "file": "mismatched-radiation-step.log",
+    "sha256": "ce1b0f45f7db65d7058c794d117bd91efc2683f5b53eb1cca5ebe26b3b193467",
+    "matched": [
+      "hydro-step",
+      "aero-warning"
+    ],
+    "engine_version": "v5.0.0"
+  }
+]

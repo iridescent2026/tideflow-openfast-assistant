@@ -1,0 +1,12 @@
+{
+  "schema": 1,
+  "reviewed": "2026-10-16",
+  "kind": "人工整理的官方文档摘要，按关键词选择；不是全文检索库",
+  "entries": [
+    {"id":"K1","title":"波浪模式、波高与周期","keywords":["wave","波","海况","种子","周期"],"summary":"SeaState 的 WaveMod=1 为规则波，2 为 JONSWAP/Pierson-Moskowitz 谱不规则波。WaveHs 在规则波中是波高，在不规则波中是显著波高；WaveTp 对应规则周期或峰值周期。相同海况参数下，不同随机种子产生不同实现，不应把单次短时输出当作海况总体统计。","url":"https://openfast.readthedocs.io/en/main/source/user/seastate/input_files.html"},
+    {"id":"K2","title":"按模块与原始日志排错","keywords":["error","fatal","file","dll","错误","日志","失败","诊断","报错","文件","控制器"],"summary":"先保留报错前后的模块调用链，定位首个实际错误，再核对对应输入及依赖。用能运行的官方算例逐项改动，有助于缩小问题范围。最终中止信息本身通常不足以定位根因；警告也不自动意味着运行失败。","url":"https://openfast.readthedocs.io/en/main/source/working.html#troubleshooting-a-simulation"},
+    {"id":"K3","title":"求解步长与数值精度","keywords":["dt","步长","收敛","精度","数值","nan","time step"],"summary":"时间步长需要与模型包含的频率及模块耦合相适应。减小步长并比较相同时间窗口下的响应，是数值敏感性检查；单个指标变化小不能证明全部通道已收敛，也不能代替模型校准。","url":"https://openfast.readthedocs.io/en/main/source/working.html#troubleshooting-a-simulation"},
+    {"id":"K4","title":"固定模型与复现范围","keywords":["模型","来源","平台","功率","运动","验证","安全","性能","summary"],"summary":"工作台固定使用 OpenFAST v5.0.0 及对应 r-test 提交中的 OC4 半潜式算例。固定参考模型、人工工况和文件哈希用于复现；它们不证明实际海域适用性或结构安全。模型、控制器和参数的工程解释仍需专业复核。","url":"https://github.com/OpenFAST/r-test/tree/dd5feaaaa500ba7283140107806300d551cff0a7/glue-codes/openfast/5MW_OC4Semi_WSt_WavesWN"},
+    {"id":"K5","title":"HydroDyn 辐射计算步长","keywords":["rdtndt","hydrodyn","辐射","步长"],"summary":"当前 HydroDyn 势流辐射计算要求 RdtnDT 与主求解步长一致。只减小主文件 DT 可能导致初始化失败。工作台同步修改二者，并记录两份输入哈希。RdtnTMax 是辐射记忆核的时间范围，不需要跟随总仿真时长增加；本工具保持其官方值。","url":"https://openfast.readthedocs.io/en/main/source/user/hydrodyn/input_files.html"}
+  ]
+}

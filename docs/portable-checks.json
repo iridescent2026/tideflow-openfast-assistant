@@ -1,0 +1,18 @@
+{
+  "at": "2026-10-16T10:22:47.134982+00:00",
+  "scope": "software-and-protocol-only-not-physical-certification",
+  "groups": [
+    {
+      "group": "Python",
+      "returncode": 0,
+      "output": "............................\n----------------------------------------------------------------------\nRan 28 tests in 1.613s\n\nOK\n"
+    },
+    {
+      "group": "JavaScript",
+      "returncode": 0,
+      "output": "✔ actual OpenFAST records independently recompute Python summary in JS (37.816ms)\n✔ bad parameters rejected (0.6351ms)\n✔ fake stats in imported JSON are recomputed and provenance downgraded (5.9049ms)\n✔ nonmonotonic output and missing channels rejected (4.9806ms)\n✔ logs produce evidence, not a success or fabricated diagnosis (0.6071ms)\n✔ rule explanation labels limitations and energy window (2.4333ms)\n✔ text output constant power integral has correct kWh scale (0.9082ms)\n✔ multiple confounders and different windows are identified (4.3548ms)\n✔ window review has finite values and never certifies stationarity (1.9905ms)\n✔ knowledge is relevant and context excludes raw time series and credentials (1.632ms)\n✔ actual fault logs diagnosed in browser as well (3.0786ms)\n✔ warning does not mask fatal (0.2253ms)\n✔ local AI bridge carries token, credentials and evidence only in request (0.7738ms)\n✔ direct probe excludes context; bad responses and HTTP errors reject (0.9072ms)\nℹ tests 14\nℹ suites 0\nℹ pass 14\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 231.6429\n"
+    }
+  ],
+  "without_engine": true,
+  "source_archive": "offshore-assistant-v0.2-source.zip"
+}

@@ -1,0 +1,16 @@
+{
+  "at": "2026-10-16T10:22:43.554825+00:00",
+  "scope": "software-and-protocol-only-not-physical-certification",
+  "groups": [
+    {
+      "group": "Python",
+      "returncode": 0,
+      "output": "............................\n----------------------------------------------------------------------\nRan 28 tests in 1.665s\n\nOK\n"
+    },
+    {
+      "group": "JavaScript",
+      "returncode": 0,
+      "output": "✔ actual OpenFAST records independently recompute Python summary in JS (36.0721ms)\n✔ bad parameters rejected (0.4873ms)\n✔ fake stats in imported JSON are recomputed and provenance downgraded (3.8437ms)\n✔ nonmonotonic output and missing channels rejected (5.4384ms)\n✔ logs produce evidence, not a success or fabricated diagnosis (0.5218ms)\n✔ rule explanation labels limitations and energy window (2.4638ms)\n✔ text output constant power integral has correct kWh scale (0.7188ms)\n✔ multiple confounders and different windows are identified (2.0328ms)\n✔ window review has finite values and never certifies stationarity (2.1317ms)\n✔ knowledge is relevant and context excludes raw time series and credentials (1.3334ms)\n✔ actual fault logs diagnosed in browser as well (2.3081ms)\n✔ warning does not mask fatal (0.2125ms)\n✔ local AI bridge carries token, credentials and evidence only in request (0.4935ms)\n✔ direct probe excludes context; bad responses and HTTP errors reject (0.7376ms)\nℹ tests 14\nℹ suites 0\nℹ pass 14\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 209.3407\n"
+    }
+  ]
+}

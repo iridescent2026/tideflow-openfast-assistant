@@ -1,0 +1,38 @@
+
+**************************************************************************************************
+OpenFAST
+
+Copyright (C) 2026 National Renewable Energy Laboratory
+Copyright (C) 2026 Envision Energy USA LTD
+
+This program is licensed under Apache License Version 2.0 and comes with ABSOLUTELY NO WARRANTY.
+See the "LICENSE" file distributed with this software for details.
+**************************************************************************************************
+
+OpenFAST-v5.0.0
+Compile Info:
+ - Compiler: Intel(R) Fortran Compiler 20250300
+ - Architecture: 64 bit
+ - Precision: double
+ - OpenMP: No
+ - Date: May 01 2026
+ - Time: 11:35:10
+Execution Info:
+ - Date: 10/16/2026
+ - Time: 17:29:25+0800
+
+OpenFAST input file heading:
+    FAST Certification Test #25: NREL 5.0 MW Baseline Wind Turbine with OC4-DeepCwind semi
+    configuration, for use in offshore analysis
+
+ Running ElastoDyn.
+ Running InflowWind.
+
+FAST_InitializeAll:InflowWind_Init:ProcessComFile:ScanComFile:OpenFInpFile:The input file,
+".\intentionally-missing.dat", was not found.
+
+ OpenFAST encountered an error during module initialization.
+ Simulation error level: FATAL ERROR
+
+ Aborting OpenFAST.
+

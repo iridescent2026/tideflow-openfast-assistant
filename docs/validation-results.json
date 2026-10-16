@@ -1,0 +1,609 @@
+{
+  "schema": 1,
+  "status": "numerical-observations-not-professional-approval",
+  "step_comparison": {
+    "GenPwr": {
+      "baseline_mean": 1646.7070366666667,
+      "half_step_mean": 1646.6695475000001,
+      "mean_change_over_baseline_rms": 2.2760585467709234e-05,
+      "baseline_max_abs": 1703.981,
+      "half_step_max_abs": 1704.008
+    },
+    "RotSpeed": {
+      "baseline_mean": 8.959912115,
+      "half_step_mean": 8.959859293333333,
+      "mean_change_over_baseline_rms": 5.895266186604038e-06,
+      "baseline_max_abs": 9.044353,
+      "half_step_max_abs": 9.044598
+    },
+    "PtfmPitch": {
+      "baseline_mean": 1.707965975,
+      "half_step_mean": 1.7080660925,
+      "mean_change_over_baseline_rms": 5.8220069137196e-05,
+      "baseline_max_abs": 2.060649,
+      "half_step_max_abs": 2.060343
+    },
+    "PtfmSurge": {
+      "baseline_mean": 5.507386575,
+      "half_step_mean": 5.506368051666667,
+      "mean_change_over_baseline_rms": 0.0001833309449369611,
+      "baseline_max_abs": 6.534798,
+      "half_step_max_abs": 6.531893
+    },
+    "Wave1Elev": {
+      "baseline_mean": -1.9333333387540658e-09,
+      "half_step_mean": -1.9333333387540658e-09,
+      "mean_change_over_baseline_rms": 0.0,
+      "baseline_max_abs": 0.7498302,
+      "half_step_max_abs": 0.7498302
+    },
+    "TwrBsMyt": {
+      "baseline_mean": 38934.38979166667,
+      "half_step_mean": 38935.642283333334,
+      "mean_change_over_baseline_rms": 3.207639231026763e-05,
+      "baseline_max_abs": 44610.27,
+      "half_step_max_abs": 44600.91
+    }
+  },
+  "long_windows": [
+    {
+      "start": 60.0,
+      "end": 120.0,
+      "samples": 601,
+      "stats": {
+        "GenPwr": {
+          "mean": 1646.7070366666667,
+          "rms": 1647.109065789746,
+          "max_abs": 1703.981
+        },
+        "RotSpeed": {
+          "mean": 8.959912115,
+          "rms": 8.960013847608975,
+          "max_abs": 9.044353
+        },
+        "PtfmPitch": {
+          "mean": 1.707965975,
+          "rms": 1.719638974732466,
+          "max_abs": 2.060649
+        },
+        "PtfmSurge": {
+          "mean": 5.507386575,
+          "rms": 5.555654195114311,
+          "max_abs": 6.534798
+        },
+        "Wave1Elev": {
+          "mean": -1.9333333387540658e-09,
+          "rms": 0.5303298281020522,
+          "max_abs": 0.7498302
+        },
+        "TwrBsMyt": {
+          "mean": 38934.38979166667,
+          "rms": 39047.14889851413,
+          "max_abs": 44610.27
+        }
+      }
+    },
+    {
+      "start": 180.0,
+      "end": 300.0,
+      "samples": 1201,
+      "stats": {
+        "GenPwr": {
+          "mean": 1642.7676641666667,
+          "rms": 1642.9640061043954,
+          "max_abs": 1689.331
+        },
+        "RotSpeed": {
+          "mean": 8.952277433333334,
+          "rms": 8.952324934309905,
+          "max_abs": 9.016716
+        },
+        "PtfmPitch": {
+          "mean": 1.7286774429166667,
+          "rms": 1.7390915661452118,
+          "max_abs": 2.030604
+        },
+        "PtfmSurge": {
+          "mean": 4.940679871666666,
+          "rms": 4.9656613203007876,
+          "max_abs": 5.959182
+        },
+        "Wave1Elev": {
+          "mean": 2.9166667242204805e-10,
+          "rms": 0.5303298256452729,
+          "max_abs": 0.7498302
+        },
+        "TwrBsMyt": {
+          "mean": 38900.054725,
+          "rms": 39007.76446540885,
+          "max_abs": 43969.38
+        }
+      }
+    },
+    {
+      "start": 300.0,
+      "end": 450.0,
+      "samples": 1501,
+      "stats": {
+        "GenPwr": {
+          "mean": 1643.7769456666667,
+          "rms": 1643.943590149401,
+          "max_abs": 1683.238
+        },
+        "RotSpeed": {
+          "mean": 8.952748236666666,
+          "rms": 8.952787485633719,
+          "max_abs": 9.005761
+        },
+        "PtfmPitch": {
+          "mean": 1.733659434,
+          "rms": 1.7438658366330058,
+          "max_abs": 2.016548
+        },
+        "PtfmSurge": {
+          "mean": 4.840884139333333,
+          "rms": 4.849542346207814,
+          "max_abs": 5.41982
+        },
+        "Wave1Elev": {
+          "mean": 8.266666670121714e-10,
+          "rms": 0.5303298259299254,
+          "max_abs": 0.7498302
+        },
+        "TwrBsMyt": {
+          "mean": 38922.70857666667,
+          "rms": 39029.53181030902,
+          "max_abs": 43991.07
+        }
+      }
+    },
+    {
+      "start": 450.0,
+      "end": 600.0,
+      "samples": 1501,
+      "stats": {
+        "GenPwr": {
+          "mean": 1640.5813210000001,
+          "rms": 1640.7405479190422,
+          "max_abs": 1677.338
+        },
+        "RotSpeed": {
+          "mean": 8.949097899666667,
+          "rms": 8.949133931988156,
+          "max_abs": 8.9952
+        },
+        "PtfmPitch": {
+          "mean": 1.7293209933333333,
+          "rms": 1.739500325693593,
+          "max_abs": 2.003315
+        },
+        "PtfmSurge": {
+          "mean": 4.879583276,
+          "rms": 4.884749220399915,
+          "max_abs": 5.314921
+        },
+        "Wave1Elev": {
+          "mean": -1.1333333288929387e-09,
+          "rms": 0.530329826343332,
+          "max_abs": 0.7498302
+        },
+        "TwrBsMyt": {
+          "mean": 38869.01496666667,
+          "rms": 38975.99404701138,
+          "max_abs": 43847.41
+        }
+      }
+    }
+  ],
+  "seed_statistics": [
+    {
+      "id": "26146514f2c8400eb3d846b957b78dcc",
+      "seed": 123456789,
+      "stats": {
+        "GenPwr": {
+          "label": "发电功率",
+          "unit": "kW",
+          "mean": 1639.9099141666666,
+          "min": 1597.92,
+          "max": 1697.739,
+          "max_abs": 1697.739,
+          "rms": 1640.0586301978178,
+          "std": 22.085830394600205
+        },
+        "RotSpeed": {
+          "label": "转子转速",
+          "unit": "rpm",
+          "mean": 8.948504588333332,
+          "min": 8.897364,
+          "max": 9.03189,
+          "max_abs": 9.03189,
+          "rms": 8.948541805158747,
+          "std": 0.025808356225747803
+        },
+        "PtfmPitch": {
+          "label": "平台纵摇",
+          "unit": "deg",
+          "mean": 1.7335617700000001,
+          "min": 1.541782,
+          "max": 1.925031,
+          "max_abs": 1.925031,
+          "rms": 1.7360892119439038,
+          "std": 0.09364476185282151
+        },
+        "PtfmSurge": {
+          "label": "平台纵荡",
+          "unit": "m",
+          "mean": 4.691419333333333,
+          "min": 4.246298,
+          "max": 5.295846,
+          "max_abs": 5.295846,
+          "rms": 4.699950243944606,
+          "std": 0.2830493497275481
+        },
+        "Wave1Elev": {
+          "label": "波面高程",
+          "unit": "m",
+          "mean": -0.006378907901166669,
+          "min": -0.7781798,
+          "max": 0.7453857,
+          "max_abs": 0.7781798,
+          "rms": 0.30384823085235746,
+          "std": 0.30378126493596663
+        },
+        "TwrBsMyt": {
+          "label": "塔底弯矩",
+          "unit": "kN-m",
+          "mean": 38744.75251666667,
+          "min": 31473.73,
+          "max": 46648.23,
+          "max_abs": 46648.23,
+          "rms": 38864.02324955059,
+          "std": 3042.4423682069796
+        }
+      }
+    },
+    {
+      "id": "e76da08b30e14c58abe614a1a8f2052a",
+      "seed": 234567890,
+      "stats": {
+        "GenPwr": {
+          "label": "发电功率",
+          "unit": "kW",
+          "mean": 1642.7661225000002,
+          "min": 1603.451,
+          "max": 1676.053,
+          "max_abs": 1676.053,
+          "rms": 1642.8383969365752,
+          "std": 15.409906406305137
+        },
+        "RotSpeed": {
+          "label": "转子转速",
+          "unit": "rpm",
+          "mean": 8.950722622499999,
+          "min": 8.903507,
+          "max": 8.990606,
+          "max_abs": 8.990606,
+          "rms": 8.950740367708692,
+          "std": 0.017823164608486614
+        },
+        "PtfmPitch": {
+          "label": "平台纵摇",
+          "unit": "deg",
+          "mean": 1.7249672941666667,
+          "min": 1.535052,
+          "max": 1.972897,
+          "max_abs": 1.972897,
+          "rms": 1.7281653263348247,
+          "std": 0.10508676986794867
+        },
+        "PtfmSurge": {
+          "label": "平台纵荡",
+          "unit": "m",
+          "mean": 4.836581259166667,
+          "min": 4.507929,
+          "max": 5.122396,
+          "max_abs": 5.122396,
+          "rms": 4.838867649100067,
+          "std": 0.14873415540818954
+        },
+        "Wave1Elev": {
+          "label": "波面高程",
+          "unit": "m",
+          "mean": 0.009988827381999998,
+          "min": -0.8338955,
+          "max": 0.6994341,
+          "max_abs": 0.8338955,
+          "rms": 0.34241690062289115,
+          "std": 0.3422711748887416
+        },
+        "TwrBsMyt": {
+          "label": "塔底弯矩",
+          "unit": "kN-m",
+          "mean": 38735.08274166667,
+          "min": 31292.62,
+          "max": 43837.93,
+          "max_abs": 43837.93,
+          "rms": 38831.046623497656,
+          "std": 2728.286435197998
+        }
+      }
+    },
+    {
+      "id": "31450cbdc17742789689ef64c8b5a5f0",
+      "seed": 345678901,
+      "stats": {
+        "GenPwr": {
+          "label": "发电功率",
+          "unit": "kW",
+          "mean": 1648.5324191666666,
+          "min": 1536.268,
+          "max": 1717.576,
+          "max_abs": 1717.576,
+          "rms": 1649.1764084012048,
+          "std": 46.08350012309177
+        },
+        "RotSpeed": {
+          "label": "转子转速",
+          "unit": "rpm",
+          "mean": 8.964011933333333,
+          "min": 8.832979,
+          "max": 9.069914,
+          "max_abs": 9.069914,
+          "rms": 8.964189476239943,
+          "std": 0.05641830366596024
+        },
+        "PtfmPitch": {
+          "label": "平台纵摇",
+          "unit": "deg",
+          "mean": 1.7105557249999999,
+          "min": 1.415531,
+          "max": 2.02689,
+          "max_abs": 2.02689,
+          "rms": 1.7165543836632486,
+          "std": 0.14338083464410548
+        },
+        "PtfmSurge": {
+          "label": "平台纵荡",
+          "unit": "m",
+          "mean": 5.679766314999999,
+          "min": 3.900475,
+          "max": 6.678874,
+          "max_abs": 6.678874,
+          "rms": 5.740522978954012,
+          "std": 0.8329817998554224
+        },
+        "Wave1Elev": {
+          "label": "波面高程",
+          "unit": "m",
+          "mean": -0.017523891991166666,
+          "min": -1.02208,
+          "max": 1.085332,
+          "max_abs": 1.085332,
+          "rms": 0.4812208642458541,
+          "std": 0.4809016878687459
+        },
+        "TwrBsMyt": {
+          "label": "塔底弯矩",
+          "unit": "kN-m",
+          "mean": 38880.972975000004,
+          "min": 28751.91,
+          "max": 48820.86,
+          "max_abs": 48820.86,
+          "rms": 39183.30579853607,
+          "std": 4858.126575019392
+        }
+      }
+    }
+  ],
+  "runs": [
+    {
+      "id": "2c6ed2be9914407cac18a743e7a258b4",
+      "name": "基准 · 8 m/s / 规则波 1.5 m",
+      "params": {
+        "name": "基准 · 8 m/s / 规则波 1.5 m",
+        "wind": 8.0,
+        "wave_height": 1.5,
+        "wave_period": 10.0,
+        "wave_mode": "regular",
+        "duration": 120,
+        "discard": 60,
+        "seed": 123456789,
+        "solver_dt": 0.0125
+      },
+      "returncode": 0,
+      "output_sha256": "c3eae301032e2cd452101798da04131bac269ff68c3adcd13a180b7b9e3bb14e",
+      "input_sha256": {
+        "glue-codes/openfast/5MW_OC4Semi_WSt_WavesWN/5MW_OC4Semi_WSt_WavesWN.fst": "0ea866973f5c0500580dfb585ed134f5294060167a5fc0a30c60f99958b4a2dc",
+        "glue-codes/openfast/5MW_Baseline/NRELOffshrBsline5MW_InflowWind_Steady8mps.dat": "83269009b0fb5d789511d71cbe52628f5132e8c8a9ff5beeb38ef2fcbaf1d457",
+        "glue-codes/openfast/5MW_OC4Semi_WSt_WavesWN/SeaState.dat": "2be0b681aab0e2971d63781de44b45266599e9c9e0f64a5634dae2fa4a475240"
+      },
+      "engine_sha256": "f947198a7dff813a9f221a22a29fd451d40a51a5e976d1847900f1c890d7ffc7"
+    },
+    {
+      "id": "c4f8eac6576b49fe80dbb4cd98661461",
+      "name": "风速对比 · 11.5 m/s / 规则波 1.5 m",
+      "params": {
+        "name": "风速对比 · 11.5 m/s / 规则波 1.5 m",
+        "wind": 11.5,
+        "wave_height": 1.5,
+        "wave_period": 10.0,
+        "wave_mode": "regular",
+        "duration": 120,
+        "discard": 60,
+        "seed": 123456789,
+        "solver_dt": 0.0125
+      },
+      "returncode": 0,
+      "output_sha256": "fa35ab194bcf16aee417a9ab523992316ce905c9ba4f6ce0aa7844cb77f7d32f",
+      "input_sha256": {
+        "glue-codes/openfast/5MW_OC4Semi_WSt_WavesWN/5MW_OC4Semi_WSt_WavesWN.fst": "0ea866973f5c0500580dfb585ed134f5294060167a5fc0a30c60f99958b4a2dc",
+        "glue-codes/openfast/5MW_Baseline/NRELOffshrBsline5MW_InflowWind_Steady8mps.dat": "6785de65bff415184daea367243082475500cea49c9a01aa069865a509cd8bb0",
+        "glue-codes/openfast/5MW_OC4Semi_WSt_WavesWN/SeaState.dat": "2be0b681aab0e2971d63781de44b45266599e9c9e0f64a5634dae2fa4a475240"
+      },
+      "engine_sha256": "f947198a7dff813a9f221a22a29fd451d40a51a5e976d1847900f1c890d7ffc7"
+    },
+    {
+      "id": "b9cb236edb3d4fd8a204f50ca1f08f72",
+      "name": "海况对比 · 8 m/s / 不规则波 3 m",
+      "params": {
+        "name": "海况对比 · 8 m/s / 不规则波 3 m",
+        "wind": 8.0,
+        "wave_height": 3.0,
+        "wave_period": 10.0,
+        "wave_mode": "irregular",
+        "duration": 120,
+        "discard": 60,
+        "seed": 123456789,
+        "solver_dt": 0.0125
+      },
+      "returncode": 0,
+      "output_sha256": "08432abdc6b00f52f820be840740c209c99e162887505a50c0a66ff675ee6a8b",
+      "input_sha256": {
+        "glue-codes/openfast/5MW_OC4Semi_WSt_WavesWN/5MW_OC4Semi_WSt_WavesWN.fst": "0ea866973f5c0500580dfb585ed134f5294060167a5fc0a30c60f99958b4a2dc",
+        "glue-codes/openfast/5MW_Baseline/NRELOffshrBsline5MW_InflowWind_Steady8mps.dat": "83269009b0fb5d789511d71cbe52628f5132e8c8a9ff5beeb38ef2fcbaf1d457",
+        "glue-codes/openfast/5MW_OC4Semi_WSt_WavesWN/SeaState.dat": "0ac899ca93abf86c18cccfb185514523dd6a1743d02aceff834cf0be1745eade"
+      },
+      "engine_sha256": "f947198a7dff813a9f221a22a29fd451d40a51a5e976d1847900f1c890d7ffc7"
+    },
+    {
+      "id": "0c0d8c3d6fb64f5c8161942759a58e51",
+      "name": "单变量 · 规则波高 3 m",
+      "params": {
+        "name": "单变量 · 规则波高 3 m",
+        "wind": 8.0,
+        "wave_height": 3.0,
+        "wave_period": 10.0,
+        "wave_mode": "regular",
+        "duration": 120,
+        "discard": 60,
+        "seed": 123456789,
+        "solver_dt": 0.0125
+      },
+      "returncode": 0,
+      "output_sha256": "27ba10160edca27f23ceec3ff36f9757d1daf9622da29c7a7ada8718578282b7",
+      "input_sha256": {
+        "glue-codes/openfast/5MW_OC4Semi_WSt_WavesWN/5MW_OC4Semi_WSt_WavesWN.fst": "0ea866973f5c0500580dfb585ed134f5294060167a5fc0a30c60f99958b4a2dc",
+        "glue-codes/openfast/5MW_Baseline/NRELOffshrBsline5MW_InflowWind_Steady8mps.dat": "83269009b0fb5d789511d71cbe52628f5132e8c8a9ff5beeb38ef2fcbaf1d457",
+        "glue-codes/openfast/5MW_OC4Semi_WSt_WavesWN/SeaState.dat": "c45111081d7585ce019520162ed55268ce9b7e44abf4f4b42a8da3d2ec53c0c2"
+      },
+      "engine_sha256": "f947198a7dff813a9f221a22a29fd451d40a51a5e976d1847900f1c890d7ffc7"
+    },
+    {
+      "id": "26146514f2c8400eb3d846b957b78dcc",
+      "name": "单变量 · JONSWAP 1.5 m",
+      "params": {
+        "name": "单变量 · JONSWAP 1.5 m",
+        "wind": 8.0,
+        "wave_height": 1.5,
+        "wave_period": 10.0,
+        "wave_mode": "irregular",
+        "duration": 120,
+        "discard": 60,
+        "seed": 123456789,
+        "solver_dt": 0.0125
+      },
+      "returncode": 0,
+      "output_sha256": "d1419d5ffe80c26779dcd028f1813d47346c36551505f8180e8d95bd0b3fda62",
+      "input_sha256": {
+        "glue-codes/openfast/5MW_OC4Semi_WSt_WavesWN/5MW_OC4Semi_WSt_WavesWN.fst": "0ea866973f5c0500580dfb585ed134f5294060167a5fc0a30c60f99958b4a2dc",
+        "glue-codes/openfast/5MW_Baseline/NRELOffshrBsline5MW_InflowWind_Steady8mps.dat": "83269009b0fb5d789511d71cbe52628f5132e8c8a9ff5beeb38ef2fcbaf1d457",
+        "glue-codes/openfast/5MW_OC4Semi_WSt_WavesWN/SeaState.dat": "8aff2290e0bfe2fd957f4b56a239bd4e11bd3e9507aa8969f0dd78bed9b401bc"
+      },
+      "engine_sha256": "f947198a7dff813a9f221a22a29fd451d40a51a5e976d1847900f1c890d7ffc7"
+    },
+    {
+      "id": "e76da08b30e14c58abe614a1a8f2052a",
+      "name": "随机种子 · JONSWAP / 234567890",
+      "params": {
+        "name": "随机种子 · JONSWAP / 234567890",
+        "wind": 8.0,
+        "wave_height": 1.5,
+        "wave_period": 10.0,
+        "wave_mode": "irregular",
+        "duration": 120,
+        "discard": 60,
+        "seed": 234567890,
+        "solver_dt": 0.0125
+      },
+      "returncode": 0,
+      "output_sha256": "71e89706195566200ae359b219d9b97330e519bc41db85d36d685c3fdc6c2e01",
+      "input_sha256": {
+        "glue-codes/openfast/5MW_OC4Semi_WSt_WavesWN/5MW_OC4Semi_WSt_WavesWN.fst": "0ea866973f5c0500580dfb585ed134f5294060167a5fc0a30c60f99958b4a2dc",
+        "glue-codes/openfast/5MW_Baseline/NRELOffshrBsline5MW_InflowWind_Steady8mps.dat": "83269009b0fb5d789511d71cbe52628f5132e8c8a9ff5beeb38ef2fcbaf1d457",
+        "glue-codes/openfast/5MW_OC4Semi_WSt_WavesWN/SeaState.dat": "a3fe34cb943b65aa6885b9884f980336854e34918c69e97cb19eeff75f555f73"
+      },
+      "engine_sha256": "f947198a7dff813a9f221a22a29fd451d40a51a5e976d1847900f1c890d7ffc7"
+    },
+    {
+      "id": "31450cbdc17742789689ef64c8b5a5f0",
+      "name": "随机种子 · JONSWAP / 345678901",
+      "params": {
+        "name": "随机种子 · JONSWAP / 345678901",
+        "wind": 8.0,
+        "wave_height": 1.5,
+        "wave_period": 10.0,
+        "wave_mode": "irregular",
+        "duration": 120,
+        "discard": 60,
+        "seed": 345678901,
+        "solver_dt": 0.0125
+      },
+      "returncode": 0,
+      "output_sha256": "dbded0dfc8a0937460e86703101205506c7ce673fe43353b6a6a4116dc62d8ac",
+      "input_sha256": {
+        "glue-codes/openfast/5MW_OC4Semi_WSt_WavesWN/5MW_OC4Semi_WSt_WavesWN.fst": "0ea866973f5c0500580dfb585ed134f5294060167a5fc0a30c60f99958b4a2dc",
+        "glue-codes/openfast/5MW_Baseline/NRELOffshrBsline5MW_InflowWind_Steady8mps.dat": "83269009b0fb5d789511d71cbe52628f5132e8c8a9ff5beeb38ef2fcbaf1d457",
+        "glue-codes/openfast/5MW_OC4Semi_WSt_WavesWN/SeaState.dat": "a695f5d9dc3f34c8dd488cdc53b92f05e096fdd5091beea7361dfa0ea89fda2e"
+      },
+      "engine_sha256": "f947198a7dff813a9f221a22a29fd451d40a51a5e976d1847900f1c890d7ffc7"
+    },
+    {
+      "id": "931428aa4388458f9e2ca2aece01ee91",
+      "name": "步长复核 · DT 0.00625 s",
+      "params": {
+        "name": "步长复核 · DT 0.00625 s",
+        "wind": 8.0,
+        "wave_height": 1.5,
+        "wave_period": 10.0,
+        "wave_mode": "regular",
+        "duration": 120,
+        "discard": 60,
+        "seed": 123456789,
+        "solver_dt": 0.00625
+      },
+      "returncode": 0,
+      "output_sha256": "cc64e7b854e3bae0e5e47d91d4104444c9be872c84b33e8062299ae4b311167f",
+      "input_sha256": {
+        "glue-codes/openfast/5MW_OC4Semi_WSt_WavesWN/5MW_OC4Semi_WSt_WavesWN.fst": "fe0cdc6b5678bb035fa597513dd033d47663d52ec7ac08a0848ac259091ca046",
+        "glue-codes/openfast/5MW_Baseline/NRELOffshrBsline5MW_InflowWind_Steady8mps.dat": "83269009b0fb5d789511d71cbe52628f5132e8c8a9ff5beeb38ef2fcbaf1d457",
+        "glue-codes/openfast/5MW_OC4Semi_WSt_WavesWN/SeaState.dat": "2be0b681aab0e2971d63781de44b45266599e9c9e0f64a5634dae2fa4a475240",
+        "glue-codes/openfast/5MW_OC4Semi_WSt_WavesWN/NRELOffshrBsline5MW_OC4DeepCwindSemi_HydroDyn.dat": "b506d976478e1bf33330a575f225bff5f3ad829bd13b9822a21016a20b2185b4"
+      },
+      "engine_sha256": "f947198a7dff813a9f221a22a29fd451d40a51a5e976d1847900f1c890d7ffc7"
+    },
+    {
+      "id": "6f53a7bccbba40229712b375acf6d457",
+      "name": "时长复核 · 600 s / 排除前 300 s",
+      "params": {
+        "name": "时长复核 · 600 s / 排除前 300 s",
+        "wind": 8.0,
+        "wave_height": 1.5,
+        "wave_period": 10.0,
+        "wave_mode": "regular",
+        "duration": 600,
+        "discard": 300,
+        "seed": 123456789,
+        "solver_dt": 0.0125
+      },
+      "returncode": 0,
+      "output_sha256": "5a4bb08c89f29bd873bdd954220c9c9cf067b5a314679d3ca82bf365ee472e8a",
+      "input_sha256": {
+        "glue-codes/openfast/5MW_OC4Semi_WSt_WavesWN/5MW_OC4Semi_WSt_WavesWN.fst": "680be7783801d881d8c41c9fde10b11e0bbeeec1b096055efedc11da450456cb",
+        "glue-codes/openfast/5MW_Baseline/NRELOffshrBsline5MW_InflowWind_Steady8mps.dat": "83269009b0fb5d789511d71cbe52628f5132e8c8a9ff5beeb38ef2fcbaf1d457",
+        "glue-codes/openfast/5MW_OC4Semi_WSt_WavesWN/SeaState.dat": "2be0b681aab0e2971d63781de44b45266599e9c9e0f64a5634dae2fa4a475240",
+        "glue-codes/openfast/5MW_OC4Semi_WSt_WavesWN/NRELOffshrBsline5MW_OC4DeepCwindSemi_HydroDyn.dat": "d9be13cb47b7e7ab5dfe0c6427fffef34c71ecbed0bd1da8ff1ad50c1f314f8d"
+      },
+      "engine_sha256": "f947198a7dff813a9f221a22a29fd451d40a51a5e976d1847900f1c890d7ffc7"
+    }
+  ]
+}

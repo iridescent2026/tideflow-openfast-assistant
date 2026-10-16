@@ -1,0 +1,11 @@
+runtime/
+__pycache__/
+*.pyc
+screenshots/
+*.tar.gz
+.env*
+.openai/
+*.zip
+.venv/
+node_modules/
+.DS_Store

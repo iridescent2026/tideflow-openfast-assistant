@@ -1,0 +1,334 @@
+
+**************************************************************************************************
+OpenFAST
+
+Copyright (C) 2026 National Renewable Energy Laboratory
+Copyright (C) 2026 Envision Energy USA LTD
+
+This program is licensed under Apache License Version 2.0 and comes with ABSOLUTELY NO WARRANTY.
+See the "LICENSE" file distributed with this software for details.
+**************************************************************************************************
+
+OpenFAST-v5.0.0
+Compile Info:
+ - Compiler: Intel(R) Fortran Compiler 20250300
+ - Architecture: 64 bit
+ - Precision: double
+ - OpenMP: No
+ - Date: May 01 2026
+ - Time: 11:35:10
+Execution Info:
+ - Date: 10/16/2026
+ - Time: 17:29:32+0800
+
+OpenFAST input file heading:
+    FAST Certification Test #25: NREL 5.0 MW Baseline Wind Turbine with OC4-DeepCwind semi
+    configuration, for use in offshore analysis
+
+ Running ElastoDyn.
+ Running InflowWind.
+ Running SeaState.
+ Generating incident wave kinematics and current time history.
+ Running AeroDyn.
+   AeroDyn: projMod: 1
+   Projection: legacy (NoSweepPitchTwist), BEM: legacy (2D)
+Warning: Turning off Unsteady Aerodynamics because polar has constant data. (node 1, blade 1)
+Warning: Turning off Unsteady Aerodynamics because polar has constant data. (node 2, blade 1)
+Warning: Turning off Unsteady Aerodynamics because polar has constant data. (node 3, blade 1)
+Warning: Turning off Unsteady Aerodynamics because polar has constant data. (node 4, blade 1)
+Warning: Turning off Unsteady Aerodynamics because polar has constant data. (node 1, blade 2)
+Warning: Turning off Unsteady Aerodynamics because polar has constant data. (node 2, blade 2)
+Warning: Turning off Unsteady Aerodynamics because polar has constant data. (node 3, blade 2)
+Warning: Turning off Unsteady Aerodynamics because polar has constant data. (node 4, blade 2)
+Warning: Turning off Unsteady Aerodynamics because polar has constant data. (node 1, blade 3)
+Warning: Turning off Unsteady Aerodynamics because polar has constant data. (node 2, blade 3)
+Warning: Turning off Unsteady Aerodynamics because polar has constant data. (node 3, blade 3)
+Warning: Turning off Unsteady Aerodynamics because polar has constant data. (node 4, blade 3)
+ Running HydroDyn.
+ Reading in WAMIT output with root name ".\../5MW_Baseline/HydroData/marin_semi".
+ Computing radiation impulse response functions and wave diffraction forces.
+ Calculating second order difference-frequency force using the full quadratic transfer function.
+ Calculating second order sum-frequency force using the full quadratic transfer function.
+ Running MoorDyn (v2.3.8, 2025-02-27).
+   This is MoorDyn v2, with significant input file changes from v1.
+
+**************************************************************************************************
+MoorDyn
+
+Copyright (C) 2026 National Renewable Energy Laboratory
+Copyright (C) 2026 Envision Energy USA LTD
+
+This program is licensed under Apache License Version 2.0 and comes with ABSOLUTELY NO WARRANTY.
+See the "LICENSE" file distributed with this software for details.
+**************************************************************************************************
+
+  Parsing MoorDyn input file: .\NRELOffshrBsline5MW_OC4DeepCwindSemi_MoorDyn.dat
+   Created mooring system:  3 lines, 6 points, 0 rods, 0 bodies.
+    Catenary solve of Line 1 unsuccessful. Initializing as linear.
+    Catenary solve of Line 2 unsuccessful. Initializing as linear.
+    Catenary solve of Line 3 unsuccessful. Initializing as linear.
+   Finalizing initial conditions using dynamic relaxation.
+
+   t=0.2  FairTen 1: 44479, 1, 2                                                                  
+   t=0.4  FairTen 1: 57193, 44479, 1                                                              
+   t=0.6  FairTen 1: 64285, 57193, 44479                                                          
+   t=0.8  FairTen 1: 68165, 64285, 57193                                                          
+   t=1  FairTen 1: 70464, 68165, 64285                                                            
+   t=1.2  FairTen 1: 72029, 70464, 68165                                                          
+   t=1.4  FairTen 1: 73256, 72029, 70464                                                          
+   t=1.6  FairTen 1: 74324, 73256, 72029                                                          
+   t=1.8  FairTen 1: 75311, 74324, 73256                                                          
+   t=2  FairTen 1: 76253, 75311, 74324                                                            
+   t=2.2  FairTen 1: 77166, 76253, 75311                                                          
+   t=2.4  FairTen 1: 78056, 77166, 76253                                                          
+   t=2.6  FairTen 1: 78927, 78056, 77166                                                          
+   t=2.8  FairTen 1: 79780, 78927, 78056                                                          
+   t=3  FairTen 1: 80616, 79780, 78927                                                            
+   t=3.2  FairTen 1: 81435, 80616, 79780                                                          
+   t=3.4  FairTen 1: 82238, 81435, 80616                                                          
+   t=3.6  FairTen 1: 83026, 82238, 81435                                                          
+   t=3.8  FairTen 1: 83798, 83026, 82238                                                          
+   t=4  FairTen 1: 84555, 83798, 83026                                                            
+   t=4.2  FairTen 1: 85298, 84555, 83798                                                          
+   t=4.4  FairTen 1: 86026, 85298, 84555                                                          
+   t=4.6  FairTen 1: 86740, 86026, 85298                                                          
+   t=4.8  FairTen 1: 1.03433E+05, 86740, 86026                                                    
+   t=5  FairTen 1: 98559, 1.03433E+05, 86740                                                      
+   t=5.2  FairTen 1: 97511, 98559, 1.03433E+05                                                    
+   t=5.4  FairTen 1: 97301, 97511, 98559                                                          
+   t=5.6  FairTen 1: 1.15884E+05, 97301, 97511                                                    
+   t=5.8  FairTen 1: 1.06888E+05, 1.15884E+05, 97301                                              
+   t=6  FairTen 1: 1.06301E+05, 1.06888E+05, 1.15884E+05                                          
+   t=6.2  FairTen 1: 1.06497E+05, 1.06301E+05, 1.06888E+05                                        
+   t=6.4  FairTen 1: 1.23681E+05, 1.06497E+05, 1.06301E+05                                        
+   t=6.6  FairTen 1: 1.16440E+05, 1.23681E+05, 1.06497E+05                                        
+   t=6.8  FairTen 1: 1.15905E+05, 1.16440E+05, 1.23681E+05                                        
+   t=7  FairTen 1: 1.16114E+05, 1.15905E+05, 1.16440E+05                                          
+   t=7.2  FairTen 1: 1.16528E+05, 1.16114E+05, 1.15905E+05                                        
+   t=7.4  FairTen 1: 1.28257E+05, 1.16528E+05, 1.16114E+05                                        
+   t=7.6  FairTen 1: 1.25392E+05, 1.28257E+05, 1.16528E+05                                        
+   t=7.8  FairTen 1: 1.25486E+05, 1.25392E+05, 1.28257E+05                                        
+   t=8  FairTen 1: 1.25841E+05, 1.25486E+05, 1.25392E+05                                          
+   t=8.2  FairTen 1: 1.26372E+05, 1.25841E+05, 1.25486E+05                                        
+   t=8.4  FairTen 1: 1.36425E+05, 1.26372E+05, 1.25841E+05                                        
+   t=8.6  FairTen 1: 1.34593E+05, 1.36425E+05, 1.26372E+05                                        
+   t=8.8  FairTen 1: 1.34873E+05, 1.34593E+05, 1.36425E+05                                        
+   t=9  FairTen 1: 1.35285E+05, 1.34873E+05, 1.34593E+05                                          
+   t=9.2  FairTen 1: 1.35771E+05, 1.35285E+05, 1.34873E+05                                        
+   t=9.4  FairTen 1: 1.49245E+05, 1.35771E+05, 1.35285E+05                                        
+   t=9.6  FairTen 1: 1.43529E+05, 1.49245E+05, 1.35771E+05                                        
+   t=9.8  FairTen 1: 1.44011E+05, 1.43529E+05, 1.49245E+05                                        
+   t=10  FairTen 1: 2.19160E+05, 1.44011E+05, 1.43529E+05                                         
+   t=10.2  FairTen 1: 1.98991E+05, 2.19160E+05, 1.44011E+05                                       
+   t=10.4  FairTen 1: 1.67465E+05, 1.98991E+05, 2.19160E+05                                       
+   t=10.6  FairTen 1: 1.82711E+05, 1.67465E+05, 1.98991E+05                                       
+   t=10.8  FairTen 1: 1.68893E+05, 1.82711E+05, 1.67465E+05                                       
+   t=11  FairTen 1: 1.73499E+05, 1.68893E+05, 1.82711E+05                                         
+   t=11.2  FairTen 1: 1.74933E+05, 1.73499E+05, 1.68893E+05                                       
+   t=11.4  FairTen 1: 1.74833E+05, 1.74933E+05, 1.73499E+05                                       
+   t=11.6  FairTen 1: 1.92816E+05, 1.74833E+05, 1.74933E+05                                       
+   t=11.8  FairTen 1: 1.78263E+05, 1.92816E+05, 1.74833E+05                                       
+   t=12  FairTen 1: 1.83517E+05, 1.78263E+05, 1.92816E+05                                         
+   t=12.2  FairTen 1: 1.86444E+05, 1.83517E+05, 1.78263E+05                                       
+   t=12.4  FairTen 1: 1.85092E+05, 1.86444E+05, 1.83517E+05                                       
+   t=12.6  FairTen 1: 1.88456E+05, 1.85092E+05, 1.86444E+05                                       
+   t=12.8  FairTen 1: 2.04097E+05, 1.88456E+05, 1.85092E+05                                       
+   t=13  FairTen 1: 1.91046E+05, 2.04097E+05, 1.88456E+05                                         
+   t=13.2  FairTen 1: 1.94672E+05, 1.91046E+05, 2.04097E+05                                       
+   t=13.4  FairTen 1: 1.99274E+05, 1.94672E+05, 1.91046E+05                                       
+   t=13.6  FairTen 1: 1.98149E+05, 1.99274E+05, 1.94672E+05                                       
+   t=13.8  FairTen 1: 1.98815E+05, 1.98149E+05, 1.99274E+05                                       
+   t=14  FairTen 1: 2.19135E+05, 1.98815E+05, 1.98149E+05                                         
+   t=14.2  FairTen 1: 2.11500E+05, 2.19135E+05, 1.98815E+05                                       
+   t=14.4  FairTen 1: 2.03894E+05, 2.11500E+05, 2.19135E+05                                       
+   t=14.6  FairTen 1: 2.09550E+05, 2.03894E+05, 2.11500E+05                                       
+   t=14.8  FairTen 1: 2.13218E+05, 2.09550E+05, 2.03894E+05                                       
+   t=15  FairTen 1: 2.12227E+05, 2.13218E+05, 2.09550E+05                                         
+   t=15.2  FairTen 1: 2.05670E+05, 2.12227E+05, 2.13218E+05                                       
+   t=15.4  FairTen 1: 2.01978E+05, 2.05670E+05, 2.12227E+05                                       
+   t=15.6  FairTen 1: 2.23858E+05, 2.01978E+05, 2.05670E+05                                       
+   t=15.8  FairTen 1: 2.14354E+05, 2.23858E+05, 2.01978E+05                                       
+   t=16  FairTen 1: 2.08845E+05, 2.14354E+05, 2.23858E+05                                         
+   t=16.2  FairTen 1: 2.12413E+05, 2.08845E+05, 2.14354E+05                                       
+   t=16.4  FairTen 1: 2.15669E+05, 2.12413E+05, 2.08845E+05                                       
+   t=16.6  FairTen 1: 2.15485E+05, 2.15669E+05, 2.12413E+05                                       
+   t=16.8  FairTen 1: 2.15617E+05, 2.15485E+05, 2.15669E+05                                       
+   t=17  FairTen 1: 2.17006E+05, 2.15617E+05, 2.15485E+05                                         
+   t=17.2  FairTen 1: 2.18191E+05, 2.17006E+05, 2.15617E+05                                       
+   t=17.4  FairTen 1: 2.18940E+05, 2.18191E+05, 2.17006E+05                                       
+   t=17.6  FairTen 1: 2.19794E+05, 2.18940E+05, 2.18191E+05                                       
+   t=17.8  FairTen 1: 2.37795E+05, 2.19794E+05, 2.18940E+05                                       
+   t=18  FairTen 1: 2.29708E+05, 2.37795E+05, 2.19794E+05                                         
+   t=18.2  FairTen 1: 2.25799E+05, 2.29708E+05, 2.37795E+05                                       
+   t=18.4  FairTen 1: 2.28350E+05, 2.25799E+05, 2.29708E+05                                       
+   t=18.6  FairTen 1: 2.32204E+05, 2.28350E+05, 2.25799E+05                                       
+   t=18.8  FairTen 1: 2.32676E+05, 2.32204E+05, 2.28350E+05                                       
+   t=19  FairTen 1: 2.32610E+05, 2.32676E+05, 2.32204E+05                                         
+   t=19.2  FairTen 1: 2.33902E+05, 2.32610E+05, 2.32676E+05                                       
+   t=19.4  FairTen 1: 2.35383E+05, 2.33902E+05, 2.32610E+05                                       
+   t=19.6  FairTen 1: 2.36311E+05, 2.35383E+05, 2.33902E+05                                       
+   t=19.8  FairTen 1: 2.37120E+05, 2.36311E+05, 2.35383E+05                                       
+   t=20  FairTen 1: 2.38119E+05, 2.37120E+05, 2.36311E+05                                         
+   t=20.2  FairTen 1: 2.39152E+05, 2.38119E+05, 2.37120E+05                                       
+   t=20.4  FairTen 1: 2.40825E+05, 2.39152E+05, 2.38119E+05                                       
+   t=20.6  FairTen 1: 2.29311E+05, 2.40825E+05, 2.39152E+05                                       
+   t=20.8  FairTen 1: 2.33236E+05, 2.29311E+05, 2.40825E+05                                       
+   t=21  FairTen 1: 2.38030E+05, 2.33236E+05, 2.29311E+05                                         
+   t=21.2  FairTen 1: 2.37814E+05, 2.38030E+05, 2.33236E+05                                       
+   t=21.4  FairTen 1: 2.37346E+05, 2.37814E+05, 2.38030E+05                                       
+   t=21.6  FairTen 1: 2.38394E+05, 2.37346E+05, 2.37814E+05                                       
+   t=21.8  FairTen 1: 2.39915E+05, 2.38394E+05, 2.37346E+05                                       
+   t=22  FairTen 1: 2.40841E+05, 2.39915E+05, 2.38394E+05                                         
+   t=22.2  FairTen 1: 2.41539E+05, 2.40841E+05, 2.39915E+05                                       
+   t=22.4  FairTen 1: 2.42455E+05, 2.41539E+05, 2.40841E+05                                       
+   t=22.6  FairTen 1: 2.43489E+05, 2.42455E+05, 2.41539E+05                                       
+   t=22.8  FairTen 1: 2.44458E+05, 2.43489E+05, 2.42455E+05                                       
+   t=23  FairTen 1: 2.45378E+05, 2.44458E+05, 2.43489E+05                                         
+   t=23.2  FairTen 1: 2.46322E+05, 2.45378E+05, 2.44458E+05                                       
+   t=23.4  FairTen 1: 2.47290E+05, 2.46322E+05, 2.45378E+05                                       
+   t=23.6  FairTen 1: 2.48252E+05, 2.47290E+05, 2.46322E+05                                       
+   t=23.8  FairTen 1: 2.49201E+05, 2.48252E+05, 2.47290E+05                                       
+   t=24  FairTen 1: 2.50150E+05, 2.49201E+05, 2.48252E+05                                         
+   t=24.2  FairTen 1: 2.51098E+05, 2.50150E+05, 2.49201E+05                                       
+   t=24.4  FairTen 1: 2.61613E+05, 2.51098E+05, 2.50150E+05                                       
+   t=24.6  FairTen 1: 2.62818E+05, 2.61613E+05, 2.51098E+05                                       
+   t=24.8  FairTen 1: 2.60242E+05, 2.62818E+05, 2.61613E+05                                       
+   t=25  FairTen 1: 2.59654E+05, 2.60242E+05, 2.62818E+05                                         
+   t=25.2  FairTen 1: 2.63154E+05, 2.59654E+05, 2.60242E+05                                       
+   t=25.4  FairTen 1: 2.64869E+05, 2.63154E+05, 2.59654E+05                                       
+   t=25.6  FairTen 1: 2.65399E+05, 2.64869E+05, 2.63154E+05                                       
+   t=25.8  FairTen 1: 2.66087E+05, 2.65399E+05, 2.64869E+05                                       
+   t=26  FairTen 1: 2.28329E+05, 2.66087E+05, 2.65399E+05                                         
+   t=26.2  FairTen 1: 2.49111E+05, 2.28329E+05, 2.66087E+05                                       
+   t=26.4  FairTen 1: 2.55727E+05, 2.49111E+05, 2.28329E+05                                       
+   t=26.6  FairTen 1: 2.57129E+05, 2.55727E+05, 2.49111E+05                                       
+   t=26.8  FairTen 1: 2.53637E+05, 2.57129E+05, 2.55727E+05                                       
+   t=27  FairTen 1: 2.54246E+05, 2.53637E+05, 2.57129E+05                                         
+   t=27.2  FairTen 1: 2.56519E+05, 2.54246E+05, 2.53637E+05                                       
+   t=27.4  FairTen 1: 2.57798E+05, 2.56519E+05, 2.54246E+05                                       
+   t=27.6  FairTen 1: 2.58254E+05, 2.57798E+05, 2.56519E+05                                       
+   t=27.8  FairTen 1: 2.58935E+05, 2.58254E+05, 2.57798E+05                                       
+   t=28  FairTen 1: 2.60005E+05, 2.58935E+05, 2.58254E+05                                         
+   t=28.2  FairTen 1: 2.61067E+05, 2.60005E+05, 2.58935E+05                                       
+   t=28.4  FairTen 1: 2.62002E+05, 2.61067E+05, 2.60005E+05                                       
+   t=28.6  FairTen 1: 2.62933E+05, 2.62002E+05, 2.61067E+05                                       
+   t=28.8  FairTen 1: 2.63927E+05, 2.62933E+05, 2.62002E+05                                       
+   t=29  FairTen 1: 2.64944E+05, 2.63927E+05, 2.62933E+05                                         
+   t=29.2  FairTen 1: 2.76439E+05, 2.64944E+05, 2.63927E+05                                       
+   t=29.4  FairTen 1: 2.77472E+05, 2.76439E+05, 2.64944E+05                                       
+   t=29.6  FairTen 1: 2.75686E+05, 2.77472E+05, 2.76439E+05                                       
+   t=29.8  FairTen 1: 2.75008E+05, 2.75686E+05, 2.77472E+05                                       
+   t=30  FairTen 1: 2.77903E+05, 2.75008E+05, 2.75686E+05                                         
+   t=30.2  FairTen 1: 2.79806E+05, 2.77903E+05, 2.75008E+05                                       
+   t=30.4  FairTen 1: 2.80832E+05, 2.79806E+05, 2.77903E+05                                       
+   t=30.6  FairTen 1: 2.81721E+05, 2.80832E+05, 2.79806E+05                                       
+   t=30.8  FairTen 1: 2.83060E+05, 2.81721E+05, 2.80832E+05                                       
+   t=31  FairTen 1: 2.84454E+05, 2.83060E+05, 2.81721E+05                                         
+   t=31.2  FairTen 1: 2.85676E+05, 2.84454E+05, 2.83060E+05                                       
+   t=31.4  FairTen 1: 2.86787E+05, 2.85676E+05, 2.84454E+05                                       
+   t=31.6  FairTen 1: 2.87900E+05, 2.86787E+05, 2.85676E+05                                       
+   t=31.8  FairTen 1: 2.58529E+05, 2.87900E+05, 2.86787E+05                                       
+   t=32  FairTen 1: 2.60368E+05, 2.58529E+05, 2.87900E+05                                         
+   t=32.2  FairTen 1: 2.74362E+05, 2.60368E+05, 2.58529E+05                                       
+   t=32.4  FairTen 1: 2.92277E+05, 2.74362E+05, 2.60368E+05                                       
+   t=32.6  FairTen 1: 2.85626E+05, 2.92277E+05, 2.74362E+05                                       
+   t=32.8  FairTen 1: 2.82953E+05, 2.85626E+05, 2.92277E+05                                       
+   t=33  FairTen 1: 2.84117E+05, 2.82953E+05, 2.85626E+05                                         
+   t=33.2  FairTen 1: 2.87332E+05, 2.84117E+05, 2.82953E+05                                       
+   t=33.4  FairTen 1: 2.88870E+05, 2.87332E+05, 2.84117E+05                                       
+   t=33.6  FairTen 1: 2.89657E+05, 2.88870E+05, 2.87332E+05                                       
+   t=33.8  FairTen 1: 2.90646E+05, 2.89657E+05, 2.88870E+05                                       
+   t=34  FairTen 1: 2.92056E+05, 2.90646E+05, 2.89657E+05                                         
+   t=34.2  FairTen 1: 2.93520E+05, 2.92056E+05, 2.90646E+05                                       
+   t=34.4  FairTen 1: 3.18016E+05, 2.93520E+05, 2.92056E+05                                       
+   t=34.6  FairTen 1: 3.17500E+05, 3.18016E+05, 2.93520E+05                                       
+   t=34.8  FairTen 1: 3.14170E+05, 3.17500E+05, 3.18016E+05                                       
+   t=35  FairTen 1: 3.12569E+05, 3.14170E+05, 3.17500E+05                                         
+   t=35.2  FairTen 1: 3.18151E+05, 3.12569E+05, 3.14170E+05                                       
+   t=35.4  FairTen 1: 3.69851E+05, 3.18151E+05, 3.12569E+05                                       
+   t=35.6  FairTen 1: 4.73961E+05, 3.69851E+05, 3.18151E+05                                       
+   t=35.8  FairTen 1: 5.12585E+05, 4.73961E+05, 3.69851E+05                                       
+   t=36  FairTen 1: 4.85291E+05, 5.12585E+05, 4.73961E+05                                         
+   t=36.2  FairTen 1: 4.97615E+05, 4.85291E+05, 5.12585E+05                                       
+   t=36.4  FairTen 1: 4.96862E+05, 4.97615E+05, 4.85291E+05                                       
+   t=36.6  FairTen 1: 4.76856E+05, 4.96862E+05, 4.97615E+05                                       
+   t=36.8  FairTen 1: 4.93881E+05, 4.76856E+05, 4.96862E+05                                       
+   t=37  FairTen 1: 5.08772E+05, 4.93881E+05, 4.76856E+05                                         
+   t=37.2  FairTen 1: 5.11398E+05, 5.08772E+05, 4.93881E+05                                       
+   t=37.4  FairTen 1: 5.26794E+05, 5.11398E+05, 5.08772E+05                                       
+   t=37.6  FairTen 1: 5.39090E+05, 5.26794E+05, 5.11398E+05                                       
+   t=37.8  FairTen 1: 5.43539E+05, 5.39090E+05, 5.26794E+05                                       
+   t=38  FairTen 1: 5.53434E+05, 5.43539E+05, 5.39090E+05                                         
+   t=38.2  FairTen 1: 5.63566E+05, 5.53434E+05, 5.43539E+05                                       
+   t=38.4  FairTen 1: 5.70865E+05, 5.63566E+05, 5.53434E+05                                       
+   t=38.6  FairTen 1: 5.81453E+05, 5.70865E+05, 5.63566E+05                                       
+   t=38.8  FairTen 1: 5.93181E+05, 5.81453E+05, 5.70865E+05                                       
+   t=39  FairTen 1: 6.03400E+05, 5.93181E+05, 5.81453E+05                                         
+   t=39.2  FairTen 1: 6.14668E+05, 6.03400E+05, 5.93181E+05                                       
+   t=39.4  FairTen 1: 6.26345E+05, 6.14668E+05, 6.03400E+05                                       
+   t=39.6  FairTen 1: 6.36894E+05, 6.26345E+05, 6.14668E+05                                       
+   t=39.8  FairTen 1: 6.47602E+05, 6.36894E+05, 6.26345E+05                                       
+   t=40  FairTen 1: 6.58614E+05, 6.47602E+05, 6.36894E+05                                         
+   t=40.2  FairTen 1: 6.69177E+05, 6.58614E+05, 6.47602E+05                                       
+   t=40.4  FairTen 1: 6.79894E+05, 6.69177E+05, 6.58614E+05                                       
+   t=40.6  FairTen 1: 6.90996E+05, 6.79894E+05, 6.69177E+05                                       
+   t=40.8  FairTen 1: 7.02030E+05, 6.90996E+05, 6.79894E+05                                       
+   t=41  FairTen 1: 7.13170E+05, 7.02030E+05, 6.90996E+05                                         
+   t=41.2  FairTen 1: 7.24575E+05, 7.13170E+05, 7.02030E+05                                       
+   t=41.4  FairTen 1: 7.35995E+05, 7.24575E+05, 7.13170E+05                                       
+   t=41.6  FairTen 1: 7.47455E+05, 7.35995E+05, 7.24575E+05                                       
+   t=41.8  FairTen 1: 7.59066E+05, 7.47455E+05, 7.35995E+05                                       
+   t=42  FairTen 1: 7.70702E+05, 7.59066E+05, 7.47455E+05                                         
+   t=42.2  FairTen 1: 7.82332E+05, 7.70702E+05, 7.59066E+05                                       
+   t=42.4  FairTen 1: 7.94018E+05, 7.82332E+05, 7.70702E+05                                       
+   t=42.6  FairTen 1: 8.05703E+05, 7.94018E+05, 7.82332E+05                                       
+   t=42.8  FairTen 1: 8.17351E+05, 8.05703E+05, 7.94018E+05                                       
+   t=43  FairTen 1: 8.28992E+05, 8.17351E+05, 8.05703E+05                                         
+   t=43.2  FairTen 1: 8.40596E+05, 8.28992E+05, 8.17351E+05                                       
+   t=43.4  FairTen 1: 8.52114E+05, 8.40596E+05, 8.28992E+05                                       
+   t=43.6  FairTen 1: 8.63533E+05, 8.52114E+05, 8.40596E+05                                       
+   t=43.8  FairTen 1: 8.74807E+05, 8.63533E+05, 8.52114E+05                                       
+   t=44  FairTen 1: 8.85876E+05, 8.74807E+05, 8.63533E+05                                         
+   t=44.2  FairTen 1: 8.96701E+05, 8.85876E+05, 8.74807E+05                                       
+   t=44.4  FairTen 1: 9.07245E+05, 8.96701E+05, 8.85876E+05                                       
+   t=44.6  FairTen 1: 9.17461E+05, 9.07245E+05, 8.96701E+05                                       
+   t=44.8  FairTen 1: 9.27321E+05, 9.17461E+05, 9.07245E+05                                       
+   t=45  FairTen 1: 9.36795E+05, 9.27321E+05, 9.17461E+05                                         
+   t=45.2  FairTen 1: 9.45846E+05, 9.36795E+05, 9.27321E+05                                       
+   t=45.4  FairTen 1: 9.54431E+05, 9.45846E+05, 9.36795E+05                                       
+   t=45.6  FairTen 1: 9.62507E+05, 9.54431E+05, 9.45846E+05                                       
+   t=45.8  FairTen 1: 9.70024E+05, 9.62507E+05, 9.54431E+05                                       
+   t=46  FairTen 1: 9.76931E+05, 9.70024E+05, 9.62507E+05                                         
+   t=46.2  FairTen 1: 9.83186E+05, 9.76931E+05, 9.70024E+05                                       
+   t=46.4  FairTen 1: 9.88753E+05, 9.83186E+05, 9.76931E+05                                       
+   t=46.6  FairTen 1: 9.93606E+05, 9.88753E+05, 9.83186E+05                                       
+   t=46.8  FairTen 1: 9.97734E+05, 9.93606E+05, 9.88753E+05                                       
+   t=47  FairTen 1: 1.00114E+06, 9.97734E+05, 9.93606E+05                                         
+   t=47.2  FairTen 1: 1.00383E+06, 1.00114E+06, 9.97734E+05                                       
+   t=47.4  FairTen 1: 1.00583E+06, 1.00383E+06, 1.00114E+06                                       
+   t=47.6  FairTen 1: 1.00719E+06, 1.00583E+06, 1.00383E+06                                       
+   t=47.8  FairTen 1: 1.00788E+06, 1.00719E+06, 1.00583E+06                                       
+   t=48  FairTen 1: 1.00633E+06, 1.00788E+06, 1.00719E+06                                         
+   t=48.2  FairTen 1: 1.00478E+06, 1.00633E+06, 1.00788E+06                                       
+   t=48.4  FairTen 1: 1.00386E+06, 1.00478E+06, 1.00633E+06                                       
+   t=48.6  FairTen 1: 1.00212E+06, 1.00386E+06, 1.00478E+06                                       
+   Fairlead tensions converged to 1% after 48.6 seconds.
+   Fairlead tension: 1.00212E+06
+   Fairlead forces: 3.94945E+05, 7.01150E+05, -5.97198E+05
+   Fairlead tension: 1.37609E+06
+   Fairlead forces: -1.17737E+06, 0, -7.12340E+05
+   Fairlead tension: 1.00212E+06
+   Fairlead forces: 3.94945E+05, -7.01150E+05, -5.97198E+05
+  MoorDyn initialization completed.
+ Running ServoDyn.
+ Running ServoDyn Interface for Bladed Controllers (using Intel Visual Fortran for Windows).
+
+FAST_InitializeAll:SrvD_Init:BladedInterface_Init:The dynamic library .\intentionally-missing.dll
+could not be loaded. Check that the file exists in the specified location and that it is compiled
+for 64-bit applications.
+
+ OpenFAST encountered an error during module initialization.
+ Simulation error level: FATAL ERROR
+
+ Aborting OpenFAST.
+
