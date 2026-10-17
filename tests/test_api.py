@@ -1,9 +1,10 @@
-import json,sys,threading,unittest,urllib.request,urllib.error
+import json,sys,threading,unittest,urllib.request,urllib.error,tempfile
 from pathlib import Path
 from http.server import ThreadingHTTPServer
 from unittest.mock import patch
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 from server import Handler,TOKEN
+from accounts import Accounts
 
 class QuietHandler(Handler):
     def log_message(self,*args):pass
@@ -11,6 +12,11 @@ class QuietHandler(Handler):
 class APITests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
+        cls.account_tmp=tempfile.TemporaryDirectory()
+        cls.account_store=Accounts(Path(cls.account_tmp.name)/'api-accounts.db')
+        cls.account_patch=patch('server.accounts',cls.account_store);cls.account_patch.start()
+        _,cookie=cls.account_store.register({'account':'api_review','password':'test-only-passphrase'})
+        cls.cookie=cookie.split(';')[0]
         cls.server=ThreadingHTTPServer(('127.0.0.1',0),QuietHandler)
         cls.thread=threading.Thread(target=cls.server.serve_forever,daemon=True)
         cls.thread.start()
@@ -18,11 +24,20 @@ class APITests(unittest.TestCase):
     @classmethod
     def tearDownClass(cls):
         cls.server.shutdown();cls.server.server_close();cls.thread.join(timeout=2)
+        cls.account_patch.stop();cls.account_tmp.cleanup()
     def request(self,path,body=None,headers=None):
-        req=urllib.request.Request(self.base+path,data=None if body is None else json.dumps(body).encode(),headers=headers or {})
+        req=urllib.request.Request(self.base+path,data=None if body is None else json.dumps(body).encode(),headers={'Cookie':self.cookie,**(headers or {})})
         try:
             with urllib.request.urlopen(req,timeout=3) as r:return r.status,json.load(r)
         except urllib.error.HTTPError as e:return e.code,json.load(e)
+    def test_account_session_is_required_for_compute(self):
+        code,data=self.request('/api/runs',{}, {'X-Run-Token':TOKEN,'Cookie':''})
+        self.assertEqual(code,401);self.assertTrue(data['login_required'])
+        self.assertEqual(self.request('/api/account/profile',{'display_name':'test'}, {'X-Run-Token':TOKEN,'Cookie':''})[0],401)
+    def test_account_profile_endpoint(self):
+        code,data=self.request('/api/account');self.assertEqual(code,200);self.assertEqual(data['user']['account'],'api_review')
+        code,data=self.request('/api/account/profile',{'display_name':'API test','bio':'profile roundtrip'}, {'X-Run-Token':TOKEN})
+        self.assertEqual(code,200);self.assertEqual(data['user']['bio'],'profile roundtrip')
     def test_health(self):
         code,data=self.request('/api/health');self.assertEqual(code,200);self.assertEqual(data['service'],'offshore-assistant')
         runtime=Path(__file__).resolve().parents[1]/'runtime'
