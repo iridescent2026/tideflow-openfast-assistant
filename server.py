@@ -23,6 +23,12 @@ class Handler(SimpleHTTPRequestHandler):
     def __init__(self,*args,**kwargs):
         super().__init__(*args,directory=str(ROOT/'dist'),**kwargs)
 
+    def end_headers(self):
+        # The local workbench changes bundled UI assets during development.
+        # Prevent a previously loaded HTML/CSS/module response from masking it.
+        self.send_header('Cache-Control','no-store, max-age=0')
+        super().end_headers()
+
     def send_json(self,data,status=200,cookie=None):
         raw=json.dumps(data,ensure_ascii=False).encode('utf-8')
         self.send_response(status)

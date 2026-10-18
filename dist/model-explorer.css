@@ -1,0 +1,230 @@
+/* A dedicated marine engineering viewport, independent of simulation controls. */
+#page-model .page-heading{margin-bottom:22px}#page-model .page-heading h1{font-weight:650;font-size:30px}#page-model .model-explorer{display:grid;grid-template-columns:minmax(0,1fr) 302px;background:#092b39;border:1px solid #284b59;border-radius:8px;overflow:hidden;min-height:640px;box-shadow:0 20px 50px #123c4610}
+.model-stage{position:relative;height:660px;min-width:0;overflow:hidden;background:radial-gradient(ellipse at 45% 36%,#1b4657,#071f2d 75%);isolation:isolate}.model-stage canvas{width:100%;height:100%;display:block;touch-action:none;outline:none}.model-stage canvas:focus-visible{outline:2px solid #75dfd8;outline-offset:-3px}.stage-top{position:absolute;top:22px;left:24px;right:24px;display:flex;justify-content:space-between;align-items:flex-start;pointer-events:none;color:#dcf1f5}.stage-top strong{display:block;font:14px 'Bahnschrift','Segoe UI',sans-serif;letter-spacing:2px}.stage-top small{display:block;color:#7ea8b6;font:9px/2.4 Consolas,monospace;letter-spacing:1.5px}.live-3d{font:9px Consolas,monospace;letter-spacing:1px;color:#91dbd3}.live-3d:before{content:'';display:inline-block;width:5px;height:5px;border-radius:50%;background:#7fdfcf;margin-right:7px}.stage-tools{position:absolute;left:22px;right:22px;bottom:47px;display:flex;flex-wrap:wrap;gap:7px}.stage-tools button{padding:9px 11px;font-size:10px;border:1px solid #5e8e9a66;color:#bfdee6;background:#0b2a38dc;backdrop-filter:blur(12px);border-radius:3px}.stage-tools button:hover,.stage-tools button[aria-pressed=true]{border-color:#76d4cb;color:#9ef4e5;background:#194854}.stage-tools button:focus-visible,.component-list button:focus-visible{outline:2px solid #79dcd2;outline-offset:2px}.stage-help{position:absolute;bottom:17px;left:24px;right:20px;font-size:9px;color:#82a8b7;pointer-events:none}.stage-loading{position:absolute;inset:0;display:grid;place-content:center;gap:12px;text-align:center;color:#b4d7de;font-size:13px;background:#092c39}.stage-loading small{font-size:10px;color:#8cacb8;max-width:270px;line-height:1.8}.stage-loading button{margin:auto;background:#1e6978;color:white;padding:9px 16px}.model-labels{position:absolute;inset:0;pointer-events:none}.model-labels button{position:absolute;pointer-events:auto;transform:translate(-50%,-50%);border:1px solid #6dabb299;background:#0b2938da;border-radius:3px;padding:6px 10px;color:#cee6ea;font-size:10px;white-space:nowrap;box-shadow:0 4px 18px #00182244}.model-labels button:before{content:'';display:inline-block;width:5px;height:5px;border:1px solid #80d9cc;border-radius:50%;margin-right:7px}.model-labels button.active{background:#155965;border-color:#8be0d3;color:white}.model-labels button small{font:9px Consolas,monospace;color:#7aaab6;margin-right:7px}.model-hover-name{position:absolute;top:82px;left:24px;color:#91e5d6;font-size:10px;pointer-events:none}.model-stage .stage-focus{position:absolute;right:24px;bottom:100px;font:9px/1.8 Consolas,'Microsoft YaHei',sans-serif;color:#8cb5c2;pointer-events:none;text-align:right}
+#page-model .part-inspector{background:#f7fbfc;border:0;padding:26px 23px;color:#214957}.part-inspector .component-list{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:20px 0 26px}.component-list button{display:flex;align-items:center;gap:7px;background:#ecf3f5;color:#6a8794;padding:11px 8px;border:1px solid transparent;border-radius:3px;font-size:10px;text-align:left}.component-list button span{font:9px Consolas,monospace;color:#99b1ba}.component-list button[aria-pressed=true]{background:#123e4c;color:#e8f8f7;border-color:#236579}.component-list button[aria-pressed=true] span{color:#82d9ce}#page-model .part-inspector h2{font-weight:600;font-size:26px;margin:9px 0 12px}#page-model .part-inspector #component-description{font-size:12px;line-height:1.95;color:#6b8997;min-height:70px}#page-model .part-inspector dl{margin:18px 0}#page-model .part-inspector dl>div{padding:10px 0}#page-model .part-inspector dt{font-size:10px;color:#7895a2}#page-model .part-inspector dd{font-size:12px;color:#315969}.component-detail{font-size:11px;color:#6d8994;line-height:1.9;border-top:1px solid #dce9ec;padding-top:16px}.component-detail b{font-size:10px;display:block;color:#3a6979;margin-bottom:8px}.component-detail p{margin:0 0 12px;font-size:11px!important}.component-source{font-size:10px;color:#208194;display:inline-block;margin:15px 0}.model-accuracy{display:flex;gap:35px;justify-content:space-between;padding:20px 3px;color:#7896a1;font-size:10px;line-height:1.9}.model-accuracy strong{color:#376374;font-weight:500;display:block;margin-bottom:4px}.model-accuracy>div{flex:1}.model-accuracy code{font-size:9px}.stage-loading.has-error{background:#092c39ed;padding:25px}.model-stage:fullscreen{width:100%;height:100%;border-radius:0}.model-stage:fullscreen .stage-top{top:30px}.model-explorer .part-inspector .inspector-note{font-size:9px;line-height:1.8;color:#8ca3ad;margin-top:18px}
+@media(min-width:1600px){.model-stage{height:740px}#page-model .model-explorer{grid-template-columns:minmax(0,1fr) 330px}.model-stage .stage-tools{bottom:50px}}
+@media(max-width:1050px){#page-model .model-explorer{grid-template-columns:minmax(0,1fr) 260px}#page-model .part-inspector{padding:22px 18px}.model-stage{height:650px}.stage-top{left:18px;right:18px}.stage-top strong{font-size:12px}.stage-tools{left:15px;right:15px;gap:5px}.stage-tools button{font-size:9px;padding:8px}.model-labels button{font-size:9px;padding:6px}.model-labels button small{display:none}}
+@media(max-width:850px){#page-model .model-explorer{grid-template-columns:1fr}.model-stage{height:560px}#page-model .part-inspector{border-top:1px solid #31515e}#page-model .part-inspector .component-list{grid-template-columns:repeat(3,1fr)}#page-model .part-inspector dl{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}#page-model .part-inspector #component-description{min-height:0}.model-accuracy{gap:18px}}
+@media(max-width:600px){#page-model .page-heading h1{font-size:25px}.model-stage{height:510px}.stage-top{top:17px}.stage-top small{font-size:8px}.live-3d{font-size:8px}.stage-help{font-size:8px;left:16px;bottom:13px}.stage-tools{bottom:48px}.stage-tools button{font-size:9px}.model-labels button{font-size:9px;padding:5px 7px}#page-model .part-inspector dl{grid-template-columns:1fr}.model-accuracy{display:block}.model-accuracy>div{margin:15px 0}.model-stage .stage-focus{font-size:8px;right:16px;bottom:125px}}
+@media(min-width:851px){#page-model .part-inspector{max-height:660px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#bdd4db transparent}body[data-page=model].nav-collapsed .topbar{padding-left:145px}}
+@media(min-width:1600px){#page-model .part-inspector{max-height:740px}}
+
+/* Deep-sea structure workspace, keeping the local Three.js model interactive. */
+body[data-page=model]{background:#031c2a;color:#e7f4f6}
+body[data-page=model] .topbar{display:none}
+body[data-page=model] .shell{margin-left:205px}
+body[data-page=model] main{max-width:none;padding:0}
+body[data-page=model] .sidebar{background:#031c2a;border-right:1px solid #1b5967}
+body[data-page=model] .app-page[hidden]{display:none!important}
+body[data-page=model] .topbar{background:#041e2bd9;border-color:#1e5260;color:#9bbdc7;backdrop-filter:blur(16px)}
+body[data-page=model] .breadcrumb b{color:#d7edf0}
+body[data-page=model] .topbar .secondary{color:#b7d4dc;border-color:#366674}
+body[data-page=model] .icon-button{color:#c6e5e9;border-color:#366674}
+#page-model.app-page{min-height:calc(100svh - 64px);padding:18px 22px 28px;background:radial-gradient(ellipse at 47% 35%,#0c4054 0%,#062a3a 43%,#031b29 100%);overflow:hidden}
+#page-model .model-page-heading{position:absolute;z-index:3;top:38px;left:38px;right:38px;margin:0;align-items:flex-start;pointer-events:none}
+#page-model .model-page-heading{display:none!important}
+#page-model .model-page-heading>div{pointer-events:none}
+#page-model .model-page-heading .kicker{color:#69d5dc;font:11px/1.5 'Segoe UI','Microsoft YaHei',sans-serif;letter-spacing:2px}
+#page-model .model-page-heading h1{margin:10px 0 2px;color:#f0f7fb;font-size:34px;font-weight:650;line-height:1.2;letter-spacing:0}
+#page-model .model-page-heading p{margin:6px 0;color:#a4c5d0;font-size:16px;letter-spacing:1px}
+#page-model .model-page-heading .stage-engineering-link{margin-top:2px;pointer-events:auto;background:#092e3bc9;border-color:#56c4cf;color:#9eeaf0}
+#page-model .model-explorer{position:relative;grid-template-columns:minmax(0,1fr) 350px;min-height:min(800px,calc(100svh - 122px));height:calc(100svh - 122px);border:0;border-radius:2px;background:transparent;box-shadow:none;overflow:visible}
+#page-model .model-stage{height:100%;min-height:580px;background:radial-gradient(ellipse at 53% 40%,#12607466 0%,#082b3a5c 45%,#031a2855 78%);overflow:hidden}
+#page-model .model-stage canvas{position:absolute;inset:0;z-index:1}
+#page-model .model-stage:before{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;background:linear-gradient(180deg,#031a2a36 0%,transparent 29%,#03192712 68%,#031a2a68 100%),repeating-linear-gradient(0deg,transparent 0 79px,#4ec3d30a 80px),repeating-linear-gradient(90deg,transparent 0 79px,#4ec3d30a 80px);mask-image:linear-gradient(transparent,#000 34%,#000 88%,transparent)}
+#page-model .model-stage .model-page-heading{position:absolute;inset:0;z-index:5;display:flex;justify-content:flex-start;pointer-events:none}
+#page-model .model-stage .model-page-heading .secondary{display:none}
+#page-model .stage-top{z-index:5;top:24px;right:28px;left:auto}
+#page-model .live-3d{color:#9de7d8}
+#page-model .model-labels{z-index:3}
+#page-model .model-labels button{background:#073344e0;border-color:#4ed0dba8;color:#d4edf0;box-shadow:0 5px 22px #00131d8c;backdrop-filter:blur(8px);font-size:11px;padding:7px 11px}
+#page-model .model-labels button:before{border-color:#40d5df}
+#page-model .model-labels button.active{background:#087280e8;border-color:#60f0e4;color:#fff;box-shadow:0 0 18px #48cad444}
+#page-model .model-labels button small{color:#8ab9c4}
+#page-model .stage-focus{z-index:4;right:28px;bottom:115px;color:#a8dce3;font-size:10px}
+#page-model .stage-tools{z-index:5;left:50%;right:auto;bottom:28px;transform:translateX(-50%);display:flex;flex-wrap:nowrap;gap:0;padding:6px;border:1px solid #55c5d2aa;border-radius:8px;background:#062b3bd9;box-shadow:0 12px 35px #00121d77;backdrop-filter:blur(18px);white-space:nowrap}
+#page-model .stage-tools button{position:relative;min-width:66px;padding:10px 12px;border:0;border-radius:2px;background:transparent;color:#9dbfc9;font-size:11px}
+#page-model .stage-tools button+button:before{content:'';position:absolute;left:0;top:9px;bottom:9px;width:1px;background:#5695a360}
+#page-model .stage-tools button:hover,#page-model .stage-tools button[aria-pressed=true]{color:#7cecf0;background:#0c4c5d}
+#page-model .stage-help{z-index:4;bottom:7px;left:22px;color:#83aab7;font-size:9px}
+#page-model .part-inspector{position:relative;z-index:6;align-self:center;max-height:calc(100% - 26px);overflow-y:auto;padding:23px 26px 20px;border:1px solid #55d3e3;border-radius:3px 20px 3px 18px;background:linear-gradient(150deg,#062c3bea,#031d2beF 76%);color:#e7f3f5;box-shadow:0 18px 50px #00131d66,inset 0 1px #d3fcff24;scrollbar-width:thin;scrollbar-color:#276777 transparent}
+#page-model .part-inspector:before{content:'';position:absolute;inset:0;pointer-events:none;border-radius:inherit;background:linear-gradient(135deg,#71e6e733,transparent 29%,transparent 74%,#5bd9e322)}
+#page-model .part-inspector>.kicker{position:relative;color:#71c8d1;font-size:10px;letter-spacing:1.5px}
+#page-model .part-inspector .component-list{position:relative;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin:14px 0 23px;border-bottom:1px solid #3b6876}
+#page-model .component-list button{min-width:0;min-height:43px;gap:6px;padding:8px 4px;border:0;border-bottom:2px solid transparent;border-radius:0;background:transparent;color:#adc7cf;font-size:10px;white-space:nowrap}
+#page-model .component-list button span{color:#78a2af;font-size:9px}
+#page-model .component-list button[aria-pressed=true]{border-color:#56e5eb;background:#0a5361a8;color:#92f5f1;font-weight:600}
+#page-model .component-list button[aria-pressed=true] span{color:#94e7e4}
+#page-model .part-inspector h2{position:relative;margin:11px 0 12px;color:#f0f8fa;font-size:27px;font-weight:650}
+#page-model .part-inspector #component-description{position:relative;min-height:0;color:#c0d5dc;font-size:12px;line-height:1.9}
+#page-model .part-inspector dl{position:relative;margin:18px 0;border-top:1px solid #4c7782}
+#page-model .part-inspector dl>div{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:11px 0;border-bottom:1px solid #315a67}
+#page-model .part-inspector dt{color:#a8c3cc;font-size:11px}
+#page-model .part-inspector dd{margin:0;color:#f0f8fb;font-size:17px;font-weight:650;white-space:nowrap}
+#page-model .component-detail{position:relative;padding-top:13px;border-color:#315a67;color:#96b6c1;font-size:10px;line-height:1.8}
+#page-model .component-detail b{color:#70d7dd;font-size:10px}
+#page-model .component-detail p{color:#9db9c4;font-size:10px!important}
+#page-model .component-source{position:relative;color:#71e0e1}
+#page-model .part-inspector .text-link{position:relative;color:#79e0e3;font-size:10px}
+#page-model .part-inspector .inspector-note{position:relative;color:#7597a3}
+#page-model .stage-loading{z-index:8;background:#062535}
+#page-model .model-accuracy{color:#8baeb8}
+#page-model .model-accuracy strong{color:#b5dce1}
+@media(min-width:1600px){#page-model .model-explorer{grid-template-columns:minmax(0,1fr) 386px}#page-model .part-inspector{padding:28px 31px}}
+@media(max-width:1100px){#page-model .model-explorer{grid-template-columns:minmax(0,1fr) 315px}#page-model .model-page-heading h1{font-size:30px}}
+@media(max-width:850px){#page-model.app-page{padding:12px 12px 24px;overflow:visible}#page-model .model-explorer{height:auto;min-height:0;grid-template-columns:1fr}#page-model .model-stage{height:68svh;min-height:500px}#page-model .part-inspector{max-height:none;overflow:visible;border-radius:3px 16px 3px 16px;margin-top:12px}#page-model .model-stage .model-page-heading{top:0;left:0;right:0;padding:0 2px}#page-model .model-page-heading h1{font-size:29px}#page-model .stage-engineering-link{display:none!important}#page-model .model-accuracy{padding:22px 8px}}
+@media(max-width:600px){#page-model.app-page{padding:8px 8px 20px}#page-model .model-stage{height:68svh;min-height:470px;max-height:650px}#page-model .model-stage .model-page-heading{top:5px}#page-model .model-page-heading h1{font-size:25px;margin-top:5px}#page-model .model-page-heading p{font-size:11px}#page-model .model-page-heading .kicker{font-size:9px}#page-model .stage-top{top:15px;right:14px}#page-model .stage-tools{bottom:34px;max-width:calc(100% - 18px);overflow-x:auto}#page-model .stage-tools button{min-width:49px;padding:9px 8px;font-size:9px}#page-model .stage-help{left:12px;bottom:9px;font-size:8px}#page-model .model-labels button{font-size:8px;padding:5px 7px}#page-model .model-labels button small{display:none}#page-model .model-stage .stage-focus{right:12px;bottom:100px;font-size:8px}#page-model .part-inspector{padding:19px 16px}#page-model .part-inspector .component-list{grid-template-columns:repeat(3,minmax(0,1fr))}#page-model .component-list button{font-size:9px;padding:7px 2px}#page-model .part-inspector h2{font-size:23px}#page-model .part-inspector dl>div{padding:9px 0}#page-model .part-inspector dd{font-size:15px}#page-model .part-inspector #component-description{font-size:11px}}
+@media(max-width:360px){#page-model .model-stage{min-height:430px}#page-model .stage-tools button{min-width:42px;padding:8px 6px;font-size:8px}#page-model .part-inspector .component-list{grid-template-columns:repeat(2,minmax(0,1fr))}#page-model .component-list button{white-space:normal}}
+
+/* Reference composition: full viewport marine atlas with a fixed navigation rail. */
+body[data-page=model]{overflow:hidden;background:#031b2a}
+body[data-page=model] .sidebar{inset:0 auto 0 0;width:208px;padding:28px 16px 22px;border-right:1px solid #1c7480;border-radius:0;clip-path:none;background:linear-gradient(180deg,#06283a 0%,#031b2b 100%);box-shadow:none}
+body[data-page=model] .shell{margin-left:208px}
+body[data-page=model] main{height:100svh;padding:0;max-width:none}
+body[data-page=model] #page-model.app-page{height:100svh;min-height:0;padding:0;background:#031b2a}
+body[data-page=model] #page-model .model-explorer{height:100svh;min-height:0;grid-template-columns:minmax(0,1fr) 405px;gap:0}
+body[data-page=model] #page-model .model-stage{height:100svh;min-height:0;background:radial-gradient(ellipse at 52% 38%,#126074 0%,#082d3d 42%,#031a2a 100%);}
+body[data-page=model] #page-model .model-stage:after{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,#03263836 0%,#03263812 37%,#031a2c9e 100%),linear-gradient(90deg,#03192718 0%,transparent 54%,#03182740 100%);mix-blend-mode:multiply}
+body[data-page=model] #page-model .model-stage canvas{z-index:2;opacity:1}
+body[data-page=model] #page-model .model-page-heading{top:65px;left:40px;right:auto}
+body[data-page=model] #page-model .model-page-heading h1{font-size:40px;letter-spacing:1px;margin:9px 0 0;text-shadow:0 4px 20px #00131d}
+body[data-page=model] #page-model .model-page-heading p{font-size:22px;margin-top:4px;color:#e3f4f5}
+body[data-page=model] #page-model .model-page-heading .kicker{font-size:13px;color:#a0d5d9;letter-spacing:2px}
+body[data-page=model] #page-model .stage-top{top:29px;right:31px;z-index:6}
+body[data-page=model] #page-model .stage-focus{z-index:6}
+body[data-page=model] #page-model .model-labels{z-index:4}
+body[data-page=model] #page-model .model-labels button{background:#073d4edb;border-color:#44d7e0;color:#e9ffff;box-shadow:0 0 0 1px #00dce033,0 6px 25px #00131d99}
+body[data-page=model] #page-model .part-inspector{align-self:center;height:calc(100svh - 204px);max-height:none;margin:0 35px 0 0;padding:30px 36px 25px;border-color:#36d5df;border-radius:4px 20px 4px 20px;background:linear-gradient(160deg,#062f42f2,#031d2df2 82%);box-shadow:0 20px 55px #00131d88,inset 0 1px #b9fbff33;overflow:hidden}
+body[data-page=model] #page-model .part-inspector .component-list{grid-template-columns:repeat(3,1fr);margin:10px 0 29px}
+body[data-page=model] #page-model .component-list button{height:50px;color:#b8d6dc;font-size:12px}
+body[data-page=model] #page-model .part-inspector h2{font-size:34px;margin:22px 0 18px}
+body[data-page=model] #page-model .part-inspector #component-description{font-size:14px;line-height:1.8;color:#d0e4e8}
+body[data-page=model] #page-model .part-inspector dl{margin:26px 0}
+body[data-page=model] #page-model .part-inspector dl>div{padding:18px 0}
+body[data-page=model] #page-model .part-inspector dt{font-size:14px;color:#bfd8de}
+body[data-page=model] #page-model .part-inspector dd{font-size:22px}
+body[data-page=model] #page-model .component-detail{font-size:13px;line-height:1.9}
+body[data-page=model] #page-model .component-detail b{font-size:13px}
+body[data-page=model] #page-model .component-detail p{font-size:13px!important;color:#b6d2d9}
+body[data-page=model] #page-model .stage-tools{bottom:28px;z-index:7}
+body[data-page=model] #page-model .model-accuracy{display:none}
+body[data-page=model] #page-model .stage-help{display:none}
+body[data-page=model] #page-model .part-inspector:after{content:'参考结构 · 视觉示意';position:absolute;left:36px;bottom:27px;color:#77b3bd;font:11px Consolas,monospace}
+@media(max-width:1100px){body[data-page=model] #page-model .model-explorer{grid-template-columns:minmax(0,1fr) 340px}body[data-page=model] #page-model .part-inspector{margin-right:18px;padding:24px}.model-page-heading h1{font-size:32px!important}}
+@media(max-width:850px){body[data-page=model]{overflow:auto}body[data-page=model] main{height:auto}body[data-page=model] #page-model.app-page{height:auto}body[data-page=model] #page-model .model-explorer{height:auto;grid-template-columns:1fr}body[data-page=model] #page-model .model-stage{height:78svh;min-height:560px}body[data-page=model] #page-model .part-inspector{height:auto;margin:12px;padding:24px}body[data-page=model] #page-model .model-page-heading{top:35px;left:25px}body[data-page=model] #page-model .model-page-heading h1{font-size:30px!important}body[data-page=model] #page-model .model-page-heading p{font-size:16px}}
+
+/* Final layout guardrails and three engineering page directions. */
+body[data-page=model] #page-model .model-page-heading{right:46%;max-width:none;min-width:0}
+body[data-page=model] #page-model .model-page-heading h1{font-size:clamp(28px,3.2vw,40px);line-height:1.16;max-width:100%;text-wrap:balance}
+body[data-page=model] #page-model .model-page-heading p{font-size:clamp(14px,1.55vw,22px);line-height:1.45;max-width:100%;text-wrap:balance}
+body[data-page=model] #page-model .part-inspector{box-sizing:border-box;height:min(760px,calc(100svh - 170px));max-height:calc(100svh - 170px);min-height:0;overflow-y:auto;overflow-x:hidden}
+body[data-page=model] #page-model .part-inspector .component-list{grid-template-columns:repeat(3,minmax(0,1fr));min-width:0}
+body[data-page=model] #page-model .component-list button{box-sizing:border-box;min-width:0;height:auto;min-height:52px;white-space:normal;line-height:1.35;overflow-wrap:anywhere;align-items:flex-start;padding:9px 4px}
+body[data-page=model] #page-model .component-list button span{flex:0 0 auto;line-height:1.35}
+body[data-page=model] #page-model .part-inspector dl>div{min-width:0}
+body[data-page=model] #page-model .part-inspector dt{flex:0 0 72px;white-space:nowrap}
+body[data-page=model] #page-model .part-inspector dd{min-width:0;white-space:normal;text-align:right;line-height:1.35}
+body[data-page=model] #page-model .component-detail p{overflow-wrap:anywhere}
+@media(max-width:1100px){body[data-page=model] #page-model .model-page-heading{right:39%}}
+@media(max-width:850px){body[data-page=model] #page-model .model-page-heading{right:20px;max-width:calc(100% - 45px)}body[data-page=model] #page-model .part-inspector{height:auto;max-height:none;overflow:visible}}
+
+.engineering-design-switch{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:-11px 0 20px;padding:7px;border:1px solid #d9e7ea;border-radius:6px;background:#f8fbfb;box-shadow:0 8px 24px #163c4808}
+.engineering-design-switch>span{margin:0 9px 0 5px;color:#7897a0;font:10px Consolas,monospace;letter-spacing:1px}
+.engineering-design-switch button{min-height:32px;padding:7px 12px;border:1px solid transparent;border-radius:4px;background:transparent;color:#70909a;font-size:11px;transition:background .2s,color .2s,border-color .2s,box-shadow .2s}
+.engineering-design-switch button:hover{border-color:#9fcbd0;color:#1a6674}
+.engineering-design-switch button[aria-pressed=true]{border-color:#2c8592;background:#1d5060;color:#fff;box-shadow:0 4px 12px #2254642e}
+
+#page-engineering[data-engineering-design=atlas] .engineering-board{background:#f8fcfc;border-color:#d5e5e9;color:#294d5b}
+#page-engineering[data-engineering-design=atlas] .engineering-copy{border-color:#dbe7eb}
+#page-engineering[data-engineering-design=atlas] .technical-drawing{background:#edf4f7}
+#page-engineering[data-engineering-design=atlas] .module-detail{box-shadow:0 12px 34px #163c480b}
+
+#page-engineering[data-engineering-design=ocean]{background:#061f2b;color:#dcecef;padding-top:34px;padding-bottom:46px}
+#page-engineering[data-engineering-design=ocean] .page-heading h1{color:#f2fbfc}
+#page-engineering[data-engineering-design=ocean] .page-heading p{color:#95b8c1}
+#page-engineering[data-engineering-design=ocean] .page-heading .kicker{color:#6dd2d1}
+#page-engineering[data-engineering-design=ocean] .engineering-design-switch{border-color:#2a5964;background:#0b2d3a}
+#page-engineering[data-engineering-design=ocean] .engineering-design-switch>span{color:#7aaab2}
+#page-engineering[data-engineering-design=ocean] .engineering-design-switch button{color:#8eb7bf}
+#page-engineering[data-engineering-design=ocean] .engineering-design-switch button:hover{border-color:#5fc8c8;color:#b9f4ec}
+#page-engineering[data-engineering-design=ocean] .engineering-board{grid-template-columns:minmax(300px,.72fr) minmax(0,1.28fr);background:#0b2c39;border:1px solid #316977;box-shadow:0 20px 50px #00131d66}
+#page-engineering[data-engineering-design=ocean] .engineering-copy{border-color:#2e5662;padding:38px 32px}
+#page-engineering[data-engineering-design=ocean] .engineering-copy h2{color:#e9f8f7}
+#page-engineering[data-engineering-design=ocean] .engineering-copy>p{color:#a4c4ca}
+#page-engineering[data-engineering-design=ocean] .engineering-copy dl>div{border-color:#28515c}
+#page-engineering[data-engineering-design=ocean] .engineering-copy dt{color:#79a7b0}
+#page-engineering[data-engineering-design=ocean] .engineering-copy dd{color:#e0f3f3}
+#page-engineering[data-engineering-design=ocean] .engineering-action{background:#73d3c8;color:#052a35}
+#page-engineering[data-engineering-design=ocean] .technical-drawing{background:#092732;border-color:#2e5a66}
+#page-engineering[data-engineering-design=ocean] .engineering-model{background:#08232f}
+#page-engineering[data-engineering-design=ocean] .model-view-label{color:#8dc6cb}
+#page-engineering[data-engineering-design=ocean] .module-pin{background:#0e3a48e8;border-color:#5bcdd0;color:#a9f2e8}
+#page-engineering[data-engineering-design=ocean] .technical-drawing .drawing-legend{border-color:#2e5a66;color:#82adb6}
+#page-engineering[data-engineering-design=ocean] .module-detail{background:#0b303d;border-color:#316977;color:#d4e9eb}
+#page-engineering[data-engineering-design=ocean] .module-detail p{color:#9fbfc6}
+#page-engineering[data-engineering-design=ocean] .module-detail dt{color:#79a7b0}
+#page-engineering[data-engineering-design=ocean] .module-detail dd{color:#d7edef}
+#page-engineering[data-engineering-design=ocean] .module-detail .module-limit{background:#103947;color:#9dbdc4;border-color:#4abcc0}
+#page-engineering[data-engineering-design=ocean] .physics-tabs button{background:#0b303d;border-color:#2c5965;color:#91b5bd}
+#page-engineering[data-engineering-design=ocean] .physics-tabs button.active{background:#1c5664;border-color:#72d8d0;color:#e9fbf7}
+#page-engineering[data-engineering-design=ocean] .physics-flow article{border-color:#3b6872}
+#page-engineering[data-engineering-design=ocean] .physics-flow h3{color:#e6f7f6}
+#page-engineering[data-engineering-design=ocean] .physics-flow p{color:#91b4bc}
+
+#page-engineering[data-engineering-design=signal]{background:#f0f6f7;padding-top:34px}
+#page-engineering[data-engineering-design=signal] .page-heading{align-items:flex-end}
+#page-engineering[data-engineering-design=signal] .page-heading h1{color:#163e4b;font-size:clamp(28px,3.1vw,46px)}
+#page-engineering[data-engineering-design=signal] .engineering-design-switch{margin-top:0;background:#fff;border-color:#c8dde1}
+#page-engineering[data-engineering-design=signal] .engineering-board{grid-template-columns:40% 60%;background:#fff;border:1px solid #c9dfe3;border-radius:8px;box-shadow:0 16px 35px #31596414}
+#page-engineering[data-engineering-design=signal] .engineering-copy{padding:42px 36px;border-color:#d6e6e9}
+#page-engineering[data-engineering-design=signal] .engineering-copy h2{font-size:clamp(24px,2.2vw,35px);color:#164653}
+#page-engineering[data-engineering-design=signal] .engineering-action{background:#0d7180}
+#page-engineering[data-engineering-design=signal] .technical-drawing{background:#f7fbfc;padding:20px;min-height:460px}
+#page-engineering[data-engineering-design=signal] .engineering-model{min-height:400px;border:1px solid #d2e4e7;border-radius:5px}
+#page-engineering[data-engineering-design=signal] .module-pin{box-shadow:0 6px 18px #1d647316}
+#page-engineering[data-engineering-design=signal] .module-detail{margin-top:18px;border:1px solid #c9dfe3;border-radius:8px;box-shadow:0 10px 28px #3159640d}
+#page-engineering[data-engineering-design=signal] .physics-tabs button{background:#fff;border-color:#c8dde1}
+#page-engineering[data-engineering-design=signal] .physics-tabs button.active{background:#0d7180;border-color:#0d7180}
+
+/* Keep the three directions distinct in both composition and visual hierarchy. */
+#page-engineering[data-engineering-design=atlas] .engineering-board{grid-template-columns:minmax(290px,.42fr) minmax(0,.58fr);border-radius:3px}
+#page-engineering[data-engineering-design=atlas] .engineering-model{min-height:390px}
+#page-engineering[data-engineering-design=ocean] .engineering-board{grid-template-columns:minmax(0,1fr);grid-template-areas:"model" "copy"}
+#page-engineering[data-engineering-design=ocean] .technical-drawing{grid-area:model;min-height:470px;padding:20px 34px}
+#page-engineering[data-engineering-design=ocean] .engineering-copy{grid-area:copy;display:grid;grid-template-columns:minmax(0,1fr) minmax(240px,.8fr);column-gap:32px;align-items:start;padding:30px 34px}
+#page-engineering[data-engineering-design=ocean] .engineering-copy>.kicker,
+#page-engineering[data-engineering-design=ocean] .engineering-copy>h2,
+#page-engineering[data-engineering-design=ocean] .engineering-copy>p:first-of-type{grid-column:1}
+#page-engineering[data-engineering-design=ocean] .engineering-copy dl{grid-column:2;grid-row:1 / span 4;margin:0}
+#page-engineering[data-engineering-design=ocean] .engineering-copy .engineering-action,
+#page-engineering[data-engineering-design=ocean] .engineering-copy .technical-note{grid-column:1}
+#page-engineering[data-engineering-design=ocean] .engineering-copy h2{margin-top:8px}
+#page-engineering[data-engineering-design=ocean] .engineering-model{min-height:430px}
+#page-engineering[data-engineering-design=signal] .engineering-board{grid-template-columns:minmax(0,1.2fr) minmax(300px,.8fr);grid-template-areas:"model copy";border-radius:2px;box-shadow:none}
+#page-engineering[data-engineering-design=signal] .technical-drawing{grid-area:model;min-height:420px}
+#page-engineering[data-engineering-design=signal] .engineering-copy{grid-area:copy;background:#e7f1f2;padding:30px 28px}
+#page-engineering[data-engineering-design=signal] .engineering-copy h2{font-size:clamp(23px,2vw,31px)}
+#page-engineering[data-engineering-design=signal] .engineering-copy dl{margin:16px 0}
+#page-engineering[data-engineering-design=signal] .engineering-copy dl>div{padding:8px 0}
+#page-engineering[data-engineering-design=signal] .engineering-model{min-height:380px;border-radius:2px}
+#page-engineering[data-engineering-design=signal] .module-detail{grid-template-columns:minmax(0,1.2fr) minmax(250px,.8fr);gap:15px 28px;border-radius:2px}
+
+@media(max-width:1100px){.engineering-design-switch{margin-top:-4px}#page-engineering[data-engineering-design=signal] .engineering-board,#page-engineering[data-engineering-design=ocean] .engineering-board{grid-template-columns:1fr}.engineering-copy{border-right:0!important}.technical-drawing{border-top:1px solid #d7e7e9}.engineering-design-switch button{flex:1 1 125px}}
+@media(max-width:1100px){#page-engineering[data-engineering-design=ocean] .engineering-copy{grid-template-columns:1fr 1fr}#page-engineering[data-engineering-design=ocean] .engineering-copy dl{grid-column:2;grid-row:1 / span 4}#page-engineering[data-engineering-design=signal] .engineering-board{grid-template-columns:minmax(0,1.2fr) minmax(270px,.8fr)}#page-engineering[data-engineering-design=signal] .engineering-model{min-height:350px}}
+@media(max-width:700px){#page-engineering[data-engineering-design=atlas] .engineering-board,#page-engineering[data-engineering-design=ocean] .engineering-board,#page-engineering[data-engineering-design=signal] .engineering-board{grid-template-columns:minmax(0,1fr);grid-template-areas:"copy" "model"}#page-engineering[data-engineering-design=ocean] .technical-drawing,#page-engineering[data-engineering-design=signal] .technical-drawing{min-height:330px}#page-engineering[data-engineering-design=ocean] .engineering-copy{grid-template-columns:minmax(0,1fr);padding:26px 22px!important}#page-engineering[data-engineering-design=ocean] .engineering-copy>*{grid-column:1!important;grid-row:auto!important}#page-engineering[data-engineering-design=ocean] .engineering-copy dl{margin:14px 0}#page-engineering[data-engineering-design=signal] .module-detail{grid-template-columns:minmax(0,1fr)}#page-engineering[data-engineering-design=signal] .engineering-model{min-height:310px}}
+@media(max-width:600px){.engineering-design-switch{gap:5px;margin-bottom:15px}.engineering-design-switch>span{width:100%;margin:2px 5px 3px}.engineering-design-switch button{flex:1 1 auto;min-width:0;font-size:10px;padding:7px 8px}.engineering-copy{padding:27px 22px!important}.technical-drawing{padding:10px!important}.engineering-model{min-height:300px!important}.module-detail{padding:22px 20px}.physics-tabs{margin-bottom:15px}}
+
+/* Let the model viewport follow the actual content width as navigation changes. */
+@media(min-width:851px){
+  body[data-page=model] .shell{margin-left:208px;transition:margin-left .3s ease}
+  body[data-page=model].nav-collapsed .shell{margin-left:0}
+  body[data-page=model] #page-model .model-explorer{grid-template-columns:minmax(0,1fr) clamp(300px,29vw,405px)}
+  body[data-page=model] #page-model .part-inspector{width:auto;margin-right:clamp(16px,2.5vw,35px);padding:clamp(20px,2.3vw,30px);height:min(760px,calc(100svh - 80px));max-height:calc(100svh - 80px);}
+}
+@media(max-width:1100px) and (min-width:851px){
+  body[data-page=model] #page-model .model-explorer{grid-template-columns:minmax(0,1fr) 310px}
+  body[data-page=model] #page-model .part-inspector{margin-right:16px;padding:20px}
+  body[data-page=model] #page-model .part-inspector h2{font-size:25px}
+  body[data-page=model] #page-model .part-inspector dd{font-size:17px}
+}
+@media(max-height:760px) and (min-width:851px){body[data-page=model] #page-model .part-inspector{height:calc(100svh - 36px);max-height:calc(100svh - 36px)}}

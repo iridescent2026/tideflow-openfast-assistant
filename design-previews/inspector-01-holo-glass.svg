@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="900" viewBox="0 0 1280 900">
+<defs>
+  <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#092c3b"/><stop offset=".55" stop-color="#061e2d"/><stop offset="1" stop-color="#03131f"/></linearGradient>
+  <radialGradient id="sea"><stop stop-color="#176b78" stop-opacity=".55"/><stop offset="1" stop-color="#052332" stop-opacity="0"/></radialGradient>
+  <linearGradient id="glass" x2="0.9" y2="1"><stop stop-color="#123e50" stop-opacity=".96"/><stop offset="1" stop-color="#061d2b" stop-opacity=".97"/></linearGradient>
+  <linearGradient id="edge"><stop stop-color="#5eeced"/><stop offset="1" stop-color="#4b9ef0"/></linearGradient>
+  <filter id="shadow" x="-30%" y="-20%" width="160%" height="150%"><feGaussianBlur stdDeviation="22"/></filter>
+</defs>
+<rect width="1280" height="900" fill="url(#bg)"/><ellipse cx="490" cy="420" rx="490" ry="470" fill="url(#sea)"/>
+<g opacity=".14" stroke="#52a9b7"><path d="M0 165H880M0 245H880M0 325H880M0 405H880M0 485H880M0 565H880M0 645H880M0 725H880"/><path d="M80 100V820M160 100V820M240 100V820M320 100V820M400 100V820M480 100V820M560 100V820M640 100V820M720 100V820M800 100V820"/></g>
+<g opacity=".75" stroke="#a2dce0" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round">
+ <path d="M410 229 443 235 452 555 396 555Z" fill="#b4cbd0" fill-opacity=".15"/><path d="M430 225V560" stroke="#d6e6e8" stroke-width="6"/>
+ <path d="M430 229 230 92M430 229 608 112M430 229 417 8" stroke="#d5e7eb" stroke-width="10"/><circle cx="430" cy="229" r="22" fill="#c8e1e5" fill-opacity=".32"/>
+ <path d="M396 555 465 555 518 622 367 622Z" fill="#5bd7de" fill-opacity=".11" stroke="#5bd7de"/><path d="M381 578 344 612M478 578 516 612M370 622H515" stroke="#64d9e2"/>
+ <path d="M329 622Q266 645 197 676M552 622Q628 640 704 674M437 622Q424 662 421 699" stroke="#63cada" stroke-width="3" stroke-dasharray="9 9" opacity=".7"/>
+</g>
+<g font-family="Segoe UI, Microsoft YaHei, sans-serif"><text x="54" y="58" fill="#8de8e6" font-size="13" letter-spacing="3">TIDEFLOW  /  MODEL EXPLORER</text><text x="54" y="112" fill="#eff9fb" font-size="35" font-weight="600">OC4 / NREL 5 MW</text><text x="56" y="145" fill="#9cbfc8" font-size="15">三维结构探索 · 参考模型尺寸与部件说明</text><text x="68" y="810" fill="#84b6c1" font-size="12">拖动旋转　·　滚轮缩放　·　右键平移</text>
+<rect x="55" y="750" width="568" height="50" rx="12" fill="#062a3b" stroke="#388e9a"/><text x="83" y="781" fill="#b8e1e5" font-size="13">全景　　　正视　　　俯视　　　系泊全貌　　　海面　　环绕</text>
+</g>
+<rect x="833" y="103" width="396" height="710" rx="25" fill="#50dfe9" opacity=".17" filter="url(#shadow)"/>
+<rect x="845" y="89" width="388" height="714" rx="22" fill="url(#glass)" stroke="url(#edge)" stroke-width="1.5"/>
+<path d="M868 91H1009" stroke="#a9ffff" stroke-width="2" opacity=".8"/><path d="M1211 119V184" stroke="#8af6ec" stroke-width="2" opacity=".65"/>
+<g font-family="Segoe UI, Microsoft YaHei, sans-serif">
+ <circle cx="874" cy="135" r="4" fill="#69efe2"/><text x="890" y="140" fill="#83d7dc" font-size="11" letter-spacing="2">STRUCTURE / 06 MODULES</text><text x="1197" y="140" text-anchor="end" fill="#6e9fae" font-size="11">01—06</text>
+ <g font-size="12"><rect x="869" y="171" width="110" height="39" rx="9" fill="#14586a" stroke="#53dcdf"/><text x="924" y="196" text-anchor="middle" fill="#c8fffb">01 叶轮</text><rect x="988" y="171" width="110" height="39" rx="9" fill="#0b2c3d" stroke="#285764"/><text x="1043" y="196" text-anchor="middle" fill="#9cbac3">02 机舱</text><rect x="1107" y="171" width="104" height="39" rx="9" fill="#0b2c3d" stroke="#285764"/><text x="1159" y="196" text-anchor="middle" fill="#9cbac3">03 塔筒</text></g>
+ <text x="871" y="258" fill="#eafaff" font-size="28" font-weight="600">叶轮与叶片</text><text x="872" y="284" fill="#68bdc8" font-size="10" letter-spacing="2">ROTOR ASSEMBLY</text>
+ <text x="871" y="322" fill="#b8d4dc" font-size="13">三片变弦长、变扭角叶片连接轮毂，</text><text x="871" y="343" fill="#b8d4dc" font-size="13">将风的作用转化为转子转矩。</text>
+ <rect x="870" y="368" width="338" height="1" fill="#315c69"/><text x="871" y="398" fill="#77aeb9" font-size="11" letter-spacing="1">REFERENCE PARAMETERS</text>
+ <text x="871" y="436" fill="#9ebec8" font-size="13">叶轮直径</text><text x="1204" y="436" text-anchor="end" fill="#efffff" font-size="19" font-weight="600">126 m</text><path d="M870 452H1208" stroke="#254b5a"/>
+ <text x="871" y="486" fill="#9ebec8" font-size="13">叶片数量</text><text x="1204" y="486" text-anchor="end" fill="#efffff" font-size="19" font-weight="600">3 片</text><path d="M870 502H1208" stroke="#254b5a"/>
+ <text x="871" y="536" fill="#9ebec8" font-size="13">几何依据</text><text x="1204" y="536" text-anchor="end" fill="#d7f0f3" font-size="14">19 个截面站位</text>
+ <rect x="870" y="563" width="338" height="1" fill="#315c69"/><text x="871" y="592" fill="#6ee5df" font-size="11" letter-spacing="1">ENGINEERING NOTE</text>
+ <text x="871" y="619" fill="#a8c6ce" font-size="12">叶片截面依据参考文件重建，采用平滑翼型</text><text x="871" y="640" fill="#a8c6ce" font-size="12">近似；不用于叶片制造或气动计算。</text>
+ <rect x="870" y="669" width="338" height="64" rx="11" fill="#092b3a" stroke="#285564"/><path d="M889 690H896M889 701H896" stroke="#6ee6df" stroke-width="2"/><text x="908" y="694" fill="#76c8d0" font-size="10" letter-spacing="1">LINKED SIGNALS</text><text x="908" y="717" fill="#c6e3e8" font-size="12">RotSpeed 转速　/　GenPwr 功率</text>
+ <text x="871" y="769" fill="#76e4e3" font-size="12">查看官方参考输入　↗</text>
+</g></svg>

@@ -2,3 +2,5 @@
 *.ps1 text eol=crlf
 # Preserve exact bytes of captured engine logs: their SHA-256 is a test fixture.
 tests/fixtures/*.log binary
+# Preserve upstream formatting in vendored dependencies.
+dist/vendor/three/* -whitespace
