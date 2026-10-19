@@ -1,16 +1,16 @@
 {
-  "at": "2026-10-18T06:25:14.773530+00:00",
+  "at": "2026-10-19T16:32:46.969880+00:00",
   "scope": "software-and-protocol-only-not-physical-certification",
   "groups": [
     {
       "group": "Python",
       "returncode": 0,
-      "output": ".....................................\n----------------------------------------------------------------------\nRan 37 tests in 3.805s\n\nOK\n"
+      "output": ".....................................\n----------------------------------------------------------------------\nRan 37 tests in 3.665s\n\nOK\n"
     },
     {
       "group": "JavaScript",
       "returncode": 0,
-      "output": "✔ actual OpenFAST records independently recompute Python summary in JS (44.6245ms)\n✔ bad parameters rejected (0.8173ms)\n✔ fake stats in imported JSON are recomputed and provenance downgraded (5.3125ms)\n✔ nonmonotonic output and missing channels rejected (6.4178ms)\n✔ logs produce evidence, not a success or fabricated diagnosis (0.2911ms)\n✔ rule explanation labels limitations and energy window (2.5939ms)\n✔ text output constant power integral has correct kWh scale (0.5965ms)\n✔ multiple confounders and different windows are identified (1.8566ms)\n✔ window review has finite values and never certifies stationarity (2.2208ms)\n✔ knowledge is relevant and context excludes raw time series and credentials (2.3974ms)\n✔ actual fault logs diagnosed in browser as well (1.9923ms)\n✔ warning does not mask fatal (0.2212ms)\n✔ local AI bridge carries token, credentials and evidence only in request (0.5141ms)\n✔ direct probe excludes context; bad responses and HTTP errors reject (0.8133ms)\n✔ reference geometry preserves platform members and mooring coordinates (3.9819ms)\n✔ all selectable meshes have finite geometry and identify their owning component (8.3118ms)\n✔ tower and platform remain at reference scale rather than flattened display scale (5.8474ms)\n✔ surface picking resolves real tower geometry to its component (6.05ms)\nℹ tests 18\nℹ suites 0\nℹ pass 18\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 268.4701\n"
+      "output": "✔ actual OpenFAST records independently recompute Python summary in JS (34.2346ms)\n✔ bad parameters rejected (0.3587ms)\n✔ fake stats in imported JSON are recomputed and provenance downgraded (4.6675ms)\n✔ nonmonotonic output and missing channels rejected (6.8071ms)\n✔ logs produce evidence, not a success or fabricated diagnosis (0.4174ms)\n✔ rule explanation labels limitations and energy window (2.7917ms)\n✔ text output constant power integral has correct kWh scale (0.6154ms)\n✔ multiple confounders and different windows are identified (1.7086ms)\n✔ window review has finite values and never certifies stationarity (1.4199ms)\n✔ knowledge is relevant and context excludes raw time series and credentials (0.9376ms)\n✔ actual fault logs diagnosed in browser as well (2.0459ms)\n✔ warning does not mask fatal (0.1548ms)\n✔ local AI bridge carries token, credentials and evidence only in request (0.4556ms)\n✔ direct probe excludes context; bad responses and HTTP errors reject (0.7446ms)\n✔ walking respects forward direction and camera yaw (1.3072ms)\n✔ diagonal movement has the same speed as straight movement (0.2467ms)\n✔ walking cannot cross cabin walls or walk through the console (6.4987ms)\n✔ resume after a stalled frame cannot teleport the visitor (0.8486ms)\n✔ camera easing stays bounded and has smooth endpoints (0.2411ms)\n✔ reference geometry preserves platform members and mooring coordinates (1.6362ms)\n✔ all selectable meshes have finite geometry and identify their owning component (12.2313ms)\n✔ tower and platform remain at reference scale rather than flattened display scale (5.8549ms)\n✔ surface picking resolves real tower geometry to its component (10.2706ms)\nℹ tests 23\nℹ suites 0\nℹ pass 23\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 308.3488\n"
     }
   ]
 }

@@ -10,7 +10,7 @@ def main():
         if bundled.exists(): node=str(bundled)
     if not node: raise RuntimeError('Node.js is required only for the JavaScript checks, not for running the workbench.')
     groups=[('Python',[sys.executable,'-m','unittest','discover','-s','tests','-p','test_*.py']),
-            ('JavaScript',[node,'--test','--test-reporter=spec','tests/core.test.mjs','tests/evidence.test.mjs','tests/model-geometry.test.mjs'])]
+            ('JavaScript',[node,'--test','--test-reporter=spec','tests/core.test.mjs','tests/evidence.test.mjs','tests/model-geometry.test.mjs','tests/lab-state.test.mjs'])]
     outcomes=[]
     env={**os.environ,'PYTHONUTF8':'1','NO_COLOR':'1'}
     for name,args in groups:
