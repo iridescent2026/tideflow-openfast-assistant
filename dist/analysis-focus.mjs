@@ -42,11 +42,22 @@ function renderQuickCompare(){
 }
 $('analysis-quick-compare').onchange=e=>{if(e.target.dataset.quickId)compare(e.target.dataset.quickId);};
 window.addEventListener('tideflow:speed-preview',e=>{
+  $('speed-plot-mode').options[0].textContent='多指标变化 / %';document.querySelector('.speed-lab-heading h2').textContent='转速联动 · 与原工况对照';
+  document.querySelector('.speed-plot-heading strong').textContent='相对原工况，哪些响应变了？';document.querySelector('.speed-plot-heading>div>span').textContent='同一转速轴，比较变化幅度';document.querySelector('.speed-preview-note').textContent='预览沿兼容算例插值，不改写真实时序与统计。';
   const {baseline,estimate}=e.detail;
   for(const key of ['wind','power','pitch','surge','energy']){const diff=baselinePercent(estimate[key],baseline[key]);$('speed-baseline-'+key).textContent=n(baseline[key],key==='power'?1:2);$('speed-change-'+key).textContent=diff===null?'基准接近零':(diff>0?'+':'')+n(diff,1)+'%';}
   deltaStrip.innerHTML=[['power','平均功率','kW','#8aede2'],['pitch','纵摇绝对峰值','°','#edc584'],['surge','纵荡绝对峰值','m','#baacf3']].map(([key,label,unit,color])=>{const value=baselinePercent(estimate[key],baseline[key]);return `<div style="--response-color:${color}"><span>${label}</span><strong>${value===null?'—':(value>0?'+':'')+n(value,1)+'%'}</strong><small>${n(baseline[key],key==='power'?1:2)} → ${n(estimate[key],key==='power'?1:2)} ${unit}</small></div>`;}).join('');
   $('speed-series-legend').innerHTML=$('speed-plot-mode').value==='power'?'<span style="--response-color:#8aede2">功率插值关系</span><span style="--response-color:#d8e6eb">原工况功率参考线</span>':'<span style="--response-color:#8aede2">平均功率变化</span><span style="--response-color:#edc584">纵摇峰值变化</span><span style="--response-color:#baacf3">纵荡峰值变化</span><span style="--response-color:#d8e6eb">原工况 0%</span>';
 });
 window.addEventListener('tideflow:speed-unavailable',()=>{deltaStrip.innerHTML='';$('speed-series-legend').textContent='暂无兼容算例，不绘制预览曲线。';for(const key of ['wind','power','pitch','surge','energy']){$('speed-baseline-'+key).textContent='—';$('speed-change-'+key).textContent='—';}});
+window.addEventListener('tideflow:speed-record',e=>{
+ $('speed-plot-mode').options[0].textContent='真实响应 / 峰值 %';document.querySelector('.speed-lab-heading h2').textContent='转速展示 · 当前真实响应';
+ const r=e.detail.record,x=r.result,values={wind:r.params.wind,power:x.stats.GenPwr?.mean,pitch:x.stats.PtfmPitch?.max_abs,surge:x.stats.PtfmSurge?.max_abs,energy:x.energy_kwh};
+ document.querySelector('.speed-plot-heading strong').textContent='当前工况 · 已保存的真实响应';document.querySelector('.speed-plot-heading>div>span').textContent='缺少兼容对照时，直接展示原始响应，不留空白。';
+ document.querySelector('.speed-preview-note').textContent='模型滑块仅调整叶轮展示速度；以下数值和曲线来自当前工况，不随演示转速改变。';
+ for(const key of ['wind','power','pitch','surge','energy']){$('speed-baseline-'+key).textContent=n(values[key],key==='power'?1:2);$('speed-change-'+key).textContent='原始结果';}
+ deltaStrip.innerHTML=[['power','平均功率','kW','#8aede2'],['pitch','纵摇绝对峰值','°','#edc584'],['surge','纵荡绝对峰值','m','#baacf3']].map(([key,label,unit,color])=>`<div style="--response-color:${color}"><span>${label}</span><strong>${n(values[key],key==='power'?1:2)} <small>${unit}</small></strong><small>当前工况真实统计</small></div>`).join('');
+ $('speed-series-legend').innerHTML=($('speed-plot-mode').value==='power'?[['发电功率 / kW','#8aede2']]:[['发电功率 / 峰值 %','#8aede2'],['平台纵摇 / 峰值 %','#edc584'],['平台纵荡 / 峰值 %','#baacf3']]).map(([label,color])=>`<span style="--response-color:${color}">${label}</span>`).join('');
+});
 window.dispatchEvent(new Event('tideflow:analysis-request'));
 window.dispatchEvent(new Event('tideflow:speed-refresh'));

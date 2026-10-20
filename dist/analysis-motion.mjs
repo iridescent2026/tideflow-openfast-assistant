@@ -1,4 +1,4 @@
-import {renderResponseComparison} from './response-plot.mjs';
+import {renderResponseComparison,renderRecordedResponse} from './response-plot.mjs';
 import {speedAnchors,estimateAtSpeed,playbackPosition} from './motion-data.mjs';
 const $=id=>document.getElementById(id),num=(v,d=2)=>Number.isFinite(v)?v.toLocaleString('zh-CN',{minimumFractionDigits:d,maximumFractionDigits:d}):'—';
 const escape=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -10,7 +10,7 @@ const replay=document.createElement('div');replay.className='analysis-replay';
 replay.innerHTML=`<div class="analysis-replay-row"><span class="replay-tag"><i></i>真实时序回放</span><button id="replay-toggle" aria-pressed="true">暂停</button><button id="replay-restart">从头播放 ↶</button><button id="replay-overview">查看完整曲线</button><label>速度<select id="replay-speed" aria-label="回放速度"><option value=".5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option><option value="4">4×</option></select></label><label class="replay-loop"><input id="replay-loop" type="checkbox" checked>循环</label></div><div class="analysis-replay-progress"><input id="replay-progress" type="range" min="0" max="1000" step="1" value="0" aria-label="时序回放进度"><output id="replay-clock">等待完整结果</output></div><p>1× 约 20 秒回放当前显示范围；到结尾短暂停留后重播。仅回放已有结果，拖动进度或点击图表可暂停读数。</p>`;
 document.querySelector('#page-analysis .chart-tabs').after(replay);
 
-let anchors=[],base=null,estimate=null,plot=null,frame=0,lastFrame=0,lastReadout=0,elapsed=0,play=!reduce.matches,reveal=!reduce.matches,spin=!reduce.matches,angle=0,modelKey='',plotKey='';
+let anchors=[],base=null,estimate=null,plot=null,frame=0,lastFrame=0,lastReadout=0,elapsed=20,play=false,reveal=false,spin=!reduce.matches,modelKey='',plotKey='';
 const isVisible=()=>document.body.dataset.page==='analysis'&&!document.hidden;
 const rotor=$('speed-rotor');
 rotor.style.transformOrigin='512px 498px';rotor.style.transformBox='view-box';
@@ -22,7 +22,7 @@ function syncRotor(){
   if(rpm>0)rotorAnimation.playbackRate=rpm/10;
   if(spin&&rpm>0&&isVisible())rotorAnimation.play();else rotorAnimation.pause();
   rotor.dataset.rpm=String(rpm);
-  rotorPeriod.textContent=rpm>0?`叶轮 ${num(rpm,2)} rpm · ${num(60/rpm,2)} 秒 / 圈${spin?'':' · 已暂停'}`:'等待兼容转速数据';
+  rotorPeriod.textContent=rpm>0?`叶轮 ${num(rpm,2)} rpm · ${num(60/rpm,2)} 秒 / 圈${spin?'':' · 已暂停'}`:estimate?'叶轮已停止 · 0 rpm':'正在载入已有结果';
 }
 function requestFrame(){syncRotor();if(!frame&&isVisible()&&play&&plot)frame=requestAnimationFrame(tick);}
 function updateButtons(){
@@ -46,30 +46,61 @@ function tick(now){
   if(play&&plot){elapsed+=dt*Number($('replay-speed').value);const pos=playbackPosition(elapsed,plot.start,plot.end);if(!$('replay-loop').checked&&(pos.holding||pos.cycle>0)){elapsed=20;play=false;updateButtons();}paintReplay(now-lastReadout>=100);if(now-lastReadout>=100)lastReadout=now;}
   requestFrame();
 }
+function showRecordedPanel(){
+ if(!base?.result)return;
+ const svg=$('speed-response'),mode=$('speed-plot-mode')?.value||'relative',key=base.id+'|'+mode+'|'+base.result.series.length;
+ if(svg.dataset.recordKey!==key){renderRecordedResponse(svg,base,mode);svg.dataset.recordKey=key;}
+ window.dispatchEvent(new CustomEvent('tideflow:speed-record',{detail:{record:base}}));
+}
 function updateModel(rpm){
+  if(anchors.length<2){
+    if(!Number.isFinite(rpm)||rpm<0)return;
+    estimate={rpm,kind:'visual'};
+    $('speed-target').textContent=num(rpm,3);$('speed-input').value=String(rpm);$('speed-input').setAttribute('aria-valuetext',`${num(rpm,3)} rpm，模型展示转速`);
+    $('speed-model-kind').textContent='模型转速演示';
+    $('speed-estimate-status').textContent='数表保持原工况真实结果';
+    $('speed-unavailable').textContent='可直接调节模型转速；没有同条件对照时，功率和曲线保持原工况真实数据。';
+    showRecordedPanel();requestFrame();return;
+  }
   estimate=estimateAtSpeed(anchors,rpm);if(!estimate)return;
   $('speed-target').textContent=num(rpm,3);$('speed-input').value=String(rpm);$('speed-input').setAttribute('aria-valuetext',`${num(rpm,3)} rpm`);
   for(const key of ['wind','power','pitch','surge','energy'])$('speed-'+key).textContent=num(estimate[key],key==='power'?1:2);
   $('speed-estimate-status').textContent=estimate.kind==='record'?'端点 · 原算例统计':'中间值 · 线性插值估计';
   $('speed-model-kind').textContent=estimate.kind==='record'?'原算例端点':'插值探索 · 非新仿真';
   const baseline=anchors.find(a=>a.id===base?.id)||anchors[0];
+  $('speed-response').dataset.recordKey='';
   renderResponseComparison($('speed-response'),anchors,baseline,estimate,$('speed-plot-mode')?.value||'relative');
   window.dispatchEvent(new CustomEvent('tideflow:speed-preview',{detail:{baseline,estimate,anchors}}));
   requestFrame();
 }
 function loadModel(detail){
-  const r=detail.record,next=speedAnchors(detail.records||[],r),key=[r?.id,...next.map(a=>a.id)].join('|');base=r;
+  const r=detail.record,next=speedAnchors(detail.records||[],r),key=[r?.id,r?.status,r?.result?.stats.RotSpeed?.mean,...next.map(a=>a.id)].join('|');base=r;
   if(key===modelKey)return;modelKey=key;anchors=next;estimate=null;
   const ready=anchors.length>=2;$('speed-input').disabled=!ready;$('speed-reset').disabled=!ready;$('speed-spin').disabled=!ready;
   $('speed-unavailable').textContent=ready?'同一海况与模型下的风速变化路径。':'当前记录缺少兼容的转速对照区间。请选择“基准”或“风速对比”工况；不会混用不同海况，也不会超出已知范围。';
-  if(!ready){window.dispatchEvent(new Event('tideflow:speed-unavailable'));$('speed-target').textContent='—';$('speed-min').textContent='—';$('speed-max').textContent='—';$('speed-response').innerHTML='';$('speed-anchor-sources').textContent='没有至少两个兼容算例。';$('speed-estimate-status').textContent='无兼容数据';$('speed-model-kind').textContent='暂不可探索';for(const k of ['wind','power','pitch','surge','energy'])$('speed-'+k).textContent='—';return;}
+  if(!ready){
+    window.dispatchEvent(new Event('tideflow:speed-unavailable'));
+    const rpm=r?.result?.stats.RotSpeed?.mean,available=Number.isFinite(rpm)&&rpm>0;
+    estimate=r?{rpm:available?rpm:0,kind:'visual'}:null;
+    $('speed-target').textContent=r?num(estimate.rpm,3):'—';
+    $('speed-input').min='0';$('speed-input').max=String(Math.max(20,Math.ceil((available?rpm:0)*1.5)));$('speed-input').value=String(available?rpm:0);
+    $('speed-input').disabled=!r;$('speed-reset').disabled=!available;
+    $('speed-min').textContent='0 rpm';$('speed-max').textContent=$('speed-input').max+' rpm';
+    $('speed-spin').disabled=!r;
+    $('speed-unavailable').textContent='可直接调节模型转速；没有同条件对照时，功率和曲线保持原工况真实数据。';
+    $('speed-response').innerHTML='';$('speed-anchor-sources').textContent='当前为单个真实算例，无需计算即可查看。';
+    $('speed-estimate-status').textContent=available?'已有真实结果':'暂无完成结果';$('speed-model-kind').textContent=available?'当前真实算例':'暂无完成结果';
+    const values={wind:r?.params?.wind,power:r?.result?.stats.GenPwr?.mean,pitch:r?.result?.stats.PtfmPitch?.max_abs,surge:r?.result?.stats.PtfmSurge?.max_abs,energy:r?.result?.energy_kwh};
+    for(const k of ['wind','power','pitch','surge','energy'])$('speed-'+k).textContent=num(values[k],k==='power'?1:2);
+    $('speed-response').dataset.recordKey='';showRecordedPanel();syncRotor();return;
+  }
   $('speed-input').min=String(anchors[0].rpm);$('speed-input').max=String(anchors.at(-1).rpm);
   $('speed-min').textContent=num(anchors[0].rpm,3)+' rpm';$('speed-max').textContent=num(anchors.at(-1).rpm,3)+' rpm';
   $('speed-anchor-sources').innerHTML=anchors.map(a=>`<p><strong>${escape(a.name)}</strong><br>${num(a.rpm,3)} rpm · ${num(a.wind,1)} m/s · ${num(a.power,1)} kW</p>`).join('');
   updateModel(Math.max(anchors[0].rpm,Math.min(anchors.at(-1).rpm,r.result.stats.RotSpeed.mean)));
 }
 $('speed-input').oninput=e=>{spin=true;updateModel(Number(e.target.value));updateButtons();};
-window.addEventListener('tideflow:speed-refresh',()=>{if(anchors.length)updateModel(Number($('speed-input').value));});
+window.addEventListener('tideflow:speed-refresh',()=>{if(base)updateModel(Number($('speed-input').value));});
 $('speed-reset').onclick=()=>{if(base?.result)updateModel(base.result.stats.RotSpeed.mean);};
 $('speed-spin').onclick=()=>{spin=!spin;lastFrame=0;updateButtons();requestFrame();};
 $('replay-toggle').onclick=()=>{play=!play;if(play){if(elapsed>=20)elapsed=0;reveal=true;}lastFrame=0;updateButtons();paintReplay();requestFrame();};
@@ -81,7 +112,7 @@ $('replay-loop').onchange=()=>{if(!$('replay-loop').checked)elapsed=elapsed%20.7
 window.addEventListener('tideflow:analysis-plot-reset',()=>{plot=null;updateButtons();});
 window.addEventListener('tideflow:replay-pause',()=>{play=false;updateButtons();});
 window.addEventListener('tideflow:replay-seek',e=>{if(!plot)return;play=false;reveal=true;elapsed=Math.max(0,Math.min(1,(e.detail.time-plot.start)/(plot.end-plot.start)))*20;updateButtons();paintReplay();});
-window.addEventListener('tideflow:analysis-plot',e=>{const next=e.detail,key=[next.record.id,next.start,next.end].join('|');if(key!==plotKey){elapsed=0;plotKey=key;}plot=next;updateButtons();paintReplay();requestFrame();});
+window.addEventListener('tideflow:analysis-plot',e=>{const next=e.detail,key=[next.record.id,next.start,next.end].join('|');if(key!==plotKey){elapsed=reveal?0:20;plotKey=key;}plot=next;updateButtons();paintReplay();requestFrame();});
 window.addEventListener('tideflow:render',e=>{if(!e.detail.records)return;loadModel(e.detail);if(!e.detail.record?.result){plot=null;updateButtons();$('replay-clock').textContent='等待完整结果';}else if(!$('analysis-reveal')){plot=null;updateButtons();}requestFrame();});
 const resume=()=>{lastFrame=0;requestFrame();};
 document.addEventListener('visibilitychange',resume);

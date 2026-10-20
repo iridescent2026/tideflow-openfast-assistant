@@ -96,12 +96,25 @@ function readAI(){return connectionFrom({url:$('ai-url').value,model:$('ai-model
 $('ai-form').onsubmit=e=>{e.preventDefault();try{cancelAI();ai=readAI();$('ai-key').value='';$('ai-dialog').close();$('insight-mode').textContent='大模型讨论 · '+ai.model;$('ask-input').placeholder='输入问题，讨论当前工况…';toast('已保存连接；连接检测可验证服务，尚不代表解释质量已验证。');}catch(error){toast(error.message,true);}};
 $('ai-test').onclick=async()=>{const button=$('ai-test'),controller=new AbortController(),timer=setTimeout(()=>controller.abort(),45000);try{const connection=readAI();button.disabled=true;$('ai-test-status').textContent='正在检测文本响应，不发送仿真数据…';await requestAI(connection,{probe:true,local,token,signal:controller.signal});$('ai-test-status').textContent='连接检测通过：服务返回有效文本。模型解释质量仍需实测。';}catch(error){$('ai-test-status').textContent=error.name==='AbortError'?'连接检测超时。':error.message;}finally{button.disabled=false;clearTimeout(timer);}};
 $('ai-disconnect').onclick=()=>{cancelAI();ai=null;$('ai-key').value='';$('insight-mode').textContent='规则解释 · 可追溯';$('ask-input').placeholder='接入 AI 后，继续讨论当前工况…';$('ai-dialog').close();$('insight-text').textContent=ruleExplanation(current(),topic);toast('已清除内存中的密钥。');};$('ask-form').onsubmit=e=>{e.preventDefault();const q=$('ask-input').value.trim();if(q){askAI(q);$('ask-input').value='';}};
-async function init(){try{let restored=null;try{const raw=localStorage.getItem(STORAGE);if(raw)restored=JSON.parse(raw);}catch{}const response=await fetch('./samples.json');if(!response.ok)throw Error('内置算例记录未加载，请检查 samples.json。');const data=await response.json();knowledge=(await fetch('./knowledge.json').then(r=>{if(!r.ok)throw Error('文档摘要加载失败');return r.json();})).entries;runs=data.runs.map(r=>validateRecord(r));if(restored){try{imported=(restored.imported||[]).slice(0,50).map(r=>validateRecord(r,{imported:true}));runs.push(...imported);selected=restored.selected;comparison=new Set((restored.comparison||[]).filter(id=>runs.some(r=>r.id===id&&r.status==='completed')).slice(0,4));draft=validateParams(restored.draft);}catch{imported=[];toast('部分本地记录无效，已载入官方示例。',true);}}
- if(['localhost','127.0.0.1'].includes(location.hostname)){try{const health=await fetch('/api/health').then(r=>r.json());if(health.service==='offshore-assistant'){local=true;token=health.token;active=health.active;await loadLocalRuns();}}catch{}}
- if(!runs.some(r=>r.id===selected))selected=runs.find(r=>r.status==='completed')?.id||runs[0]?.id||null;
- $('side-mode').textContent=local?'本机引擎服务':'真实算例展示';$('side-dot').classList.toggle('ready',local);$('connection-label').textContent=local?'本机服务已连接':'线上结果展示';$('mode-banner').querySelector('p').textContent=local?'已连接本机工作台。提交工况将调用官方 OpenFAST 程序，原始输入、日志和输出均保存在本机。':'当前为真实算例展示模式，可浏览、对比及导入结果。运行新工况请启动项目内的本机服务。';
+async function init(){try{
+ let restored=null;try{const raw=localStorage.getItem(STORAGE);if(raw)restored=JSON.parse(raw);}catch{}
+ const response=await fetch('./samples.json');if(!response.ok)throw Error('内置算例记录未加载，请检查 samples.json。');
+ const data=await response.json();runs=data.runs.map(r=>validateRecord(r));
+ if(restored){try{imported=(restored.imported||[]).slice(0,50).map(r=>validateRecord(r,{imported:true}));runs.push(...imported);selected=restored.selected;comparison=new Set((restored.comparison||[]).filter(id=>runs.some(r=>r.id===id&&r.status==='completed')).slice(0,4));draft=validateParams(restored.draft);}catch{imported=[];toast('部分本地记录无效，已载入官方示例。',true);}}
+ // Render completed saved results before knowledge or backend requests finish.
+ if(!runs.some(r=>r.id===selected&&r.result))selected=runs.find(r=>r.status==='completed'&&r.result)?.id||runs[0]?.id||null;
+ $('side-mode').textContent='已保存算例';$('connection-label').textContent='已有结果 · 直接展示';
+ fillForm(current()?.params||draft);render();
+ fetch('./knowledge.json').then(r=>{if(!r.ok)throw Error('文档摘要加载失败');return r.json();}).then(data=>{knowledge=data.entries||[];if(current())showReferences(aiContext(current(),topic,knowledge).references);}).catch(()=>{});
+ if(['localhost','127.0.0.1'].includes(location.hostname)){try{
+  const health=await fetch('/api/health',{signal:AbortSignal.timeout(2000)}).then(r=>r.json());
+  if(health.service==='offshore-assistant'){local=true;token=health.token;active=health.active;await loadLocalRuns();if(restored?.selected&&runs.some(r=>r.id===restored.selected&&r.result))selected=restored.selected;}
+ }catch{}}
+ $('side-mode').textContent=local?'本机引擎服务':'真实算例展示';$('side-dot').classList.toggle('ready',local);$('connection-label').textContent=local?'本机服务已连接':'已有结果 · 直接展示';
+ $('mode-banner').querySelector('p').textContent=local?'已有结果直接展示。只有点击提交新工况才调用 OpenFAST，原始输入、日志和输出保存在本机。':'当前展示已保存的真实算例，可浏览、对比及导入结果。运行新工况请启动本机服务。';
  fillForm(current()?.params||draft);render();if(active)pollTimer=setTimeout(poll,1000);
  }catch(error){$('result-title').textContent='数据尚未就绪';$('insight-text').textContent=error.message;$('time-chart').innerHTML='<div class="empty">数据加载失败。请确认通过 HTTP 服务打开，且 samples.json 存在。</div>';$('connection-label').textContent='加载失败';toast(error.message,true);}}
+
 init();
 
 // Stable UI bridge: enhancements consume the same records and operations as the

@@ -1,4 +1,19 @@
 const SERIES=[{key:'power',label:'平均功率',unit:'kW',color:'#8aede2'},{key:'pitch',label:'纵摇绝对峰值',unit:'°',color:'#edc584'},{key:'surge',label:'纵荡绝对峰值',unit:'m',color:'#baacf3'}];
+export function renderRecordedResponse(svg,record,mode='relative'){
+ const result=record?.result;if(!result?.series?.length)return;
+ const W=900,H=310,L=62,R=28,T=31,B=262;
+ const defs=[['GenPwr','发电功率','#8aede2'],['PtfmPitch','平台纵摇','#edc584'],['PtfmSurge','平台纵荡','#baacf3']].slice(0,mode==='power'?1:3);
+ const curves=defs.map(([key,label,color])=>({key,label,color,index:result.channels.indexOf(key),scale:mode==='power'?1:Math.max(1e-9,result.series.reduce((m,row)=>Math.max(m,Math.abs(row[result.channels.indexOf(key)])),0))/100})).filter(s=>s.index>=0);
+ const start=result.series[0][0],end=result.series.at(-1)[0],values=curves.flatMap(s=>result.series.map(row=>row[s.index]/s.scale));
+ let lo=values.reduce((m,v)=>Math.min(m,v),0),hi=values.reduce((m,v)=>Math.max(m,v),0);const pad=Math.max(.1,(hi-lo)*.1);lo-=pad;hi+=pad;
+ const x=t=>L+(t-start)/Math.max(.001,end-start)*(W-L-R),y=v=>B-(v-lo)/(hi-lo)*(B-T);
+ let html=`<text x="${L}" y="17" fill="#bdd5df" font-size="12">${mode==='power'?'发电功率 / kW':'各通道 / 本工况绝对峰值 %'} · 已保存的真实时序</text>`;
+ for(let i=0;i<=4;i++){const v=lo+(hi-lo)*i/4;html+=`<path d="M${L} ${y(v)}H${W-R}" stroke="#a9d1db" stroke-opacity=".12"/><text x="${L-10}" y="${y(v)+4}" text-anchor="end" fill="#a9c5d1" font-size="12">${n(v,0)}</text>`;}
+ for(let i=0;i<=6;i++){const t=start+(end-start)*i/6;html+=`<text x="${x(t)}" y="${B+22}" text-anchor="middle" fill="#a9c5d1" font-size="12">${n(t,0)}</text>`;}
+ for(const s of curves){const stride=Math.max(1,Math.ceil(result.series.length/1000)),rows=result.series.filter((_,i)=>i%stride===0);if(rows.at(-1)!==result.series.at(-1))rows.push(result.series.at(-1));html+=`<path data-recorded-series="${s.key}" d="${rows.map((row,i)=>`${i?'L':'M'}${x(row[0]).toFixed(2)},${y(row[s.index]/s.scale).toFixed(2)}`).join(' ')}" fill="none" stroke="${s.color}" stroke-width="1.8"/>`;}
+ html+='<text x="872" y="306" text-anchor="end" fill="#a9c5d1" font-size="12">时间 / s</text>';
+ svg.setAttribute('viewBox',`0 0 ${W} ${H}`);svg.setAttribute('aria-label','当前工况已保存的真实响应曲线，模型调速不改写数据');svg.innerHTML=html;
+}
 const n=(v,d=1)=>Number.isFinite(v)?v.toLocaleString('zh-CN',{minimumFractionDigits:d,maximumFractionDigits:d}):'—';
 export function baselinePercent(value,base){return Number.isFinite(value)&&Number.isFinite(base)&&Math.abs(base)>1e-9?(value-base)/Math.abs(base)*100:null;}
 export function responseSeries(anchors,baseline,mode='relative'){
