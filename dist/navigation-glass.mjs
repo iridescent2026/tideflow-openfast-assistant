@@ -13,7 +13,8 @@ function syncPage(){
  document.body.classList.toggle('tidal-lab-immersive',Boolean(immersive));
  shell.hidden=Boolean(immersive);toggle.hidden=Boolean(immersive);shade.hidden=Boolean(immersive);
  for(const button of shell.querySelectorAll('[data-page]')){const selected=button.dataset.page===active;button.classList.toggle('is-current',selected);if(selected)button.setAttribute('aria-current','page');else button.removeAttribute('aria-current');}
- if(immersive){setOpen(false);shell.inert=true;}else if(compact.matches)setOpen(false);else setOpen(desktopOpen);
+ // Give the landing page its full ocean view, independent of other pages' saved preference.
+ if(immersive){setOpen(false);shell.inert=true;}else if(active==='home'||compact.matches)setOpen(false);else setOpen(desktopOpen);
 }
 toggle.onclick=()=>{setOpen(!open);if(!compact.matches){desktopOpen=open;try{localStorage.setItem('tidal-nav-desktop-open',String(open));}catch{}}};shade.onclick=()=>{setOpen(false);toggle.focus();};
 document.addEventListener('keydown',event=>{if(event.key==='Escape'&&compact.matches&&open){setOpen(false);toggle.focus();}});
