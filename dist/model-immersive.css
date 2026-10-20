@@ -1,0 +1,332 @@
+/* Spatial explorer: quiet controls, real 3D, and details that appear on demand. */
+body[data-page=model] #page-model .model-stage{
+  background:radial-gradient(ellipse at 48% 26%,#1b5265 0%,#0a2d3d 45%,#041925 100%);
+  background-image:radial-gradient(ellipse at 48% 26%,#1b5265 0%,#0a2d3d 45%,#041925 100%);
+}
+body[data-page=model] #page-model .model-stage:before{
+  background:linear-gradient(90deg,#03162038,transparent 28%,#03162016),linear-gradient(0deg,#02121b30,transparent 30%);
+  filter:none;opacity:1;mask-image:none;z-index:2;
+}
+body[data-page=model] #page-model .model-stage:after{display:none}
+body[data-page=model] #page-model .model-stage>.page-heading{
+  top:30px;left:32px;right:auto;bottom:auto;max-width:calc(100% - var(--model-panel) - 80px);padding:0;margin:0;opacity:1;
+}
+body[data-page=model] #page-model .model-stage>.page-heading .kicker{
+  font:10px/1.5 'Bahnschrift','Segoe UI','Microsoft YaHei',sans-serif;letter-spacing:2px;color:#8daeb8;
+}
+body[data-page=model] #page-model .model-stage>.page-heading h1{
+  font:600 clamp(21px,1.75vw,30px)/1.25 'Bahnschrift','Segoe UI','Microsoft YaHei',sans-serif;
+  letter-spacing:1px;margin:9px 0 5px;white-space:normal;text-shadow:0 2px 18px #00111d55;
+}
+body[data-page=model] #page-model .model-stage>.page-heading p{
+  font-size:11px;line-height:1.7;letter-spacing:1px;color:#94b4bf;margin:0;
+}
+body[data-page=model] #page-model .model-stage>.page-heading:after{width:24px;height:1px;margin-top:12px;background:#75c9ce}
+body[data-page=model] #page-model .ocean-depth,body[data-page=model] #page-model .ocean-compass{display:none}
+
+/* Screen-space anchors stay small even when selected. */
+body[data-page=model] #page-model .model-labels{z-index:5}
+body[data-page=model] #page-model .model-labels .model-point,
+body[data-page=model] #page-model .model-labels .model-point.active{
+  display:grid;place-items:center;width:36px;height:36px;min-width:36px;min-height:36px;
+  padding:0;margin:0;border:0;border-radius:50%;background:transparent;color:#b6ffff;
+  box-shadow:none;transform:translate(-50%,-50%);font-size:0;line-height:0;
+  backdrop-filter:none;-webkit-backdrop-filter:none;overflow:visible;cursor:pointer;
+}
+body[data-page=model] #page-model .model-labels .model-point:before,
+body[data-page=model] #page-model .model-labels .model-point.active:before{
+  content:'';position:absolute;inset:8px;width:auto;height:auto;left:8px;top:8px;
+  margin:0;background:#1b8d9d28;border:1px solid #b6fff4b8;border-radius:50%;
+  box-shadow:0 0 13px #4de7e747,inset 0 0 8px #9ce9e92b;transform:none;
+  transition:inset .18s ease,background .18s ease,box-shadow .18s ease;
+}
+body[data-page=model] #page-model .model-labels .model-point:after{
+  content:'';position:absolute;inset:3px;border:1px solid #9bffff30;border-radius:50%;pointer-events:none;
+}
+body[data-page=model] #page-model .model-labels .model-point>span{
+  width:5px;height:5px;background:#e3fffa;border-radius:50%;box-shadow:0 0 9px #74f5ed;position:relative;
+}
+body[data-page=model] #page-model .model-labels .model-point:hover:before,
+body[data-page=model] #page-model .model-labels .model-point[aria-expanded=true]:before{
+  inset:5px;background:#45c2cc44;box-shadow:0 0 20px #62f5e95e,inset 0 0 10px #9ce9e947;
+}
+body[data-page=model] #page-model .model-labels .model-point:focus-visible{outline:2px solid #baffee;outline-offset:4px}
+
+/* A single, anchored detail card replaces permanent model labels. */
+body[data-page=model] #page-model .part-hotspot-popover{
+  position:absolute;z-index:14;width:254px;max-width:calc(100% - 24px);box-sizing:border-box;
+  margin:0;padding:21px 20px 16px;border:1px solid #83c7ce7a;border-radius:14px;
+  background:linear-gradient(145deg,#143e4af5,#082630f5);color:#e5f5f5;
+  box-shadow:0 16px 48px #00101880,inset 0 1px #f1ffff15;backdrop-filter:blur(20px);
+}
+body[data-page=model] #page-model .part-hotspot-popover .hotspot-eyebrow{
+  display:block;padding-right:16px;color:#80aeb6;font:8px/1.7 'Bahnschrift','Segoe UI',sans-serif;letter-spacing:1.3px;
+}
+body[data-page=model] #page-model .part-hotspot-popover h3{font-size:21px;line-height:1.4;font-weight:600;margin:6px 0 7px;color:#f0fffc}
+body[data-page=model] #page-model .part-hotspot-popover p{font-size:11px;line-height:1.8;color:#b7ced2;margin:0 0 15px;overflow-wrap:anywhere}
+body[data-page=model] #page-model .hotspot-close,
+body[data-page=model] #page-model .model-point-guide>button{
+  position:absolute;top:10px;right:10px;display:grid;place-items:center;width:28px;height:28px;min-height:0;
+  border:0;border-radius:7px;background:transparent;color:#8fb0b8;padding:6px;cursor:pointer;
+}
+body[data-page=model] #page-model .hotspot-close:hover,
+body[data-page=model] #page-model .model-point-guide>button:hover{background:#b2f1ed12;color:#e8fffa}
+body[data-page=model] #page-model .hotspot-close svg,
+body[data-page=model] #page-model .model-point-guide>button svg{width:15px;height:15px}
+body[data-page=model] #page-model .hotspot-actions{display:grid;gap:7px}
+body[data-page=model] #page-model .hotspot-actions>button,
+body[data-page=model] #page-model .inspector-experience-actions>button{
+  display:flex;align-items:center;gap:9px;min-height:41px;padding:10px 12px;border:1px solid #8ee6da65;border-radius:7px;
+  background:linear-gradient(115deg,#296e73,#24555e);box-shadow:inset 0 1px #effff812;
+  color:#e3fff5;font:500 11px/1.5 'Segoe UI','Microsoft YaHei',sans-serif;text-align:left;cursor:pointer;
+}
+body[data-page=model] #page-model .hotspot-actions>button svg,
+body[data-page=model] #page-model .inspector-experience-actions>button svg{width:18px;height:18px;flex:none}
+body[data-page=model] #page-model .hotspot-actions>button b,
+body[data-page=model] #page-model .inspector-experience-actions>button b{margin-left:auto;font-size:15px;font-weight:400;opacity:.7}
+body[data-page=model] #page-model .hotspot-actions>button.is-secondary,
+body[data-page=model] #page-model .inspector-experience-actions>button.is-secondary{background:#112f3a88;border-color:#789aa745;color:#b5cdd1;box-shadow:none}
+body[data-page=model] #page-model .hotspot-actions>button:hover,
+body[data-page=model] #page-model .inspector-experience-actions>button:hover{border-color:#d2fff1;color:#fff;background:#2c7079}
+body[data-page=model] #page-model .inspector-experience-actions{position:relative;display:grid;gap:7px;margin:17px 0 20px}
+
+/* One brief introduction, dismissed permanently after the first interaction. */
+body[data-page=model] #page-model .model-point-guide{
+  position:absolute;z-index:9;left:32px;top:151px;max-width:min(318px,calc(100% - 64px));
+  display:flex;gap:13px;align-items:center;box-sizing:border-box;padding:14px 42px 14px 16px;
+  background:#0b2a35c7;border:1px solid #82bdc13d;border-radius:10px;color:#d9edea;backdrop-filter:blur(16px);
+  box-shadow:0 12px 30px #00131d26;
+}
+body[data-page=model] #page-model .model-point-guide .guide-point{display:block;position:relative;flex:none;width:18px;height:18px;border:1px solid #b0f4eb99;border-radius:50%;background:#77ded619;box-shadow:0 0 0 4px #7fece80c}
+body[data-page=model] #page-model .model-point-guide .guide-point:after{content:'';position:absolute;inset:5px;background:#d9fff6;border-radius:50%;box-shadow:0 0 9px #76e6da}
+body[data-page=model] #page-model .model-point-guide strong{display:block;font-size:11px;line-height:1.65;font-weight:500;white-space:normal}
+body[data-page=model] #page-model .model-point-guide div>span{display:block;color:#8aaeb8;font-size:9px;line-height:1.8;margin-top:3px}
+body[data-page=model] #page-model .model-point-guide>button{top:8px;right:6px}
+
+/* View presets and interior entry points share the available scene width. */
+body[data-page=model] #page-model .stage-tools{
+  --scene-width:calc(100% - var(--model-panel)*.65 - 45px);
+  left:calc(var(--scene-width)/2);right:auto;bottom:25px;width:520px;max-width:calc(var(--scene-width) - 48px);
+  min-height:56px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) 1.45fr 1fr;gap:0;
+  padding:6px;border:1px solid #91bfc044;border-radius:12px;background:linear-gradient(115deg,#173a46db,#102b39ee);
+  backdrop-filter:blur(18px);box-shadow:0 12px 35px #00151c55,inset 0 1px #c3e9e315;
+}
+body[data-page=model] #page-model .stage-tools button{
+  display:flex;align-items:center;justify-content:center;gap:8px;min-width:0;min-height:42px;padding:8px 9px;
+  font-size:11px;line-height:1.5;border:0;border-radius:7px;color:#a9c1c8;background:transparent;white-space:nowrap;
+}
+body[data-page=model] #page-model .stage-tools button+button{border-left:0}
+body[data-page=model] #page-model .stage-tools button svg{width:18px;height:18px;stroke-width:1.5}
+body[data-page=model] #page-model .stage-tools button.active,
+body[data-page=model] #page-model .stage-tools button:hover{background:#8ed5d210;color:#c7f8eb}
+body[data-page=model] #page-model .stage-tools [data-view=rotor]{display:flex;color:#b5d2cf;border-left:1px solid #89b6bc35;border-radius:0}
+body[data-page=model] #page-model .stage-tools [data-view=mooring],
+body[data-page=model] #page-model .stage-tools [data-view=water],
+body[data-page=model] #page-model .stage-tools [data-view=rotate]{display:none}
+body[data-page=model] #page-model .experience-switcher{
+  position:absolute;z-index:10;left:calc((100% - var(--model-panel)*.65 - 45px)/2);bottom:94px;
+  display:flex;align-items:center;gap:3px;transform:translateX(-50%);max-width:calc(100% - 48px);box-sizing:border-box;
+  padding:5px;border:1px solid #a1c5c52c;border-radius:9px;background:#0a2530b8;backdrop-filter:blur(16px);
+}
+body[data-page=model] #page-model .experience-switcher>span{color:#82a5ae;font-size:9px;letter-spacing:.5px;white-space:nowrap;padding:0 10px 0 8px}
+body[data-page=model] #page-model .experience-switcher>button{
+  display:flex;align-items:center;justify-content:center;gap:7px;min-height:34px;padding:7px 12px;
+  border:0;border-radius:5px;background:transparent;color:#bad4d5;font-size:11px;white-space:nowrap;cursor:pointer;
+}
+body[data-page=model] #page-model .experience-switcher>button svg{width:17px;height:17px}
+body[data-page=model] #page-model .experience-switcher>button:hover,
+body[data-page=model] #page-model .experience-switcher>button[aria-pressed=true]{background:#77d1c81c;color:#d4fff0}
+body[data-page=model] #page-model .stage-help{left:32px;bottom:7px;font-size:8px;letter-spacing:.3px}
+
+/* The inspector remains fully usable, with readable spacing and contained scrolling. */
+body[data-page=model] #page-model .part-inspector{
+  border:1px solid #83b7ba50;border-radius:15px;background:linear-gradient(145deg,#153b48ed,#092631f2 70%);
+  box-shadow:0 18px 55px #00131b70,inset 0 1px #dbf5f015;
+}
+body[data-page=model] #page-model .part-inspector h2{font-size:29px;line-height:1.3;margin:17px 0 14px}
+body[data-page=model] #page-model .part-inspector #component-description{font-size:12px;line-height:1.9;color:#b5cdd2;margin-bottom:14px}
+body[data-page=model] #page-model .part-inspector dl{margin:19px 0 17px}
+body[data-page=model] #page-model .part-inspector dl>div{min-height:48px;padding:11px 0}
+body[data-page=model] #page-model .part-inspector dt{font-size:11px;color:#95b1ba}
+body[data-page=model] #page-model .part-inspector dd{font-size:20px;line-height:1.45;white-space:normal;overflow-wrap:anywhere}
+body[data-page=model] #page-model .part-inspector .component-detail #component-detail{font-size:11px!important;color:#7f9ea9;line-height:1.9}
+body[data-page=model] #page-model .ocean-inspector-foot{font-size:9px;margin-top:19px;color:#6f929e}
+
+/* First person UI yields the entire viewport to the scene. */
+body[data-page=model] #page-model[data-experience]:not([data-experience=overview]) .part-inspector,
+body[data-page=model] #page-model .model-stage:not([data-experience=overview])>.page-heading,
+body[data-page=model] #page-model .model-stage:not([data-experience=overview]) .model-labels,
+body[data-page=model] #page-model .model-stage:not([data-experience=overview]) .stage-tools,
+body[data-page=model] #page-model .model-stage:not([data-experience=overview]) .stage-help,
+body[data-page=model] #page-model .model-stage:not([data-experience=overview]) .model-point-guide{display:none!important}
+body[data-page=model] #page-model .experience-hud{position:absolute;z-index:10;inset:0;pointer-events:none}
+body[data-page=model] #page-model .experience-identity{
+  position:absolute;left:32px;top:32px;display:flex;gap:12px;align-items:flex-start;
+  width:max-content;max-width:calc(100% - 310px);min-width:0;box-sizing:border-box;padding:12px 16px;
+  border:1px solid #a7d4cf30;border-radius:10px;background:linear-gradient(115deg,#051d29eb,#0a2c39d6);
+  backdrop-filter:blur(14px) saturate(110%);-webkit-backdrop-filter:blur(14px) saturate(110%);
+  box-shadow:inset 0 1px #c5e9e30b,0 8px 25px #00101426;color:#e8faf5;text-shadow:0 1px 4px #00131d66;
+}
+body[data-page=model] #page-model .experience-identity>div{min-width:0;overflow-wrap:anywhere}
+body[data-page=model] #page-model .experience-live-dot{width:6px;height:6px;border-radius:50%;background:#9cddc5;margin-top:5px;box-shadow:0 0 10px #89dec86b;flex:none}
+body[data-page=model] #page-model .experience-identity div>span{display:block;font:9px/1.5 'Bahnschrift','Segoe UI',sans-serif;letter-spacing:2px;color:#b3d9d8}
+body[data-page=model] #page-model .experience-identity h2{font-size:25px;line-height:1.4;margin:7px 0 4px;font-weight:500;letter-spacing:1px;color:#e8faf5}
+body[data-page=model] #page-model .experience-identity p{font-size:10px;line-height:1.7;color:#bdd0d7;margin:0;letter-spacing:.5px}
+body[data-page=model] #page-model .experience-exit{
+  position:absolute;right:25px;top:88px;pointer-events:auto;display:flex;align-items:center;gap:10px;min-height:42px;
+  border:1px solid #9ec5c14f;border-radius:8px;background:#0d2833d9;color:#d2e9e5;padding:9px 12px;font-size:11px;backdrop-filter:blur(16px);cursor:pointer;
+}
+body[data-page=model] #page-model .experience-exit svg{width:17px;height:17px}
+body[data-page=model] #page-model .experience-exit kbd{font:8px/1.7 'Segoe UI',sans-serif;border:1px solid #bad4d140;border-radius:3px;padding:1px 4px;color:#8da9b1;margin-left:3px}
+body[data-page=model] #page-model .experience-exit:hover{border-color:#b3e9d3;background:#20525a}
+body[data-page=model] #page-model .model-stage:not([data-experience=overview]) .experience-switcher{top:139px;bottom:auto;left:32px;transform:none;background:#0a2530c4}
+body[data-page=model] #page-model .model-stage:not([data-experience=overview]) .experience-switcher>span{display:none}
+body[data-page=model] #page-model .experience-navigation{position:absolute;z-index:10;inset:0;pointer-events:none}
+body[data-page=model] #page-model .first-person-hint{position:absolute;left:32px;bottom:31px;max-width:calc(100% - 220px);padding:11px 14px;border:1px solid #9dbabb2c;border-radius:8px;background:#061c27a8;color:#b6ced0;backdrop-filter:blur(15px)}
+body[data-page=model] #page-model .first-person-hint>span{display:block;font-size:9px;color:#8dc6c1;letter-spacing:1px;margin-bottom:5px}
+body[data-page=model] #page-model .first-person-hint p{font-size:9px;line-height:1.8;white-space:normal;margin:0;color:#8aa8b2}
+body[data-page=model] #page-model .first-person-hint b{font-size:9px;color:#c0d6d7;font-weight:500}
+body[data-page=model] #page-model .first-person-hint i{font-style:normal;margin:0 7px;opacity:.5}
+body[data-page=model] #page-model .walk-controls{
+  pointer-events:auto;position:absolute;right:29px;bottom:26px;display:grid;grid-template-columns:repeat(3,39px);grid-template-rows:repeat(3,36px);gap:4px;
+  border-radius:12px;padding:6px;background:#061b256e;border:1px solid #b4d8cf20;backdrop-filter:blur(10px);user-select:none;touch-action:none;
+}
+body[data-page=model] #page-model .walk-controls button{
+  width:39px;height:36px;min-height:0;display:grid;place-items:center;border:1px solid #a5c9c638;border-radius:6px;padding:8px;
+  background:#183640b8;color:#bbd5d2;touch-action:none;cursor:pointer;
+}
+body[data-page=model] #page-model .walk-controls button:hover,
+body[data-page=model] #page-model .walk-controls button:active{background:#427b7d;border-color:#9cebd3;color:#fff}
+body[data-page=model] #page-model .walk-controls button svg{width:19px;height:19px;pointer-events:none}
+body[data-page=model] #page-model .walk-controls [data-walk=forward]{grid-column:2;grid-row:1}
+body[data-page=model] #page-model .walk-controls [data-walk=left]{grid-column:1;grid-row:2}
+body[data-page=model] #page-model .walk-controls [data-walk=left] svg{transform:rotate(-90deg)}
+body[data-page=model] #page-model .walk-controls [data-walk=right]{grid-column:3;grid-row:2}
+body[data-page=model] #page-model .walk-controls [data-walk=right] svg{transform:rotate(90deg)}
+body[data-page=model] #page-model .walk-controls [data-walk=back]{grid-column:2;grid-row:3}
+body[data-page=model] #page-model .walk-controls [data-walk=back] svg{transform:rotate(180deg)}
+body[data-page=model] #page-model .walk-controls>span{grid-column:2;grid-row:2;display:grid;place-items:center;color:#6d9c9f}
+body[data-page=model] #page-model .walk-controls>span svg{width:18px;height:18px}
+body[data-page=model] #page-model .submersion-effect{position:absolute;inset:0;z-index:4;pointer-events:none;opacity:0;overflow:hidden;background:radial-gradient(ellipse at 50% 15%,#83e4d414,transparent 65%);transition:opacity .8s}
+body[data-page=model] #page-model .model-stage[data-experience=underwater] .submersion-effect{opacity:1;box-shadow:inset 0 0 100px #002a4e4d}
+body[data-page=model] #page-model .submersion-effect i{position:absolute;left:-30%;right:-30%;top:16%;height:50%;border:1px solid #a0e9e30c;border-radius:48%;transform:rotate(-8deg);animation:oc4-refraction 12s ease-in-out infinite}
+body[data-page=model] #page-model .submersion-effect i:nth-child(2){top:10%;animation-delay:-4s;transform:rotate(6deg)}
+body[data-page=model] #page-model .submersion-effect i:nth-child(3){top:-8%;animation-delay:-8s;transform:rotate(-4deg)}
+@keyframes oc4-refraction{0%,100%{translate:-3% -8%;scale:1.04;opacity:.2}50%{translate:3% 6%;scale:.95;opacity:.7}}
+body[data-page=model] #page-model button:focus-visible{outline:2px solid #a3ecd5;outline-offset:3px}
+
+@media(min-width:901px){
+  body[data-page=model] #page-model .part-inspector{top:88px;right:22px;bottom:26px;height:auto;max-height:calc(100svh - 114px);padding:23px 26px 25px}
+  body[data-page=model] #page-model .part-inspector .component-list{margin-bottom:21px}
+}
+@media(min-width:901px) and (max-height:760px){
+  body[data-page=model] #page-model .part-inspector{top:84px;bottom:20px;max-height:calc(100svh - 104px);padding:18px 22px}
+  body[data-page=model] #page-model .part-inspector .component-list{margin-bottom:12px}
+  body[data-page=model] #page-model .part-inspector .component-list button{padding:7px 0 10px}
+  body[data-page=model] #page-model .part-inspector h2{font-size:26px;margin:12px 0}
+  body[data-page=model] #page-model .part-inspector #component-description{font-size:11px;line-height:1.8;margin-bottom:10px}
+  body[data-page=model] #page-model .inspector-experience-actions{margin:12px 0 14px;gap:6px}
+  body[data-page=model] #page-model .inspector-experience-actions>button{min-height:36px;padding:8px 10px;font-size:10px}
+  body[data-page=model] #page-model .part-inspector dl{margin:14px 0}
+  body[data-page=model] #page-model .part-inspector dl>div{min-height:41px;padding:9px 0}
+  body[data-page=model] #page-model .part-inspector dd{font-size:18px}
+  body[data-page=model] #page-model .part-inspector .component-detail #component-detail{font-size:10px!important;line-height:1.8}
+  body[data-page=model] #page-model .ocean-inspector-foot{margin-top:12px}
+}
+@media(max-width:1100px) and (min-width:901px){
+  body[data-page=model] #page-model .model-stage>.page-heading{left:26px;top:31px;max-width:calc(100% - var(--model-panel) - 60px)}
+  body[data-page=model] #page-model .model-stage>.page-heading h1{font-size:22px!important}
+  body[data-page=model] #page-model .model-point-guide{left:26px;top:145px;max-width:278px;padding-left:13px;gap:10px}
+  body[data-page=model] #page-model .stage-tools{max-width:calc(100% - var(--model-panel) - 30px);left:calc((100% - var(--model-panel) - 20px)/2)}
+  body[data-page=model] #page-model .stage-tools button{font-size:10px;gap:5px;padding:7px 5px}
+  body[data-page=model] #page-model .stage-tools button svg{width:16px;height:16px}
+  body[data-page=model] #page-model .experience-switcher{left:calc((100% - var(--model-panel) - 20px)/2)}
+  body[data-page=model] #page-model .experience-switcher>span{display:none}
+  body[data-page=model] #page-model .experience-switcher>button{padding:7px 11px}
+}
+@media(max-width:900px){
+  body[data-page=model] #page-model .model-explorer{height:auto;min-height:100svh}
+  body[data-page=model] #page-model .model-stage{height:82svh;min-height:640px;max-height:none}
+  body[data-page=model] #page-model .model-stage>.page-heading{top:80px;left:24px;max-width:calc(100% - 48px)}
+  body[data-page=model] #page-model .model-stage>.page-heading h1{font-size:25px!important;margin:7px 0 3px}
+  body[data-page=model] #page-model .model-stage>.page-heading .kicker{font-size:9px}
+  body[data-page=model] #page-model .model-stage>.page-heading p{font-size:10px}
+  body[data-page=model] #page-model .model-point-guide{top:184px;left:24px;max-width:calc(100% - 48px);padding:12px 40px 12px 14px;gap:11px}
+  body[data-page=model] #page-model .model-point-guide strong{font-size:10px}
+  body[data-page=model] #page-model .model-point-guide div>span{font-size:8px}
+  body[data-page=model] #page-model .stage-tools{left:50%;bottom:22px;width:500px;max-width:calc(100% - 32px);min-height:53px;padding:5px;border-radius:10px}
+  body[data-page=model] #page-model .stage-tools button{font-size:10px;gap:6px;min-height:39px;padding:7px 6px}
+  body[data-page=model] #page-model .stage-tools button svg{width:17px;height:17px}
+  body[data-page=model] #page-model .experience-switcher{left:50%;bottom:87px;max-width:calc(100% - 32px)}
+  body[data-page=model] #page-model .experience-switcher>span{font-size:8px;padding:0 7px}
+  body[data-page=model] #page-model .experience-switcher>button{min-height:33px;font-size:10px;padding:7px 10px;gap:6px}
+  body[data-page=model] #page-model .experience-switcher>button svg{width:16px;height:16px}
+  body[data-page=model] #page-model .stage-help{left:20px;bottom:5px;font-size:7px}
+  body[data-page=model] #page-model .part-inspector{margin:0 16px 24px;padding:22px 24px;min-height:0;height:auto;max-height:none}
+  body[data-page=model] #page-model .part-inspector .component-list{margin-bottom:18px}
+  body[data-page=model] #page-model .part-inspector h2{font-size:27px}
+  body[data-page=model] #page-model .part-inspector .inspector-experience-actions{grid-template-columns:repeat(2,minmax(0,1fr))}
+  body[data-page=model] #page-model .part-inspector .inspector-experience-actions>button{font-size:10px;padding:9px 10px;gap:6px}
+  body[data-page=model] #page-model .part-inspector .inspector-experience-actions>button b{font-size:12px}
+  body[data-page=model] #page-model .experience-identity{top:84px;left:24px;max-width:calc(100% - 48px)}
+  body[data-page=model] #page-model .experience-identity div>span{font-size:8px}
+  body[data-page=model] #page-model .experience-identity h2{font-size:24px;margin-top:6px}
+  body[data-page=model] #page-model .experience-identity p{font-size:9px}
+  body[data-page=model] #page-model .experience-exit{top:auto;bottom:24px;left:22px;right:auto;min-height:40px;font-size:10px;padding:8px 10px}
+  body[data-page=model] #page-model .experience-exit kbd{display:none}
+  body[data-page=model] #page-model .model-stage:not([data-experience=overview]) .experience-switcher{left:23px;top:190px;bottom:auto;transform:none}
+  body[data-page=model] #page-model .first-person-hint{left:24px;bottom:82px;max-width:calc(100% - 200px);padding:10px}
+  body[data-page=model] #page-model .first-person-hint p{font-size:8px;line-height:1.8}
+  body[data-page=model] #page-model .first-person-hint i{margin:0 4px}
+  body[data-page=model] #page-model .walk-controls{right:21px;bottom:23px;grid-template-columns:repeat(3,35px);grid-template-rows:repeat(3,34px);gap:3px;padding:5px}
+  body[data-page=model] #page-model .walk-controls button{width:35px;height:34px;padding:7px}
+  body[data-page=model] #page-model[data-experience]:not([data-experience=overview]) .model-stage{height:100svh;min-height:580px}
+}
+@media(max-width:420px){
+  body[data-page=model] #page-model .model-stage>.page-heading{left:21px;max-width:calc(100% - 42px)}
+  body[data-page=model] #page-model .model-stage>.page-heading h1{font-size:24px!important;letter-spacing:.5px}
+  body[data-page=model] #page-model .model-point-guide{left:21px;max-width:calc(100% - 42px)}
+  body[data-page=model] #page-model .experience-switcher>span{display:none}
+  body[data-page=model] #page-model .experience-switcher>button{padding:7px 15px}
+  body[data-page=model] #page-model .stage-tools{max-width:calc(100% - 24px)}
+  body[data-page=model] #page-model .stage-tools button{flex-direction:column;gap:3px;padding:4px;font-size:9px;min-height:43px}
+  body[data-page=model] #page-model .stage-tools button svg{width:16px;height:16px}
+  body[data-page=model] #page-model .stage-tools [data-view=rotor]{font-size:9px}
+  body[data-page=model] #page-model .part-inspector{padding:20px 20px}
+  body[data-page=model] #page-model .part-inspector .inspector-experience-actions{grid-template-columns:1fr}
+  body[data-page=model] #page-model .first-person-hint{max-width:calc(100% - 175px);left:22px}
+  body[data-page=model] #page-model .first-person-hint p{max-width:140px}
+  body[data-page=model] #page-model .first-person-hint b{font-size:8px}
+  body[data-page=model] #page-model .part-hotspot-popover{width:234px;padding:19px 17px 14px}
+}
+@media(prefers-reduced-motion:reduce){
+  body[data-page=model] #page-model .submersion-effect i{animation:none}
+  body[data-page=model] #page-model .model-point:before,body[data-page=model] #page-model .submersion-effect{transition:none}
+}
+
+/* The glass navigation owns real layout space on desktop. The model viewport,
+   its anchor points, and its controls resize together when the rail closes. */
+@media(min-width:901px){
+  body.tidal-navigation[data-page=model].tidal-nav-open .shell,
+  body.tidal-navigation[data-page=model].tidal-nav-closed .shell{
+    margin-left:var(--tidal-nav-width)!important;width:calc(100% - var(--tidal-nav-width))!important;min-width:0;
+  }
+  body.tidal-navigation[data-page=model].tidal-nav-closed #page-model .model-stage>.page-heading{left:108px}
+  body.tidal-navigation[data-page=model].tidal-nav-closed #page-model .experience-identity{left:108px}
+  body.tidal-navigation[data-page=model] #page-model .model-stage .stage-tools{
+    left:calc((100% - var(--model-panel)*.65 - 45px)/2);
+    max-width:calc(100% - var(--model-panel)*.65 - 93px);
+  }
+  body.tidal-navigation[data-page=model] #page-model .model-stage .stage-help{left:32px}
+}
+@media(min-width:901px) and (max-width:1100px){
+  body.tidal-navigation[data-page=model] #page-model .model-stage .stage-tools{
+    left:calc((100% - var(--model-panel) - 20px)/2);max-width:calc(100% - var(--model-panel) - 30px);
+  }
+}
+@media(max-width:900px){
+  body.tidal-navigation[data-page=model] #page-model .model-stage .stage-tools{left:50%;max-width:calc(100% - 32px)}
+}
+@media(max-width:420px){
+  body.tidal-navigation[data-page=model] #page-model .model-stage .stage-tools{max-width:calc(100% - 24px)}
+}

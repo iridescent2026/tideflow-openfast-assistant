@@ -1,4 +1,4 @@
-import {initializeWorkspace} from './workspace-startup.mjs?v=1.4.0';
+import {initializeWorkspace} from './workspace-startup.mjs?v=1.4.7';
 const status=document.getElementById('workspace-loading');
 function showFailure(message){
   status.hidden=false;

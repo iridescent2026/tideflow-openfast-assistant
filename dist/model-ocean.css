@@ -78,3 +78,21 @@ body[data-page=model] #page-model .model-labels button{backdrop-filter:none;-web
 body[data-page=model] #page-model .part-inspector .component-list button{min-height:0;align-items:center;overflow-wrap:normal}
 body[data-page=model] #page-model .part-inspector dd{overflow-wrap:anywhere}
 @media(max-width:900px){body[data-page=model] main{height:auto}body[data-page=model] #page-model .model-stage{max-height:none}body[data-page=model] #page-model .part-inspector{height:auto;margin:0 18px 30px;top:auto;bottom:auto;right:auto;left:auto}}
+
+/* Keep the utility toolbar clear of the inspector and use one restrained panel edge. */
+body[data-page=model] #page-model .part-inspector{
+  background:linear-gradient(145deg,#164d62e8 0%,#062b3de8 58%,#062333f2 100%);
+  border:1px solid #6bd7e0b8;
+  border-radius:16px;
+  box-shadow:0 20px 55px #00131d88,inset 0 1px #d9fcff25;
+}
+body[data-page=model] #page-model .part-inspector:before{display:none}
+body[data-page=model] #page-model .inspector-frame{display:none}
+@media(min-width:901px){
+  body[data-page=model] #page-model .part-inspector{
+    top:max(84px,10.2svh);
+    bottom:auto;
+    height:min(760px,calc(100svh - 170px));
+    max-height:calc(100svh - 170px);
+  }
+}

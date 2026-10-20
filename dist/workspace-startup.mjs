@@ -6,7 +6,7 @@ export async function initializeWorkspace(load, report = () => {}) {
   }
   report('engineering-ready');
   const failures=[];
-  for (const path of ['./navigation-glass.mjs?v=1.5.0', './configure-ocean.mjs?v=1.0.0', './app.mjs?v=1.1.0', './account-ui.mjs?v=0.5.3', './analysis.mjs?v=1.4.0', './analysis-motion.mjs?v=1.4.0', './analysis-focus.mjs?v=1.4.0', './analysis-hero.mjs?v=1.4.0', './analysis-deepsea.mjs?v=1.4.0', './ocean-workspace.mjs?v=1.4.0', './model-explorer.mjs?v=0.6.2', './model-ocean.mjs?v=0.6.1', './configure-lab.mjs?v=1.2.0']) {
+  for (const path of ['./navigation-glass.mjs?v=1.5.1', './configure-ocean.mjs?v=1.0.0', './app.mjs?v=1.1.0', './account-ui.mjs?v=0.6.0', './analysis.mjs?v=1.4.0', './analysis-motion.mjs?v=1.4.1', './analysis-focus.mjs?v=1.4.0', './analysis-hero.mjs?v=1.4.0', './analysis-deepsea.mjs?v=1.4.4', './ocean-workspace.mjs?v=1.4.0', './model-explorer.mjs?v=0.7.1', './model-ocean.mjs?v=0.7.1', './configure-lab.mjs?v=1.2.0']) {
     try { await load(path); }
     catch(error) { failures.push({path,error}); report('module-error',{path,error}); }
   }

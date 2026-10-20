@@ -1,0 +1,321 @@
+/* Account and guide surfaces. Loaded after the page-level stylesheets. */
+body[data-page] .account-toolbar.account-toolbar {
+  position: fixed;
+  z-index: 80;
+  top: 18px;
+  right: 24px;
+  display: flex !important;
+  align-items: center;
+  gap: 9px;
+  max-width: calc(100vw - 48px);
+  padding: 4px;
+  border: 1px solid rgba(179, 215, 222, .25);
+  border-radius: 10px;
+  background: rgba(9, 31, 45, .78);
+  box-shadow: 0 9px 26px rgba(0, 17, 29, .22), inset 0 1px rgba(226, 251, 255, .08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+body[data-page] .account-toolbar.account-toolbar > button {
+  box-sizing: border-box;
+  display: inline-flex;
+  flex: 0 1 auto;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-width: 0;
+  min-height: 46px;
+  padding: 0 14px;
+  border: 1px solid rgba(154, 204, 212, .25);
+  border-radius: 7px;
+  background: linear-gradient(145deg, rgba(42, 82, 99, .94), rgba(22, 51, 68, .96));
+  color: #edf8f8;
+  font: 600 12px/1.25 "Segoe UI", "Microsoft YaHei", sans-serif;
+  white-space: nowrap;
+  cursor: pointer;
+  box-shadow: inset 0 1px rgba(231, 255, 255, .12), 0 3px 9px rgba(0, 13, 23, .13);
+  transition: background-color .18s ease, border-color .18s ease, box-shadow .18s ease, transform .18s ease;
+}
+
+body[data-page] .account-toolbar.account-toolbar > button:hover,
+body[data-page] .account-toolbar.account-toolbar #account-launch:hover {
+  border-color: rgba(142, 224, 225, .68);
+  background: linear-gradient(145deg, rgba(51, 103, 119, .98), rgba(25, 65, 79, .98));
+  box-shadow: inset 0 1px rgba(238, 255, 255, .16), 0 6px 17px rgba(0, 14, 25, .25), 0 0 0 2px rgba(102, 202, 205, .1);
+  transform: translateY(-1px);
+}
+
+body[data-page] .account-toolbar.account-toolbar > button:active { transform: translateY(0); }
+body[data-page] .account-toolbar.account-toolbar > button:focus-visible { outline: 2px solid #83d4d5; outline-offset: 2px; }
+body[data-page] .account-toolbar.account-toolbar > button:disabled { cursor: not-allowed; opacity: .58; transform: none; }
+
+body[data-page] .account-toolbar.account-toolbar #guide-launch { display: inline-flex; min-width: 132px; }
+body[data-page] .account-toolbar.account-toolbar #guide-launch::before { display: none; content: none; }
+body[data-page] .account-toolbar.account-toolbar .account-guide-symbol { display: grid; place-items: center; width: 22px; height: 22px; flex: none; color: #a6e3e3; }
+body[data-page] .account-toolbar.account-toolbar .account-guide-symbol svg { display: block; width: 20px; height: 20px; }
+body[data-page] .account-toolbar.account-toolbar #account-launch { justify-content: flex-start; gap: 10px; min-width: 163px; max-width: none; padding: 0 12px 0 8px; border: 1px solid rgba(154, 204, 212, .25); border-radius: 7px; background: linear-gradient(145deg, rgba(42, 82, 99, .94), rgba(22, 51, 68, .96)); text-align: left; }
+body[data-page] .account-toolbar.account-toolbar .avatar-mini { display: grid; place-items: center; width: 32px; height: 32px; flex: none; overflow: hidden; border: 1px solid rgba(168, 220, 224, .7); border-radius: 50%; background: linear-gradient(145deg, #477e89, #1d4d60); color: #f0ffff; font-size: 12px; box-shadow: 0 0 0 3px rgba(201, 251, 250, .05), inset 0 1px rgba(246, 255, 255, .25); }
+body[data-page] .account-toolbar.account-toolbar .avatar-mini img { display: block; width: 100%; height: 100%; object-fit: cover; }
+body[data-page] .account-toolbar.account-toolbar .toolbar-identity { display: grid; min-width: 0; gap: 2px; flex: 1; }
+body[data-page] .account-toolbar.account-toolbar #toolbar-name { display: block; max-width: 110px; overflow: hidden; color: #f3fbfb; font-size: 12px; font-weight: 650; text-overflow: ellipsis; white-space: nowrap; }
+body[data-page] .account-toolbar.account-toolbar #toolbar-state { overflow: hidden; color: #a8c7ce; font-size: 10px; font-weight: 400; text-overflow: ellipsis; white-space: nowrap; }
+body[data-page] .account-toolbar.account-toolbar .account-chevron { width: 14px; height: 14px; flex: none; color: #a7cbd0; }
+
+body dialog.account-dialog.account-polished {
+  box-sizing: border-box;
+  width: min(490px, calc(100vw - 32px));
+  max-width: calc(100vw - 24px);
+  max-height: min(760px, calc(100dvh - 32px));
+  margin: auto;
+  padding: 30px 34px;
+  overflow: hidden;
+  border: 1px solid #d2e1e3;
+  border-radius: 11px;
+  background: linear-gradient(145deg, #fbfdfd, #f2f7f8);
+  color: #294650;
+  box-shadow: 0 30px 100px rgba(1, 19, 30, .43), 0 1px rgba(255, 255, 255, .94) inset;
+  font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
+}
+
+body dialog.account-dialog.account-polished::backdrop { background: rgba(4, 23, 35, .68); backdrop-filter: blur(6px); }
+body dialog.account-dialog.account-polished[open] { display: flex; flex-direction: column; }
+body dialog.account-dialog.account-polished button,
+body dialog.account-dialog.account-polished input,
+body dialog.account-dialog.account-polished textarea { font-family: inherit; }
+
+body dialog.account-dialog.account-polished .account-dialog-header {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  min-height: 42px;
+  margin: 0 0 20px;
+}
+
+body dialog.account-dialog.account-polished .account-heading { display: flex; min-width: 0; align-items: center; gap: 12px; }
+body dialog.account-dialog.account-polished .account-heading-icon { display: grid; place-items: center; width: 36px; height: 36px; flex: none; border: 1px solid #ccdedf; border-radius: 8px; background: #eaf2f3; color: #367c88; }
+body dialog.account-dialog.account-polished .account-heading-icon svg { display: block; width: 19px; height: 19px; }
+body dialog.account-dialog.account-polished .account-heading > div { min-width: 0; }
+body dialog.account-dialog.account-polished .account-eyebrow { display: block; margin: 0 0 3px; color: #75929a; font: 600 9px/1.35 Consolas, "Microsoft YaHei", monospace; }
+body dialog.account-dialog.account-polished .account-heading h2 { margin: 0; color: #203d48; font-size: 21px; font-weight: 650; line-height: 1.35; }
+body dialog.account-dialog.account-polished .close { display: grid; place-items: center; width: 36px; height: 36px; flex: none; padding: 0; border: 1px solid #d6e2e4; border-radius: 50%; background: #edf3f4; color: #66838d; font-size: 21px; line-height: 1; cursor: pointer; transition: color .18s ease, background .18s ease, border-color .18s ease, transform .18s ease; }
+body dialog.account-dialog.account-polished .close:hover { border-color: #75afb4; background: #e3f0f1; color: #245f6b; transform: rotate(4deg); }
+body dialog.account-dialog.account-polished .close:focus-visible { outline: 2px solid #438d98; outline-offset: 2px; }
+
+/* Profile */
+body dialog#profile-dialog.account-polished {
+  width: min(1020px, calc(100vw - 48px));
+  max-height: min(760px, calc(100dvh - 32px));
+  padding: 28px 34px 30px;
+}
+body dialog#profile-dialog.account-polished .account-dialog-header { margin-bottom: 18px; }
+body dialog#profile-dialog.account-polished #profile-form { display: flex; min-height: 0; flex: 1; flex-direction: column; overflow-y: auto; }
+body dialog#profile-dialog.account-polished .profile-layout { display: grid; min-height: 0; flex: none; grid-template-columns: 246px minmax(0, 1fr); gap: 30px; align-items: stretch; }
+body dialog#profile-dialog.account-polished .profile-identity { position: relative; display: flex; min-width: 0; flex-direction: column; align-items: flex-start; padding: 24px 22px; overflow: hidden; border: 1px solid #315b69; border-radius: 10px; background: linear-gradient(155deg, #244b5d, #102e40); color: #e8f5f6; box-shadow: inset 0 1px rgba(213, 255, 255, .12); }
+body dialog#profile-dialog.account-polished .profile-identity::after { position: absolute; right: -78px; bottom: -102px; width: 210px; height: 210px; border: 1px solid rgba(173, 222, 225, .13); border-radius: 50%; box-shadow: 0 0 0 26px rgba(173, 222, 225, .035), 0 0 0 52px rgba(173, 222, 225, .025); content: ""; pointer-events: none; }
+body dialog#profile-dialog.account-polished .avatar-large { position: relative; z-index: 1; display: grid; place-items: center; width: 82px; height: 82px; flex: none; overflow: hidden; margin: 2px 0 20px; border: 1px solid #8dbec5; border-radius: 50%; background: linear-gradient(145deg, #4b8290, #245a6d); color: #e8ffff; font-size: 29px; box-shadow: 0 0 0 5px rgba(186, 240, 241, .06), inset 0 1px rgba(238, 255, 255, .26); }
+body dialog#profile-dialog.account-polished .avatar-large img { display: block; width: 100%; height: 100%; object-fit: cover; }
+body dialog#profile-dialog.account-polished #profile-display-name { position: relative; z-index: 1; max-width: 100%; margin: 0 0 8px; overflow-wrap: anywhere; color: #effafb; font-size: 20px; font-weight: 650; line-height: 1.35; }
+body dialog#profile-dialog.account-polished .profile-signed-state { position: relative; z-index: 1; display: inline-flex; align-items: center; gap: 7px; color: #adccd2; font-size: 11px; line-height: 1.5; }
+body dialog#profile-dialog.account-polished .profile-signed-state::before { width: 6px; height: 6px; flex: none; border-radius: 50%; background: #a8d9b9; box-shadow: 0 0 0 3px rgba(168, 217, 185, .1); content: ""; }
+body dialog#profile-dialog.account-polished .profile-workspace-label { position: relative; z-index: 1; margin: 25px 0 7px; color: #8eb2bc; font: 600 9px/1.5 Consolas, monospace; letter-spacing: .08em; }
+body dialog#profile-dialog.account-polished .profile-identity-note { position: relative; z-index: 1; margin: 0; color: #a4c0c8; font-size: 11px; line-height: 1.8; }
+body dialog#profile-dialog.account-polished .avatar-editor { position: relative; z-index: 1; display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 20px; }
+body dialog#profile-dialog.account-polished .avatar-editor .avatar-upload,
+body dialog#profile-dialog.account-polished .avatar-editor .quiet { display: inline-flex; min-height: 32px; align-items: center; justify-content: center; margin: 0; padding: 0 10px; border: 1px solid rgba(157, 202, 209, .32); border-radius: 5px; background: rgba(239, 252, 252, .06); color: #d2e8eb; font-size: 10px; font-weight: 550; cursor: pointer; transition: border-color .18s ease, background .18s ease, color .18s ease; }
+body dialog#profile-dialog.account-polished .avatar-editor .avatar-upload:hover,
+body dialog#profile-dialog.account-polished .avatar-editor .quiet:hover { border-color: rgba(154, 225, 226, .68); background: rgba(207, 250, 249, .12); color: #fff; }
+body dialog#profile-dialog.account-polished .avatar-editor input[type="file"] { display: none; }
+body dialog#profile-dialog.account-polished .profile-main { min-width: 0; }
+body dialog#profile-dialog.account-polished .profile-main h3 { margin: 0 0 5px; color: #203d48; font-size: 27px; font-weight: 650; line-height: 1.3; }
+body dialog#profile-dialog.account-polished .account-intro { margin: 0 0 17px; color: #718991; font-size: 12px; line-height: 1.7; }
+body dialog#profile-dialog.account-polished .profile-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 16px; }
+body dialog#profile-dialog.account-polished .profile-grid > div,
+body dialog#profile-dialog.account-polished .profile-wide-field { display: flex; min-width: 0; flex-direction: column; gap: 5px; }
+body dialog#profile-dialog.account-polished .profile-main label { display: block; margin: 0; color: #5d7881; font-size: 14px; font-weight: 600; line-height: 1.5; }
+body dialog#profile-dialog.account-polished .profile-main input:not([type="checkbox"]),
+body dialog#profile-dialog.account-polished .profile-main textarea { box-sizing: border-box; width: 100%; min-width: 0; min-height: 42px; margin: 0; padding: 9px 11px; border: 1px solid #d0dfe1; border-radius: 6px; outline: 0; background: rgba(255, 255, 255, .8); color: #294a54; font-size: 16px; line-height: 1.45; box-shadow: inset 0 1px 2px rgba(15, 50, 61, .025); transition: border-color .16s ease, box-shadow .16s ease, background .16s ease; }
+body dialog#profile-dialog.account-polished .profile-main input:focus,
+body dialog#profile-dialog.account-polished .profile-main textarea:focus { border-color: #5c9ca5; background: #fff; box-shadow: 0 0 0 3px rgba(75, 151, 160, .13); }
+body dialog#profile-dialog.account-polished .profile-main input[readonly] { background: #edf3f4; color: #849ba1; }
+body dialog#profile-dialog.account-polished .profile-main input::placeholder,
+body dialog#profile-dialog.account-polished .profile-main textarea::placeholder { color: #9aadb2; }
+body dialog#profile-dialog.account-polished .profile-wide-field { margin-top: 11px; }
+body dialog#profile-dialog.account-polished .profile-wide-field textarea { min-height: 58px; resize: vertical; }
+body dialog#profile-dialog.account-polished .profile-privacy-note { display: flex; align-items: center; gap: 8px; margin: 12px 0 0; padding: 9px 11px; border-left: 2px solid #6cabb2; background: #edf4f5; color: #718992; font-size: 10px; line-height: 1.6; }
+body dialog#profile-dialog.account-polished .profile-privacy-note svg { width: 15px; height: 15px; flex: none; color: #44828c; }
+body dialog#profile-dialog.account-polished #profile-status { min-height: 18px; margin: 5px 0 0; color: #378779; font-size: 11px; line-height: 1.5; }
+body dialog#profile-dialog.account-polished #profile-status.error { color: #b45151; }
+body dialog#profile-dialog.account-polished .profile-actions { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 5px; }
+body dialog.account-dialog.account-polished .primary,
+body dialog.account-dialog.account-polished .secondary,
+body dialog.account-dialog.account-polished .quiet { min-height: 42px; padding: 0 16px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer; transition: background .18s ease, border-color .18s ease, box-shadow .18s ease, color .18s ease, transform .18s ease; }
+body dialog.account-dialog.account-polished .primary { border: 1px solid #286b78; background: linear-gradient(140deg, #397f8b, #245c6b); color: #f2fbfb; box-shadow: inset 0 1px rgba(255, 255, 255, .2), 0 3px 8px rgba(25, 79, 91, .12); }
+body dialog.account-dialog.account-polished .primary:hover { border-color: #205965; background: linear-gradient(140deg, #317482, #1d5261); box-shadow: 0 5px 14px rgba(25, 79, 91, .2); transform: translateY(-1px); }
+body dialog.account-dialog.account-polished .secondary { border: 1px solid #c9d9dc; background: rgba(255, 255, 255, .55); color: #56737d; }
+body dialog.account-dialog.account-polished .secondary:hover { border-color: #85b5bb; background: #eaf3f4; color: #2f6975; }
+body dialog.account-dialog.account-polished button:focus-visible { outline: 2px solid #438d98; outline-offset: 2px; }
+body dialog.account-dialog.account-polished button:disabled { cursor: not-allowed; opacity: .6; transform: none; box-shadow: none; }
+
+/* Guided tour */
+body dialog#tour-dialog.account-polished { width: min(1140px, calc(100vw - 48px)); padding: 30px 40px 26px; }
+body dialog#tour-dialog.account-polished .account-dialog-header { margin-bottom: 14px; }
+body dialog#tour-dialog.account-polished .tour-progress { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 0 0 27px; }
+body dialog#tour-dialog.account-polished .tour-progress button { position: relative; display: flex; min-width: 0; height: 35px; align-items: center; gap: 8px; padding: 8px 0 10px; border: 0; border-bottom: 3px solid #dce7e8; border-radius: 0; background: transparent; color: #83989e; text-align: left; cursor: pointer; transition: color .18s ease, border-color .18s ease; }
+body dialog#tour-dialog.account-polished .tour-progress button.active,
+body dialog#tour-dialog.account-polished .tour-progress button[aria-current="step"] { border-bottom-color: #398893; color: #326d77; }
+body dialog#tour-dialog.account-polished .tour-progress button:hover { color: #276e79; }
+body dialog#tour-dialog.account-polished .progress-number { display: grid; place-items: center; width: 22px; height: 22px; flex: none; border: 1px solid #d3e2e3; border-radius: 6px; background: #f4f8f8; font: 600 9px/1 Consolas, monospace; }
+body dialog#tour-dialog.account-polished .tour-progress button.active .progress-number,
+body dialog#tour-dialog.account-polished .tour-progress button[aria-current="step"] .progress-number { border-color: #90bdc2; background: #e7f1f2; color: #327783; }
+body dialog#tour-dialog.account-polished .progress-label { min-width: 0; overflow: hidden; font-size: 11px; font-weight: 600; text-overflow: ellipsis; white-space: nowrap; }
+body dialog#tour-dialog.account-polished .tour-layout { display: grid; min-height: 0; flex: 1; grid-template-columns: minmax(0, 1.45fr) minmax(260px, .75fr); gap: 36px; align-items: stretch; overflow-y: auto; }
+body dialog#tour-dialog.account-polished .tour-main { min-width: 0; }
+body dialog#tour-dialog.account-polished #tour-number { display: block; margin: 0 0 8px; color: #648d95; font: 600 10px/1.4 Consolas, monospace; letter-spacing: .08em; }
+body dialog#tour-dialog.account-polished #tour-title { margin: 0 0 10px; color: #203e49; font-size: 30px; font-weight: 680; line-height: 1.3; overflow-wrap: anywhere; }
+body dialog#tour-dialog.account-polished #tour-description { max-width: 660px; margin: 0; color: #657f88; font-size: 14px; line-height: 1.85; }
+body dialog#tour-dialog.account-polished #tour-checklist { display: grid; gap: 8px; margin: 19px 0 0; padding: 0; list-style: none; }
+body dialog#tour-dialog.account-polished #tour-checklist li { display: grid; grid-template-columns: 30px minmax(0, 1fr) 16px; gap: 11px; align-items: center; min-width: 0; min-height: 57px; padding: 9px 11px; border: 1px solid #dce7e8; border-radius: 7px; background: rgba(255, 255, 255, .74); color: #36545d; line-height: 1.5; }
+body dialog#tour-dialog.account-polished .tour-item-index { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 7px; background: #ebf3f4; color: #48828b; font: 600 10px/1 Consolas, monospace; }
+body dialog#tour-dialog.account-polished #tour-checklist li > div { display: grid; min-width: 0; gap: 2px; }
+body dialog#tour-dialog.account-polished #tour-checklist strong { color: #375761; font-size: 14px; font-weight: 700; }
+body dialog#tour-dialog.account-polished .tour-item-detail { color: #789097; font-size: 12px; line-height: 1.55; overflow-wrap: anywhere; }
+body dialog#tour-dialog.account-polished #tour-checklist li > svg { width: 15px; height: 15px; color: #81aeb4; }
+body dialog#tour-dialog.account-polished #tour-page { display: inline-flex; align-items: center; gap: 7px; margin-top: 14px; padding: 3px 0; border: 0; background: transparent; color: #286f7b; font-size: 11px; font-weight: 650; cursor: pointer; }
+body dialog#tour-dialog.account-polished #tour-page:hover { color: #194e5a; text-decoration: underline; text-underline-offset: 3px; }
+body dialog#tour-dialog.account-polished .tour-reference { display: flex; min-width: 0; flex-direction: column; padding: 16px; border: 1px solid #d7e4e5; border-radius: 9px; background: linear-gradient(150deg, #eaf2f3, #f3f7f8); }
+body dialog#tour-dialog.account-polished .tour-reference-visual { display: grid; min-height: 160px; place-items: center; overflow: hidden; margin: 11px 0 13px; border: 1px solid #d5e3e4; border-radius: 7px; background: linear-gradient(145deg, #f7fbfb, #e7f0f1); }
+body dialog#tour-dialog.account-polished .tour-reference-visual svg { display: block; width: min(100%, 250px); max-height: 170px; }
+body dialog#tour-dialog.account-polished .tour-reference-title { margin: 0 0 5px; color: #294b55; font-size: 15px; font-weight: 700; }
+body dialog#tour-dialog.account-polished .tour-reference-note { margin: 0; color: #778e95; font-size: 10px; line-height: 1.7; }
+body dialog#tour-dialog.account-polished .tour-reference-specs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: auto; padding-top: 13px; }
+body dialog#tour-dialog.account-polished .tour-reference-specs > div { min-width: 0; padding: 8px 9px; border: 1px solid #dce7e8; border-radius: 6px; background: rgba(255, 255, 255, .66); }
+body dialog#tour-dialog.account-polished .tour-reference-specs small { display: block; margin-bottom: 4px; color: #8ba0a5; font-size: 8px; line-height: 1.4; }
+body dialog#tour-dialog.account-polished .tour-reference-specs strong { color: #456772; font: 600 11px/1.4 Consolas, "Microsoft YaHei", monospace; overflow-wrap: anywhere; }
+body dialog#tour-dialog.account-polished .tour-footer { display: flex; align-items: center; justify-content: space-between; gap: 15px; margin-top: 22px; padding-top: 16px; border-top: 1px solid #dbe6e7; }
+body dialog#tour-dialog.account-polished .tour-footer label { display: inline-flex; align-items: center; gap: 8px; margin: 0; color: #718991; font-size: 10px; line-height: 1.5; }
+body dialog#tour-dialog.account-polished .tour-footer input[type="checkbox"] { width: 15px; height: 15px; flex: none; margin: 0; accent-color: #367f8c; }
+body dialog#tour-dialog.account-polished .tour-footer > div { display: flex; gap: 8px; }
+body dialog#tour-dialog.account-polished .tour-footer button { min-height: 40px; }
+
+/* Sign in */
+body dialog#auth-dialog.account-polished { width: min(490px, calc(100vw - 32px)); max-height: min(700px, calc(100dvh - 32px)); overflow-y: auto; }
+body dialog#auth-dialog.account-polished .account-intro { margin: 0 0 18px; color: #718991; font-size: 12px; line-height: 1.8; }
+body dialog#auth-dialog.account-polished .auth-tabs { display: flex; gap: 22px; margin: 17px 0 17px; border-bottom: 1px solid #dce7e8; }
+body dialog#auth-dialog.account-polished .auth-tabs button { min-height: 38px; padding: 0 2px 8px; border: 0; border-bottom: 2px solid transparent; border-radius: 0; background: transparent; color: #82989e; font-size: 12px; cursor: pointer; }
+body dialog#auth-dialog.account-polished .auth-tabs button.active { border-bottom-color: #3b8993; color: #286c77; font-weight: 650; }
+body dialog#auth-dialog.account-polished #account-auth-form { display: flex; flex-direction: column; gap: 7px; }
+body dialog#auth-dialog.account-polished #account-auth-form label { margin: 5px 0 0; color: #5d7881; font-size: 11px; font-weight: 600; }
+body dialog#auth-dialog.account-polished #account-auth-form input:not([type="checkbox"]) { box-sizing: border-box; width: 100%; min-height: 42px; padding: 9px 12px; border: 1px solid #d1dfe1; border-radius: 6px; outline: 0; background: rgba(255, 255, 255, .82); color: #294a54; font-size: 12px; }
+body dialog#auth-dialog.account-polished #account-auth-form input:focus { border-color: #5c9ca5; background: #fff; box-shadow: 0 0 0 3px rgba(75, 151, 160, .13); }
+body dialog#auth-dialog.account-polished #register-name-wrap[hidden],
+body dialog#auth-dialog.account-polished #confirm-password-wrap[hidden] { display: none; }
+body dialog#auth-dialog.account-polished .form-status { min-height: 19px; margin: 4px 0 0; color: #378779; font-size: 11px; line-height: 1.6; }
+body dialog#auth-dialog.account-polished .form-status.error { color: #b45151; }
+body dialog#auth-dialog.account-polished .account-submit { width: 100%; min-height: 44px; margin: 1px 0 0; }
+body dialog#auth-dialog.account-polished .account-footnote { margin: 15px 0 0; color: #84999f; font-size: 10px; line-height: 1.75; }
+
+@media (max-height: 760px) and (min-width: 761px) {
+  body dialog#profile-dialog.account-polished { padding-top: 21px; padding-bottom: 22px; }
+  body dialog#profile-dialog.account-polished .account-dialog-header { margin-bottom: 12px; }
+  body dialog#profile-dialog.account-polished .profile-layout { gap: 24px; }
+  body dialog#profile-dialog.account-polished .profile-identity { padding: 18px; }
+  body dialog#profile-dialog.account-polished .avatar-large { width: 70px; height: 70px; margin-bottom: 14px; }
+  body dialog#profile-dialog.account-polished .profile-workspace-label { margin-top: 18px; }
+  body dialog#profile-dialog.account-polished .profile-main h3 { font-size: 25px; }
+  body dialog#profile-dialog.account-polished .profile-main .account-intro { margin-bottom: 12px; }
+  body dialog#profile-dialog.account-polished .profile-grid { gap: 9px 14px; }
+  body dialog#profile-dialog.account-polished .profile-main input:not([type="checkbox"]) { min-height: 35px; padding-top: 7px; padding-bottom: 7px; }
+  body dialog#profile-dialog.account-polished .profile-wide-field { margin-top: 8px; }
+  body dialog#profile-dialog.account-polished .profile-wide-field textarea { min-height: 48px; }
+  body dialog#profile-dialog.account-polished .profile-privacy-note { margin-top: 9px; padding-top: 7px; padding-bottom: 7px; }
+  body dialog#tour-dialog.account-polished { padding-top: 23px; padding-bottom: 20px; }
+  body dialog#tour-dialog.account-polished .tour-progress { margin-bottom: 19px; }
+  body dialog#tour-dialog.account-polished .tour-layout { gap: 26px; }
+  body dialog#tour-dialog.account-polished #tour-title { font-size: 27px; }
+  body dialog#tour-dialog.account-polished #tour-checklist { gap: 6px; margin-top: 14px; }
+  body dialog#tour-dialog.account-polished #tour-checklist li { min-height: 51px; padding-top: 7px; padding-bottom: 7px; }
+  body dialog#tour-dialog.account-polished .tour-reference-visual { min-height: 135px; }
+  body dialog#tour-dialog.account-polished .tour-footer { margin-top: 15px; padding-top: 12px; }
+}
+
+@media (max-width: 900px) {
+  body dialog#profile-dialog.account-polished { width: min(900px, calc(100vw - 36px)); }
+  body dialog#profile-dialog.account-polished .profile-layout { grid-template-columns: 205px minmax(0, 1fr); gap: 20px; }
+  body dialog#profile-dialog.account-polished .profile-identity { padding: 20px 17px; }
+  body dialog#tour-dialog.account-polished { width: calc(100vw - 36px); padding-right: 28px; padding-left: 28px; }
+  body dialog#tour-dialog.account-polished .tour-layout { grid-template-columns: minmax(0, 1.35fr) minmax(230px, .8fr); gap: 22px; }
+  body dialog#tour-dialog.account-polished .progress-label { font-size: 10px; }
+}
+
+@media (max-width: 700px) {
+  body[data-page] .account-toolbar.account-toolbar { top: 12px; right: 12px; gap: 5px; max-width: calc(100vw - 82px); padding: 3px; border-radius: 8px; }
+  body[data-page] .account-toolbar.account-toolbar > button { min-height: 40px; gap: 6px; padding-right: 9px; padding-left: 9px; font-size: 10px; }
+  body[data-page] .account-toolbar.account-toolbar #guide-launch { min-width: 0; }
+  body[data-page] .account-toolbar.account-toolbar .account-guide-symbol { width: 19px; height: 19px; }
+  body[data-page] .account-toolbar.account-toolbar .account-guide-symbol svg { width: 18px; height: 18px; }
+  body[data-page] .account-toolbar.account-toolbar #account-launch { min-width: 0; gap: 7px; padding-left: 6px; }
+  body[data-page] .account-toolbar.account-toolbar .avatar-mini { width: 27px; height: 27px; }
+  body[data-page] .account-toolbar.account-toolbar #toolbar-name { max-width: 68px; font-size: 10px; }
+  body[data-page] .account-toolbar.account-toolbar #toolbar-state { font-size: 9px; }
+  body[data-page] .account-toolbar.account-toolbar .account-chevron { width: 12px; height: 12px; }
+  body dialog.account-dialog.account-polished { max-height: calc(100dvh - 20px); padding: 22px 20px; }
+  body dialog.account-dialog.account-polished .account-dialog-header { margin-bottom: 16px; }
+  body dialog.account-dialog.account-polished .account-heading-icon { width: 32px; height: 32px; }
+  body dialog.account-dialog.account-polished .account-heading h2 { font-size: 19px; }
+  body dialog#profile-dialog.account-polished { width: calc(100vw - 20px); padding: 18px 16px; }
+  body dialog#profile-dialog.account-polished #profile-form { overflow-y: auto; }
+  body dialog#profile-dialog.account-polished .profile-layout { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  body dialog#profile-dialog.account-polished .profile-identity { display: grid; grid-template-columns: 54px minmax(0, 1fr); column-gap: 12px; align-items: center; padding: 12px; }
+  body dialog#profile-dialog.account-polished .profile-identity::after { display: none; }
+  body dialog#profile-dialog.account-polished .avatar-large { grid-row: 1 / span 2; width: 50px; height: 50px; margin: 0; font-size: 20px; }
+  body dialog#profile-dialog.account-polished #profile-display-name { margin: 0; font-size: 15px; }
+  body dialog#profile-dialog.account-polished .profile-signed-state { align-self: start; font-size: 10px; }
+  body dialog#profile-dialog.account-polished .profile-workspace-label,
+  body dialog#profile-dialog.account-polished .profile-identity-note { display: none; }
+  body dialog#profile-dialog.account-polished .avatar-editor { grid-column: 1 / -1; margin-top: 8px; padding-top: 0; }
+  body dialog#profile-dialog.account-polished .profile-main h3 { font-size: 22px; }
+  body dialog#profile-dialog.account-polished .profile-grid { gap: 10px; }
+  body dialog#profile-dialog.account-polished .profile-grid > div { gap: 4px; }
+  body dialog#profile-dialog.account-polished .profile-wide-field { margin-top: 10px; }
+  body dialog#profile-dialog.account-polished .profile-actions { margin-top: 7px; }
+  body dialog#tour-dialog.account-polished { width: calc(100vw - 20px); padding: 18px 16px; }
+  body dialog#tour-dialog.account-polished .tour-progress { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 7px; margin-bottom: 17px; }
+  body dialog#tour-dialog.account-polished .tour-progress button { justify-content: center; height: 31px; padding: 3px 0 7px; }
+  body dialog#tour-dialog.account-polished .progress-number { width: 20px; height: 20px; }
+  body dialog#tour-dialog.account-polished .progress-label { display: none; }
+  body dialog#tour-dialog.account-polished .tour-layout { grid-template-columns: minmax(0, 1fr); gap: 15px; }
+  body dialog#tour-dialog.account-polished #tour-title { font-size: 24px; }
+  body dialog#tour-dialog.account-polished #tour-description { font-size: 12px; }
+  body dialog#tour-dialog.account-polished #tour-checklist li { grid-template-columns: 27px minmax(0, 1fr) 14px; gap: 8px; min-height: 52px; padding: 7px 8px; }
+  body dialog#tour-dialog.account-polished .tour-item-index { width: 25px; height: 25px; }
+  body dialog#tour-dialog.account-polished .tour-reference { display: grid; grid-template-columns: minmax(0, 1fr) minmax(90px, .65fr); column-gap: 12px; align-items: center; padding: 10px; }
+  body dialog#tour-dialog.account-polished .tour-reference-visual { grid-column: 2; grid-row: 1 / span 3; min-height: 96px; margin: 0; }
+  body dialog#tour-dialog.account-polished .tour-reference-visual svg { max-height: 105px; }
+  body dialog#tour-dialog.account-polished .tour-reference-specs { grid-column: 1 / -1; gap: 6px; margin-top: 8px; padding-top: 0; }
+  body dialog#tour-dialog.account-polished .tour-reference-specs > div { padding: 6px 7px; }
+  body dialog#tour-dialog.account-polished .tour-reference-specs small { font-size: 7px; }
+  body dialog#tour-dialog.account-polished .tour-footer { align-items: flex-start; flex-direction: column; gap: 11px; margin-top: 14px; padding-top: 12px; }
+  body dialog#tour-dialog.account-polished .tour-footer > div { width: 100%; justify-content: flex-end; }
+}
+
+@media (max-width: 390px) {
+  body[data-page] .account-toolbar.account-toolbar { max-width: calc(100vw - 76px); }
+  body[data-page] .account-toolbar.account-toolbar > button { min-height: 38px; padding-right: 7px; padding-left: 7px; font-size: 9px; }
+  body[data-page] .account-toolbar.account-toolbar #toolbar-name { max-width: 52px; }
+  body dialog#profile-dialog.account-polished .profile-grid { grid-template-columns: minmax(0, 1fr); }
+  body dialog#profile-dialog.account-polished .profile-actions { align-items: stretch; flex-direction: column-reverse; }
+  body dialog#profile-dialog.account-polished .profile-actions button { width: 100%; }
+  body dialog#tour-dialog.account-polished .account-heading h2 { font-size: 17px; }
+  body dialog#tour-dialog.account-polished .tour-reference { grid-template-columns: minmax(0, 1fr) 84px; }
+  body dialog#tour-dialog.account-polished .tour-reference-title { font-size: 13px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body[data-page] .account-toolbar.account-toolbar > button,
+  body dialog.account-dialog.account-polished *,
+  body dialog.account-dialog.account-polished *::before,
+  body dialog.account-dialog.account-polished *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}

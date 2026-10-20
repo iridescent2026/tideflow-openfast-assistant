@@ -3,14 +3,10 @@ const page=document.getElementById('page-analysis'),q=s=>page.querySelector(s),b
 page.classList.add('deepsea-design');
 const icons={home:'<rect x="3" y="3" width="6" height="6"/><rect x="15" y="3" width="6" height="6"/><rect x="3" y="15" width="6" height="6"/><rect x="15" y="15" width="6" height="6"/>',configure:'<path d="M3 5h7l2 3h9v13H3z M6 13h3l2-3 3 7 2-4h3"/>',analysis:'<path d="M3 3v18h18 M7 16v-5 M12 16V7 M17 16V4"/>',model:'<path d="m12 3 8 5v9l-8 5-8-5V8z M4 8l8 5 8-5 M12 13v9"/>',records:'<ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v13c0 4 16 4 16 0V5 M4 11c0 4 16 4 16 0"/>'};
 const icon=(name)=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true">${icons[name]}</svg>`;
-const header=document.createElement('header');header.className='deepsea-header';
-header.innerHTML='<a href="#home" class="deepsea-brand"><img src="./assets/tidal-mark.svg" alt=""><strong>潮汐</strong><span>TIDEFLOW</span></a><span class="deepsea-product">海上风电工程仿真与分析平台 <b>|</b> OpenFAST</span><div class="deepsea-header-right"><span class="deepsea-edition"><i></i>01 / 深海工业</span><span id="deepsea-condition"></span><button id="deepsea-help" aria-label="使用指南">?</button><button id="deepsea-account">工程师 <span>⌄</span></button></div>';
 const rail=document.createElement('nav');rail.className='deepsea-rail';rail.setAttribute('aria-label','深海分析导航');
 rail.innerHTML=[['home','项目'],['configure','工况'],['analysis','结果分析'],['model','模型设置'],['records','数据管理']].map(([key,label])=>`<button data-page="${key}" ${key==='analysis'?'aria-current="page"':''}>${icon(key)}<span>${label}</span></button>`).join('');
-document.body.append(header,rail);
-by('deepsea-help').onclick=()=>by('help-open').click();by('deepsea-account').onclick=()=>by('account-launch').click();
+document.body.append(rail);
 q('.analysis-heading h1').textContent='结果分析';q('.analysis-heading p').textContent='从响应，看机理，让风电更可靠。';
-q('.analysis-heading').insertAdjacentHTML('beforeend','<div class="deepsea-heading-stamp"><span>OFFSHORE WIND<br>ENGINEERING ANALYTICS</span><b>TIDEFLOW<small>01 / 深海工业</small></b></div>');
 q('.opening-model-title').innerHTML='<span>FLOATING<br>OFFSHORE WIND<br>SEMI-SUBMERSIBLE</span><i></i>';
 q('.opening-model').insertAdjacentHTML('afterbegin','<div class="deepsea-compass" aria-hidden="true"><span>N</span><i></i><b>＋</b></div>');
 q('.opening-model').insertAdjacentHTML('beforeend','<span class="deepsea-model-caption">NREL 5 MW / OC4<br>工程视觉示意</span>');
@@ -38,7 +34,6 @@ function styleChart(){
  by('chart-legend').querySelectorAll('button').forEach((button,i)=>button.style.setProperty('--series-color',colors[i%colors.length]));
 }
 window.addEventListener('tideflow:analysis-plot',styleChart);
-window.addEventListener('tideflow:render',e=>{const r=e.detail.record;if(!r?.params)return;const p=r.params;by('deepsea-condition').textContent=`≋　海况 ${p.wave_mode==='regular'?'H':'Hs'} ${p.wave_height} m　 |　 T ${p.wave_period} s　 |　 风速 ${p.wind} m/s`;});
 // A newly drawn chart replaces the real legend; apply its colors after render.
 window.addEventListener('tideflow:chart',()=>queueMicrotask(styleChart));
 window.dispatchEvent(new Event('tideflow:analysis-request'));styleChart();

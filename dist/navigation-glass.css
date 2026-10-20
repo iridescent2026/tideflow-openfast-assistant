@@ -12,6 +12,8 @@ body.tidal-navigation .sidebar,body.tidal-navigation #sidebar-toggle,body.tidal-
 #tidal-shared-navigation>nav>button:hover{background:#c5f1ff17;color:#fff;border-color:#b6edff38}
 #tidal-shared-navigation>nav>button.is-current{color:#f1feff;font-weight:600;background:linear-gradient(110deg,#a6edff3b,#7bcee92b);border-color:#b6f3ffbc;box-shadow:inset 0 0 15px #c6f8ff22,0 0 15px #8cdeed1c}
 #tidal-shared-navigation>nav>button.is-current:after{content:'';position:absolute;inset:4px;border:1px solid #d7faff91;border-radius:11px;pointer-events:none}
+/* Keep this button inside the navigation's inward-curving middle edge. */
+#tidal-shared-navigation>nav>button[data-page=analysis]{width:calc(100% - 12px)}
 #tidal-shared-navigation>nav>button:focus-visible,.tidal-nav-tools button:focus-visible{outline:2px solid #b3f7ff;outline-offset:3px}
 #tidal-shared-navigation>footer{margin-top:auto;padding:24px 15px 0;pointer-events:auto}
 .tidal-nav-tools{display:flex;align-items:center;gap:13px;margin-bottom:22px;flex-wrap:wrap}
@@ -75,3 +77,23 @@ body.tidal-navigation.tidal-lab-immersive[data-page=configure] .lab-header{paddi
 body.tidal-navigation.tidal-nav-closed :is(#page-records,#page-reports) .ow-heading{padding-top:24px}
 @media(max-width:900px){body.tidal-navigation .topbar,body.tidal-navigation[data-page=configure] .lab-header,body.tidal-navigation[data-page=analysis] .deepsea-header{padding-left:110px!important;box-sizing:border-box}body.tidal-navigation.tidal-lab-immersive[data-page=configure] .lab-header{padding-left:20px!important}}
 @media(min-width:901px){body.tidal-navigation.tidal-nav-closed{--tidal-nav-width:0px}#tidal-nav-toggle{position:fixed;display:flex;align-items:center;justify-content:center;gap:6px;z-index:115;top:17px;left:calc(var(--tidal-nav-width) - 35px);height:27px;min-width:26px;padding:2px 6px;border:1px solid #a2e2f071;border-radius:8px;background:#174558aa;color:#daf7ff;backdrop-filter:blur(12px);cursor:pointer}#tidal-nav-toggle>span{font:22px/1 sans-serif}#tidal-nav-toggle>b{display:none}body.tidal-navigation.tidal-nav-closed #tidal-nav-toggle{left:15px;min-width:67px}body.tidal-navigation.tidal-nav-closed #tidal-nav-toggle>b{display:block;font-size:10px;font-weight:400}body.tidal-navigation.tidal-nav-closed #tidal-shared-navigation{visibility:hidden;pointer-events:none;transform:translateX(-110%)}body.tidal-navigation.tidal-nav-closed #page-analysis .analysis-heading{padding-left:55px}body.tidal-navigation.tidal-nav-closed[data-page=home] .home-copy,body.tidal-navigation.tidal-nav-closed[data-page=home] .home-project{left:65px}body.tidal-navigation.tidal-nav-closed[data-page=model] #page-model .page-heading{left:45px}}
+
+/* Readable utility buttons stay inside the narrowing foot of the glass rail. */
+#tidal-shared-navigation>nav{flex:0 1 auto;min-height:0;overflow-x:hidden;overflow-y:auto;align-content:start;scrollbar-width:thin;scrollbar-color:#72c4df66 transparent;overscroll-behavior:contain}
+#tidal-shared-navigation>footer{flex:0 0 auto;width:calc(100% - 25px);max-width:100%;padding:18px 0 0 8px}
+#tidal-shared-navigation .tidal-nav-tools{display:grid;grid-template-columns:minmax(0,1fr);gap:6px;min-width:0;margin:0 0 14px}
+#tidal-shared-navigation .tidal-nav-tools button{display:flex;align-items:center;gap:9px;width:100%;min-width:0;min-height:40px;box-sizing:border-box;padding:9px 10px;border:1px solid #a7def236;border-radius:9px;background:linear-gradient(110deg,#25607c75,#153d566b);box-shadow:inset 0 1px #d8f6ff0b;color:#e5f6ff;font:600 13px/1.4 'Microsoft YaHei','Segoe UI',sans-serif;letter-spacing:.05em;text-align:left;white-space:normal;cursor:pointer;transition:background .18s,border-color .18s,color .18s,transform .15s,box-shadow .15s}
+#tidal-shared-navigation .tidal-nav-tools button svg{flex:0 0 17px;width:17px;height:17px;color:#b6eafa}
+#tidal-shared-navigation .tidal-nav-tools button span{flex:1 1 auto;min-width:0;overflow-wrap:anywhere}
+#tidal-shared-navigation .tidal-nav-tools button b{flex:0 0 auto;color:#b5ddeb;font-size:12px;font-weight:400}
+#tidal-shared-navigation .tidal-nav-tools button:hover{background:linear-gradient(110deg,#377f9b9c,#23556e94);border-color:#bcefff8f;color:#fff}
+#tidal-shared-navigation .tidal-nav-tools button:active{transform:translateY(1px) scale(.97);border-color:#b2f4ff;box-shadow:inset 0 2px 9px #00172399,0 0 12px #8be5fa22}
+#tidal-shared-navigation .tidal-nav-tools button[data-nav-tool=ai]{border-color:#d6b87866;background:linear-gradient(110deg,#6a613e73,#2149598c);color:#fff0cf}
+#tidal-shared-navigation .tidal-nav-tools button[data-nav-tool=ai] svg{color:#f2d592}
+#tidal-shared-navigation .tidal-nav-tools button[data-nav-tool=ai]:hover{border-color:#f1d79b;background:linear-gradient(110deg,#88723f91,#315c6999)}
+#tidal-shared-navigation .tidal-nav-tools button:focus-visible{outline:2px solid #c0f4ff;outline-offset:-3px}
+#tidal-shared-navigation>footer p{font-size:11px;letter-spacing:1px;margin-bottom:7px}
+#tidal-shared-navigation>footer small{font-size:8px;letter-spacing:1px;color:#c3dfec}
+@media(max-height:800px){#tidal-shared-navigation>footer{padding-top:13px}.tidal-nav-brand{flex-shrink:0}#tidal-shared-navigation .tidal-nav-tools{gap:5px;margin-bottom:10px}#tidal-shared-navigation .tidal-nav-tools button{min-height:32px;padding-block:5px}}
+@media(max-height:640px){#tidal-shared-navigation>footer{width:calc(100% - 50px);padding-top:9px}#tidal-shared-navigation .tidal-nav-tools{grid-template-columns:minmax(0,1fr);gap:5px;margin-bottom:0}#tidal-shared-navigation .tidal-nav-tools button{gap:7px;min-height:34px;padding:6px 8px;font-size:12px}#tidal-shared-navigation .tidal-nav-tools button svg{width:15px;height:15px;flex-basis:15px}#tidal-shared-navigation .tidal-nav-tools button b{display:none}}
+@media(prefers-reduced-motion:reduce){#tidal-shared-navigation .tidal-nav-tools button{transition:none}}

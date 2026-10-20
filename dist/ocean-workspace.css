@@ -53,3 +53,41 @@ body:is([data-page=records],[data-page=reports]) .sidebar .nav svg{display:block
 @media(max-width:800px){.or-task-list{max-height:220px}.oa-summary{max-height:none}.oa-data-scroll{flex:initial}}
 @media(max-width:520px){.or-log-lines{font-size:10px}}
 .oa-selection[hidden]{display:none}.op-paper .report-body h1{font-weight:700}.op-paper .report-body p{font-size:12px}
+/* Quiet panel edges and a viewport-sized desktop workspace. */
+:is(.ow-records,.ow-reports) .ow-glass{border-color:#80b4cc45;border-radius:8px;background:linear-gradient(145deg,#0b2b43ed,#082238f0);box-shadow:0 6px 22px #00172b26;backdrop-filter:blur(14px)}
+.or-task{border-color:#52819a45;border-radius:5px;background:#12364d66}
+.or-task.selected{border-color:#63c5dc99;background:#104367;box-shadow:inset 2px 0 #6cf2ff}
+.or-artifacts{gap:0;border-top:1px solid #6c9bb637}
+.or-artifacts>button{padding:10px 3px;border:0;border-bottom:1px solid #6c9bb637;border-radius:0;background:transparent}
+.or-artifacts>button:hover{background:#29617f33}
+.op-evidence-cards>article{border-color:#52819a45;border-radius:5px;background:#12364d66}
+.op-note{border-color:#6c9bb637;border-radius:5px;background:#12364d44}
+@media(min-width:1200px){
+ :is(.ow-records,.ow-reports)>.ow-content{height:100svh;box-sizing:border-box;display:flex;flex-direction:column;min-height:0}
+ :is(.ow-records,.ow-reports) .ow-heading{min-height:106px;flex:0 0 auto;align-items:center;padding-bottom:10px}
+ .or-grid,.op-grid{height:auto;min-height:0;flex:1;gap:14px}
+ .or-main{min-height:0}
+ .or-workflow{padding:11px 14px;flex:0 0 auto}
+ .or-stages{margin:14px 0 9px}
+ .or-terminal{padding:11px 12px 7px}
+ .or-log-lines{max-height:none;min-height:0}
+ .or-task{padding:9px;margin-bottom:8px}
+ .or-details{padding:12px;overflow:auto}
+ .or-parameters dl{margin:12px 0 15px}
+ .or-parameters dl>div{margin-bottom:7px;line-height:1.45}
+ .or-details h3{margin:13px 0 8px}
+ .or-findings article{margin-top:8px;border-radius:0 4px 4px 0}
+ .ow-records .ow-page-footer{margin-top:8px;flex:0 0 auto}
+ .op-outline{min-height:0;overflow:auto}
+ .op-reader{max-height:none;min-height:0;padding:6px}
+ .op-paper{border-color:#c6ddea;border-radius:4px;box-shadow:none;padding:21px 22px 24px}
+ .op-evidence{max-height:none;overflow:auto;padding:13px 12px}
+ .op-evidence-cards>article{padding:12px 9px;margin-top:10px}
+ .op-note{margin-top:11px;padding:10px}
+}
+@media(max-height:850px) and (min-width:1200px){
+ :is(.ow-records,.ow-reports) .ow-heading{min-height:90px}
+ .or-parameters dl>div{margin-bottom:5px}
+ .or-artifacts>button{padding:8px 3px}
+ .op-evidence-cards>article{padding:9px 8px;margin-top:7px}
+}

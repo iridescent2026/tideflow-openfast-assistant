@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>UI TEST ONLY · 账号与指南视觉检查</title>
+  <link rel="stylesheet" href="../dist/account-ui.css?v=0.5.3">
+  <link rel="stylesheet" href="../dist/account-polish.css?v=1.0.0">
+  <style>
+    * { box-sizing: border-box; }
+    html, body { min-height: 100%; margin: 0; }
+    body { min-height: 100dvh; background: radial-gradient(ellipse at 60% 25%, #17445c 0, #0d2a3d 45%, #061725 100%); color: #d7eef4; font-family: "Segoe UI", "Microsoft YaHei", sans-serif; }
+    .fixture-notice { position: fixed; inset: 22px auto auto 24px; max-width: min(450px, calc(100vw - 48px)); padding-right: 12px; }
+    .fixture-notice strong { display: block; color: #8ce2d6; font: 700 12px/1.5 Consolas, monospace; letter-spacing: .12em; }
+    .fixture-notice h1 { margin: 12px 0 7px; font-size: 22px; font-weight: 600; }
+    .fixture-notice p { margin: 0; color: #a8c5d0; font-size: 12px; line-height: 1.8; }
+    .fixture-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
+    .fixture-links a { padding: 8px 12px; border: 1px solid #6094a4; border-radius: 6px; color: #d7eef4; font-size: 12px; text-decoration: none; }
+    .fixture-links a:hover { background: #2f6479; }
+    .fixture-footer { position: fixed; right: 24px; bottom: 20px; left: 24px; color: #83a6b5; font: 11px/1.8 Consolas, "Microsoft YaHei", monospace; }
+    .side-bottom, #help-open, #ai-disconnect { display: none; }
+    @media (max-width: 700px) { .fixture-notice { top: 140px; } }
+  </style>
+</head>
+<body data-page="analysis">
+  <main class="fixture-notice">
+    <strong>UI TEST ONLY / 独立视觉检查</strong>
+    <h1>账号与指南组件测试夹具</h1>
+    <p>以下账号为固定虚构数据。所有账号 API 均在本页拦截，资料保存仅改变本页内存；刷新即重置。</p>
+    <nav class="fixture-links" aria-label="视觉测试视图">
+      <a href="?view=profile">个人资料</a>
+      <a href="?view=guide">新手指南</a>
+      <a href="?view=entry">右上角入口</a>
+    </nav>
+  </main>
+  <div class="side-bottom"></div>
+  <button id="help-open" type="button">新手指南</button>
+  <button id="ai-disconnect" type="button">测试断开</button>
+  <footer class="fixture-footer">UI TEST ONLY · qa@example.test · 不读取或写入真实账号数据</footer>
+  <script>
+    (() => {
+      // The actual component uses localStorage for guide preferences; keep those
+      // preferences in this fixture's memory as well, even on a shared origin.
+      const fixturePreferences = new Map();
+      Object.defineProperty(window, 'localStorage', { value: {
+        getItem: key => fixturePreferences.get(String(key)) ?? null,
+        setItem: (key, value) => fixturePreferences.set(String(key), String(value)),
+        removeItem: key => fixturePreferences.delete(String(key)),
+        clear: () => fixturePreferences.clear(),
+        key: index => [...fixturePreferences.keys()][index] ?? null,
+        get length() { return fixturePreferences.size; }
+      } });
+      const testUser = {
+        id: 'qa-visual-only',
+        account: 'ui_visual_test',
+        display_name: '海风研究员 · 视觉测试',
+        affiliation: '示例工程实验室',
+        specialty: '海上风电与浮式平台动力学',
+        email: 'qa@example.test',
+        bio: '仅用于检查弹窗排版、表单与头像预览，不代表真实个人资料。',
+        avatar: ''
+      };
+      let mockUser = { ...testUser };
+      const nativeFetch = window.fetch.bind(window);
+      const json = (data, status = 200) => Promise.resolve(new Response(JSON.stringify(data), {
+        status,
+        headers: { 'Content-Type': 'application/json; charset=utf-8' }
+      }));
+      window.fetch = (input, options = {}) => {
+        const target = new URL(typeof input === 'string' ? input : input.url, location.href);
+        if (target.pathname === '/api/health') return json({ token: 'ui-test-only-no-real-token' });
+        if (target.pathname === '/api/account') return json({ user: mockUser });
+        if (target.pathname === '/api/account/profile') {
+          try {
+            const draft = JSON.parse(options.body || '{}');
+            const allowed = ['display_name', 'affiliation', 'specialty', 'email', 'bio', 'avatar'];
+            for (const key of allowed) if (Object.hasOwn(draft, key)) mockUser[key] = String(draft[key]);
+            return json({ user: { ...mockUser } });
+          } catch { return json({ error: 'UI TEST ONLY：测试资料解析失败。' }, 400); }
+        }
+        if (target.pathname === '/api/account/logout') { mockUser = null; return json({ ok: true }); }
+        if (target.pathname.startsWith('/api/account')) return json({ error: 'UI TEST ONLY：本夹具不提供登录或注册。' }, 403);
+        if (target.pathname.startsWith('/api/')) return json({ error: 'UI TEST ONLY：已阻止未模拟的 API 请求。' }, 403);
+        return nativeFetch(input, options);
+      };
+      let opened = false;
+      window.addEventListener('tideflow:account', event => {
+        if (opened || !event.detail.signedIn) return;
+        opened = true;
+        const view = new URLSearchParams(location.search).get('view') || 'profile';
+        requestAnimationFrame(() => {
+          if (view === 'guide') document.getElementById('guide-launch').click();
+          else if (view !== 'entry') document.getElementById('account-launch').click();
+        });
+      });
+    })();
+  </script>
+  <script type="module" src="../dist/account-ui.mjs?v=0.6.0"></script>
+</body>
+</html>

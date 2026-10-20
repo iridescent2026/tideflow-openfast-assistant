@@ -10,7 +10,7 @@ const replay=document.createElement('div');replay.className='analysis-replay';
 replay.innerHTML=`<div class="analysis-replay-row"><span class="replay-tag"><i></i>真实时序回放</span><button id="replay-toggle" aria-pressed="true">暂停</button><button id="replay-restart">从头播放 ↶</button><button id="replay-overview">查看完整曲线</button><label>速度<select id="replay-speed" aria-label="回放速度"><option value=".5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option><option value="4">4×</option></select></label><label class="replay-loop"><input id="replay-loop" type="checkbox" checked>循环</label></div><div class="analysis-replay-progress"><input id="replay-progress" type="range" min="0" max="1000" step="1" value="0" aria-label="时序回放进度"><output id="replay-clock">等待完整结果</output></div><p>1× 约 20 秒回放当前显示范围；到结尾短暂停留后重播。仅回放已有结果，拖动进度或点击图表可暂停读数。</p>`;
 document.querySelector('#page-analysis .chart-tabs').after(replay);
 
-let anchors=[],base=null,estimate=null,plot=null,frame=0,lastFrame=0,lastReadout=0,elapsed=20,play=false,reveal=false,spin=!reduce.matches,modelKey='',plotKey='';
+let anchors=[],base=null,estimate=null,plot=null,frame=0,lastFrame=0,lastReadout=0,elapsed=0,play=!reduce.matches,reveal=false,spin=!reduce.matches,modelKey='',plotKey='';
 const isVisible=()=>document.body.dataset.page==='analysis'&&!document.hidden;
 const rotor=$('speed-rotor');
 rotor.style.transformOrigin='512px 498px';rotor.style.transformBox='view-box';
@@ -112,7 +112,7 @@ $('replay-loop').onchange=()=>{if(!$('replay-loop').checked)elapsed=elapsed%20.7
 window.addEventListener('tideflow:analysis-plot-reset',()=>{plot=null;updateButtons();});
 window.addEventListener('tideflow:replay-pause',()=>{play=false;updateButtons();});
 window.addEventListener('tideflow:replay-seek',e=>{if(!plot)return;play=false;reveal=true;elapsed=Math.max(0,Math.min(1,(e.detail.time-plot.start)/(plot.end-plot.start)))*20;updateButtons();paintReplay();});
-window.addEventListener('tideflow:analysis-plot',e=>{const next=e.detail,key=[next.record.id,next.start,next.end].join('|');if(key!==plotKey){elapsed=reveal?0:20;plotKey=key;}plot=next;updateButtons();paintReplay();requestFrame();});
+window.addEventListener('tideflow:analysis-plot',e=>{const next=e.detail,key=[next.record.id,next.start,next.end].join('|');if(key!==plotKey){elapsed=play||reveal?0:20;if(play)reveal=true;plotKey=key;}plot=next;updateButtons();paintReplay();requestFrame();});
 window.addEventListener('tideflow:render',e=>{if(!e.detail.records)return;loadModel(e.detail);if(!e.detail.record?.result){plot=null;updateButtons();$('replay-clock').textContent='等待完整结果';}else if(!$('analysis-reveal')){plot=null;updateButtons();}requestFrame();});
 const resume=()=>{lastFrame=0;requestFrame();};
 document.addEventListener('visibilitychange',resume);

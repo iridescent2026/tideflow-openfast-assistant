@@ -22,9 +22,6 @@ body[data-page=analysis] .deepsea-rail{display:flex;flex-direction:column;positi
 #page-analysis.deepsea-design .analysis-heading{display:flex;align-items:center;justify-content:space-between;min-height:93px;margin:0}
 #page-analysis.deepsea-design .analysis-heading h1{font-size:44px;line-height:1.2;font-weight:650;letter-spacing:1px;margin:0}
 #page-analysis.deepsea-design .analysis-heading p{display:block;font-size:17px;letter-spacing:2px;color:#abc1d7;margin:12px 0 0;line-height:1.5}
-.deepsea-heading-stamp{display:flex;align-items:center;gap:38px;color:#6c94b0;font:10px/1.5 Consolas,monospace;letter-spacing:1.4px;margin-right:14px}
-.deepsea-heading-stamp>b{border-left:1px solid #47768d7d;padding-left:16px;font:11px/1.6 Consolas,monospace;color:#54e4f5}
-.deepsea-heading-stamp small{display:block;font-size:10px;color:#a0b6c9;letter-spacing:.6px}
 #page-analysis.deepsea-design .result-column{margin:0}
 #page-analysis.deepsea-design .analysis-state:empty{display:none}
 #page-analysis.deepsea-design .analysis-opening{display:grid;grid-template-columns:minmax(275px,29%) minmax(0,1fr);gap:0;margin:7px 0 70px;align-items:start;position:relative}
@@ -113,3 +110,35 @@ body[data-page=analysis]::before{background-image:linear-gradient(#00101f16,#001
 #page-analysis.deepsea-design .trace-card.deepsea-reading>.deepsea-tooltip{display:grid;grid-template-columns:1fr}
 #page-analysis.deepsea-design .deepsea-tooltip strong{font-size:12px;color:#def6ff}#page-analysis.deepsea-design .deepsea-tooltip small{font-size:8px}
 @media(max-width:700px){#page-analysis.deepsea-design .opening-model-title{display:none}}
+
+/* Float the shared account tools without reserving a duplicate page header. */
+body[data-page=analysis] .account-toolbar{display:flex!important;position:fixed;top:22px;right:29px;z-index:26;gap:19px;align-items:center}
+body[data-page=analysis] .account-toolbar>button{height:38px;min-height:38px;padding:0 0 0 8px;color:#a7d1e1;background:transparent;border:0;border-radius:0;box-shadow:none;font-size:12px;backdrop-filter:none}
+body[data-page=analysis] .account-toolbar #guide-launch:before{content:'⊙';font-size:19px;vertical-align:-1px;margin-right:8px;color:#7ce1ed}
+body[data-page=analysis] .account-toolbar #account-launch{padding-left:24px;border-left:1px solid #56d6e0}
+body[data-page=analysis] .account-toolbar #toolbar-name{display:none}
+body[data-page=analysis] .account-toolbar .avatar-mini{width:32px;height:32px;flex:0 0 32px;background:#addce9;color:#154657;border:1px solid #cceaf1;font-size:13px}
+body.tidal-navigation[data-page=analysis] #page-analysis.deepsea-design{padding-top:32px}
+@media(min-width:1700px){body.tidal-navigation[data-page=analysis] #page-analysis.deepsea-design{padding-top:42px}}
+@media(max-width:900px){body[data-page=analysis] .account-toolbar{top:18px;right:18px;gap:8px}body[data-page=analysis] .account-toolbar>button{font-size:10px}body[data-page=analysis] .account-toolbar #account-launch{padding-left:12px}body[data-page=analysis] .account-toolbar .avatar-mini{width:28px;height:28px;flex-basis:28px}body.tidal-navigation[data-page=analysis] #page-analysis.deepsea-design{padding-top:72px}}
+
+/* Give the live rotor control a legible, self-contained surface over the wave image. */
+#page-analysis.deepsea-design .opening-speed{box-sizing:border-box;width:100%;min-width:0;padding:clamp(15px,2vw,23px);margin:24px 0 0;border:1px solid #79c9df47;border-radius:15px;background:linear-gradient(145deg,#061a2add,#031421e8);box-shadow:inset 0 1px #d1f5ff17,0 14px 32px #00101e72;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+#page-analysis.deepsea-design .opening-speed>label{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 10px;color:#eff9ff;font-size:clamp(15px,1.1vw,18px);font-weight:600;line-height:1.45}
+#page-analysis.deepsea-design .opening-speed #speed-target{margin-left:auto;color:#f3fbff;font-size:clamp(27px,2.3vw,36px);font-variant-numeric:tabular-nums;letter-spacing:.02em}
+#page-analysis.deepsea-design .opening-speed>label>span{font-size:14px;color:#c8e4f1}
+#page-analysis.deepsea-design #speed-input{display:block;width:100%;max-width:100%;box-sizing:border-box;height:9px;margin:20px 0 0;border-color:#75a9bd;background:linear-gradient(90deg,#63e8ef 0%,#63e8ef var(--rotor-fill,0%),#25495c var(--rotor-fill,0%),#25495c 100%);touch-action:pan-y}
+#page-analysis.deepsea-design #speed-input:focus-visible{outline:3px solid #96f2fb;outline-offset:5px}
+#page-analysis.deepsea-design #speed-input::-webkit-slider-thumb{width:19px;height:19px;border-width:2px;box-shadow:0 0 0 4px #5ddfec35,0 0 13px #22c7d8aa}
+#page-analysis.deepsea-design #speed-input::-moz-range-thumb{width:15px;height:15px;border:2px solid #53e4fa;border-radius:50%;background:#e1fdff;box-shadow:0 0 0 4px #5ddfec35,0 0 13px #22c7d8aa}
+#page-analysis.deepsea-design .opening-speed .speed-range{display:flex;flex-wrap:wrap;gap:5px 12px;justify-content:space-between;margin-top:14px;color:#d4e5ef;font-size:12px;line-height:1.6}
+#page-analysis.deepsea-design .opening-speed .speed-range>span:nth-child(2){display:block;flex:1 1 120px;text-align:center;color:#a9c3d2}
+#page-analysis.deepsea-design #speed-rotation-period{margin:9px 0 0;color:#a8dae6;font-size:12px;line-height:1.6;font-variant-numeric:tabular-nums}
+#page-analysis.deepsea-design #speed-unavailable{margin-top:8px;color:#d4e4ed;font-size:12px;line-height:1.65;overflow-wrap:anywhere}
+@media(max-width:700px){#page-analysis.deepsea-design .opening-speed{grid-column:1/-1;grid-row:2;padding:15px;margin:8px 0 0}#page-analysis.deepsea-design .opening-speed>label{font-size:15px}#page-analysis.deepsea-design .opening-speed #speed-target{font-size:27px}#page-analysis.deepsea-design .opening-speed .speed-range{font-size:11px;gap:4px 8px}#page-analysis.deepsea-design #speed-rotation-period,#page-analysis.deepsea-design #speed-unavailable{font-size:11px}}
+
+/* Keep only the shared guide and avatar controls on the analysis page. */
+body[data-page=analysis] .deepsea-header{display:none!important}
+body.tidal-navigation[data-page=analysis] #page-analysis.deepsea-design{padding-top:0}
+body.tidal-navigation[data-page=analysis] #page-analysis.deepsea-design .analysis-heading{min-height:0}
+@media(max-width:900px){body.tidal-navigation[data-page=analysis] #page-analysis.deepsea-design{padding-top:58px}}
