@@ -100,3 +100,10 @@ async function init(){try{let restored=null;try{const raw=localStorage.getItem(S
  fillForm(current()?.params||draft);render();if(active)pollTimer=setTimeout(poll,1000);
  }catch(error){$('result-title').textContent='数据尚未就绪';$('insight-text').textContent=error.message;$('time-chart').innerHTML='<div class="empty">数据加载失败。请确认通过 HTTP 服务打开，且 samples.json 存在。</div>';$('connection-label').textContent='加载失败';toast(error.message,true);}}
 init();
+
+// Stable UI bridge: enhancements consume the same records and operations as the
+// original workbench, never a second demo dataset or a second polling loop.
+export function workspaceState(){return {runs:[...runs],record:current(),plots:plots(),comparison:[...comparison],local,active};}
+export function workspaceSelect(id){selectRun(id);}
+export function workspaceCompare(ids){comparison=new Set(ids.filter(id=>runs.some(r=>r.id===id&&r.status==='completed')).slice(0,4));render();persist();}
+export function workspaceReport(){return reportHTML();}

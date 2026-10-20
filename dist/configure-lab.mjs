@@ -1,3 +1,4 @@
+import {installCockpit} from './cockpit-console.mjs?v=1.2.0';
 import './configure-ocean.mjs?v=1.0.0';
 const $=id=>document.getElementById(id),page=$('page-configure');
 document.body.classList.add('lab-enabled');page.classList.add('lab-page');
@@ -14,19 +15,19 @@ const bench=lab.querySelector('.lab-workbench');bench.append(draft,dock);
 const viewport=lab.querySelector('.lab-viewport'),loading=lab.querySelector('.lab-loading'),guidance=lab.querySelector('.lab-guidance'),chair=lab.querySelector('.lab-chair'),walkControls=lab.querySelector('.lab-walk-controls'),seatedTop=lab.querySelector('.lab-seated-top');
 let scene=null,phase='loading',starting=false,lessMotion=matchMedia('(prefers-reduced-motion:reduce)').matches,flat=false;
 const messages={loading:'正在加载实验舱',outside:'01 / 点击进入实验舱',opening:'舱门开启中…',entering:'正在进入实验舱…',walking:'02 / 使用 W A S D 或方向键移动，拖动画面环顾；点击发光座椅落座。',sitting:'正在落座，控制台即将点亮…',seated:'03 / 调整风浪参数，准备一次真实计算。',rising:'正在起身…'};
-function setPhase(next){phase=next;lab.dataset.phase=next;scene?.setPhase(next);guidance.textContent=messages[next];const seated=next==='seated';bench.hidden=!seated;bench.inert=!seated;seatedTop.hidden=!seated;walkControls.hidden=next!=='walking';chair.hidden=next!=='walking';if(seated)lab.querySelector('.lab-rise').focus({preventScroll:true});}
+function setPhase(next){phase=next;lab.dataset.phase=next;scene?.setPhase(next);scene?.setActive(document.body.dataset.page==='configure'&&!document.hidden&&next!=='seated');guidance.textContent=messages[next];const seated=next==='seated';bench.hidden=!seated;bench.inert=!seated;seatedTop.hidden=!seated;walkControls.hidden=next!=='walking';chair.hidden=next!=='walking';if(seated)lab.querySelector('.lab-rise').focus({preventScroll:true});}
 function sit(){if(!scene||!['outside','walking'].includes(phase))return;setPhase('sitting');scene.travel([0,1.68,1.48],lessMotion?.01:1.55,0,-.1);}
 function onFrame(frame){
- if(phase==='opening'&&frame.door>.92){setPhase('entering');scene.travel([0,1.75,4.85],lessMotion?.01:1.7,0,-.05);}
+ if(phase==='opening'&&frame.door>.92){setPhase('entering');scene.travel([-2.5,1.75,4.7],lessMotion?.01:1.7,-.36,-.12);}
  else if(phase==='entering'&&!frame.transitioning)setPhase('walking');
  else if(phase==='sitting'&&!frame.transitioning)setPhase('seated');
  else if(phase==='rising'&&!frame.transitioning)setPhase('walking');
  if(phase==='walking'){chair.hidden=!frame.chairVisible;chair.style.left=frame.chairX+'%';chair.style.top=frame.chairY+'%';}
 }
-async function start(){if(starting||scene)return;starting=true;try{const {createLabScene}=await import('./lab-scene.mjs?v=1.1.0');scene=createLabScene(viewport,{onChair:sit,onFrame,getParameters:()=>({wind:Number($('wind').value),wave:Number($('wave-height').value),period:Number($('wave-period').value)})});scene.setActive(document.body.dataset.page==='configure'&&!document.hidden);loading.hidden=true;setPhase('outside');}catch(error){loading.hidden=true;flat=true;lab.classList.add('lab-flat');setPhase('seated');seatedTop.querySelector('span').textContent='当前设备未能开启三维场景，已切换为参数面板。';lab.querySelector('.lab-rise').hidden=true;}finally{starting=false;}}
+async function start(){if(starting||scene)return;starting=true;try{const {createLabScene}=await import('./lab-scene.mjs?v=1.1.1');scene=createLabScene(viewport,{onChair:sit,onFrame,getParameters:()=>({wind:Number($('wind').value),wave:Number($('wave-height').value),period:Number($('wave-period').value)})});scene.setActive(document.body.dataset.page==='configure'&&!document.hidden);loading.hidden=true;setPhase('outside');}catch(error){loading.hidden=true;flat=true;lab.classList.add('lab-flat');setPhase('seated');seatedTop.querySelector('span').textContent='当前设备未能开启三维场景，已切换为参数面板。';lab.querySelector('.lab-rise').hidden=true;}finally{starting=false;}}
 lab.querySelector('.lab-enter').onclick=()=>{if(phase==='outside')setPhase('opening');};
 lab.querySelector('.lab-skip').onclick=sit;chair.onclick=sit;
-lab.querySelector('.lab-rise').onclick=()=>{if(!scene)return;flat=false;lab.classList.remove('lab-flat');setPhase('rising');scene.travel([0,1.75,3.6],lessMotion?.01:1.1,0,-.05);};
+lab.querySelector('.lab-rise').onclick=()=>{if(!scene)return;flat=false;lab.classList.remove('lab-flat');setPhase('rising');scene.travel([-2.2,1.75,3.8],lessMotion?.01:1.1,-.4,-.1);};
 lab.querySelector('.lab-return-outside').onclick=()=>{setPhase('outside');scene.travel([0,2.02,12],lessMotion?.01:1.5,0,0);};
 lab.querySelector('.lab-flat-toggle').onclick=()=>{flat=!flat;lab.classList.toggle('lab-flat',flat);if(flat){if(phase==='loading')return;setPhase('seated');}else if(scene){setPhase('sitting');scene.travel([0,1.68,1.48],.01,0,-.1);}lab.querySelector('.lab-flat-toggle').textContent=flat?'返回沉浸视角':'参数面板';};
 lab.querySelector('.lab-soundless').onclick=e=>{lessMotion=!lessMotion;e.currentTarget.setAttribute('aria-pressed',String(lessMotion));lab.classList.toggle('lab-reduced',lessMotion);scene?.setReducedMotion(lessMotion);};
@@ -34,5 +35,7 @@ lab.querySelectorAll('[data-walk]').forEach(button=>{button.onpointerdown=e=>{if
 lab.querySelectorAll('[data-knob]').forEach(button=>button.onclick=()=>{const input=$(button.dataset.knob),step=Number(input.step)||.5;input.value=String(Math.min(Number(input.max),Number(input.value)+step));input.dispatchEvent(new Event('input',{bubbles:true}));input.dispatchEvent(new Event('change',{bubbles:true}));});
 function syncHardware(){lab.style.setProperty('--lab-wind',Number($('wind').value));lab.style.setProperty('--lab-wave',Number($('wave-height').value));lab.querySelector('[data-knob="wave-height"] i').style.transform=`rotate(${Number($('wave-height').value)*70}deg)`;lab.querySelector('[data-knob="wave-period"] i').style.transform=`rotate(${Number($('wave-period').value)*22}deg)`;}
 form.addEventListener('input',syncHardware);form.addEventListener('change',syncHardware);window.addEventListener('tideflow:render',syncHardware);$('reset-config').addEventListener('click',()=>queueMicrotask(syncHardware));syncHardware();
-function visibility(){const active=document.body.dataset.page==='configure'&&!document.hidden;if(active&&!scene&&!starting)start();scene?.setActive(active);}
+function visibility(){const active=document.body.dataset.page==='configure'&&!document.hidden&&phase!=='seated';if(active&&!scene&&!starting)start();scene?.setActive(active);}
 new MutationObserver(visibility).observe(document.body,{attributes:true,attributeFilter:['data-page']});document.addEventListener('visibilitychange',visibility);visibility();
+
+installCockpit(lab);
