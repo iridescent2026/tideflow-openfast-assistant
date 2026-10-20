@@ -1,0 +1,144 @@
+/* The configuration console keeps native inputs and the existing solver pipeline. */
+body[data-page=configure]{background:#04314c;color:#e1f7ff;color-scheme:dark}
+body[data-page=configure] .shell,body[data-page=configure].nav-collapsed .shell{margin-left:0}
+body[data-page=configure] main>footer{display:none}
+body[data-page=configure] #sidebar-toggle{display:none!important}
+body[data-page=configure] .topbar{position:absolute;inset:0 0 auto 0;z-index:8;height:66px;min-height:66px;padding:15px 300px 15px 246px;border:0;background:linear-gradient(#00233b80,transparent);color:#d1eaff}
+body[data-page=configure] .breadcrumb{font-size:12px;color:#c5e4f7;white-space:nowrap}
+body[data-page=configure] .breadcrumb b{color:#fff}
+body[data-page=configure] .top-actions{margin-left:auto;gap:14px}
+body[data-page=configure] .connection{font-size:10px;color:#daf8ff;white-space:nowrap}
+body[data-page=configure] #model-open,body[data-page=configure] #help-open{color:#d4f4ff;background:#103f5970;border:1px solid #83d3f16e;box-shadow:inset 0 1px #e0fbff12;border-radius:5px;height:36px;font-size:12px}
+body[data-page=configure] #model-open{padding:6px 14px;white-space:nowrap}
+body[data-page=configure] #help-open{border-radius:50%;width:30px;height:30px}
+body[data-page=configure] .account-toolbar{top:20px;right:26px;gap:16px;z-index:12}
+body[data-page=configure] .account-toolbar>button{height:36px;color:#e4f6ff;background:#103c5655;border:1px solid #86cced66;box-shadow:none;font-size:12px}
+body[data-page=configure] .account-toolbar #account-launch{background:transparent;border:0}
+body[data-page=configure] .sidebar{position:fixed;inset:0 auto 0 0;transform:none;width:210px;height:100svh;padding:32px 14px 25px 22px;background:transparent;backdrop-filter:none;border:0;box-shadow:none;clip-path:none;overflow:visible;z-index:20}
+body[data-page=configure] .sidebar:before,body[data-page=configure] .sidebar:after{display:none}
+body[data-page=configure] .ocean-sidebar-surface{display:block;position:absolute;inset:0;z-index:-1;width:100%;height:100%;filter:drop-shadow(2px 0 4px #36d8f655);pointer-events:none}
+body[data-page=configure] .sidebar .brand.brand-lockup{padding:0 8px;min-height:48px}
+body[data-page=configure] .sidebar .brand-lockup>img{width:150px;max-width:150px;height:auto;filter:none}
+body[data-page=configure] .brand-caption,body[data-page=configure] .sidebar-rail-label,body[data-page=configure] .sidebar .side-bottom,body[data-page=configure] .sidebar .nav-index,body[data-page=configure] .sidebar .nav b{display:none}
+body[data-page=configure] .sidebar nav{display:grid;gap:8px;width:168px;padding:0;margin-top:40px;overflow:visible}
+body[data-page=configure] .sidebar .nav{min-height:56px;height:56px;padding:0 10px;gap:16px;font-size:14px;font-weight:400;color:#cae8ff;border:1px solid transparent;border-radius:9px;background:transparent;overflow:visible}
+body[data-page=configure] .sidebar .nav:before,body[data-page=configure] .sidebar .nav:after{display:none}
+body[data-page=configure] .sidebar .ocean-icon{display:block;width:25px;height:25px}
+body[data-page=configure] .sidebar .nav.active{color:#69f7ff;background:linear-gradient(100deg,#0ec9e65c,#00799a66);border-color:#7affff9c;box-shadow:inset 3px 0 10px #39f7ff6b,0 0 17px #11e9ff4d;font-weight:600}
+body[data-page=configure] .sea-nav-caption{display:block;position:absolute;bottom:25px;left:32px;color:#d5f5ff;font-size:11px;letter-spacing:2px}
+body[data-page=configure] .sea-nav-caption small{font:8px/1.8 Consolas,monospace;display:block;color:#84c7e6;margin-top:10px;letter-spacing:2px}
+#page-configure.ocean-console{--console-line:#81d9f16b;--console-glass:linear-gradient(120deg,#002337e8,#01283cc7);position:relative;isolation:isolate;display:grid;grid-template-rows:100px minmax(0,1fr) 76px;gap:18px;height:100svh;min-height:740px;max-width:none;padding:76px 26px 18px 236px;margin:0;background:#03456a url('./assets/configure-ocean-daylight.png') center center/100% 100% no-repeat;color:#e4f7ff;overflow:hidden}
+#page-configure.ocean-console[hidden]{display:none}
+#page-configure:before{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,#002b463d,transparent 55%),linear-gradient(180deg,#001c3426,transparent 24%);pointer-events:none}
+.console-heading{display:flex;justify-content:space-between;align-items:center;gap:20px;min-width:0}
+#page-configure .console-heading h1{font-size:40px;line-height:1.25;font-weight:700;letter-spacing:1px;margin:0;color:#f0faff;text-shadow:0 2px 8px #00264255}
+.console-heading h1>span{font:12px/1.6 'Segoe UI',sans-serif;letter-spacing:5px;color:#b6d5ed;margin-left:12px;vertical-align:middle}
+#page-configure .console-heading p{font-size:19px;color:#ecf8ff;margin:12px 0 0;letter-spacing:1px;text-shadow:0 1px 5px #002440}
+.console-progress{display:flex;gap:40px;align-self:flex-start;padding-top:12px;flex-shrink:0}
+#page-configure .console-progress button{position:relative;display:grid;justify-items:center;gap:8px;background:transparent;border:0;color:#b6ddf1;padding:0;font-size:12px;white-space:nowrap}
+.console-progress button b{width:29px;height:29px;border-radius:50%;border:1px solid #9bdcf4;font:16px/27px 'Segoe UI',sans-serif;font-weight:400}
+.console-progress button:not(:last-child):after{content:'';position:absolute;left:calc(50% + 19px);top:14px;width:64px;height:1px;background:#9dd5ec88}
+#page-configure .console-progress [aria-current=step]{color:#dcfcff;font-weight:600}
+.console-progress [aria-current=step] b{color:#00384c;background:#51f3ff;border-color:#8dfaff;box-shadow:0 0 12px #26f4ff77}
+.console-layout{display:grid;grid-template-columns:minmax(360px,38.3%) minmax(0,1fr);gap:24px;min-height:0;min-width:0}
+.console-parameters{position:relative;min-width:0;min-height:0;padding:0;border:1px solid #76d7f2a8;border-radius:5px 42px 7px 23px;background:var(--console-glass);box-shadow:inset 1px 0 #97faff66,0 9px 25px #00162126;backdrop-filter:blur(3px);overflow:auto;scrollbar-width:thin;scrollbar-color:#4ca9c7 transparent}
+.console-parameters:before{content:'';position:absolute;top:0;left:0;width:2px;height:60px;background:#7effff;box-shadow:0 0 9px #31fbff;pointer-events:none}
+#page-configure #case-form{display:flex;flex-direction:column;gap:0;padding:0;height:100%;min-height:0}
+.console-environment{padding:23px 30px 20px;flex:1;min-height:0}
+.console-section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:17px}
+#page-configure .console-section-head h2{font-size:19px;font-weight:600;line-height:1.4;letter-spacing:.5px;white-space:nowrap;color:#f1fbff;margin:0}
+.console-section-head em{font:500 29px/1.2 Georgia,serif;color:#51efff;font-style:normal;margin-right:16px}
+#page-configure .console-help{background:transparent;border:0;border-bottom:1px solid #7dd6e780;color:#9de9ff;font-size:11px;padding:0;white-space:nowrap}
+#page-configure .console-field{min-width:0}
+#page-configure label{display:block;color:#e7f6ff;font-size:13px;font-weight:400;margin:0 0 7px;letter-spacing:.2px}
+#page-configure input:not([type=range]),#page-configure select{width:100%;height:40px;padding:7px 12px;border:1px solid #6ba6c18c;border-radius:4px;background:linear-gradient(120deg,#11455d80,#0a31484d);color:#eefaff;box-shadow:inset 0 1px 3px #b8e9ff0d;font-size:13px;margin:0;min-width:0}
+#page-configure select option{color:#e5f7ff;background:#07394f}
+#page-configure input:focus-visible,#page-configure select:focus-visible{outline:2px solid #7ff6ff;outline-offset:2px}
+.console-wind{margin-top:20px}
+.console-wind-readout{display:flex;align-items:center;justify-content:space-between;margin:-1px 0 9px}
+.console-wind-readout strong{color:#5befff;font-size:42px;line-height:1.2;font-weight:600;letter-spacing:.5px}
+.console-wind-readout strong small{font-size:28px;font-weight:500}
+#page-configure svg{fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round}
+.console-wind-readout svg,.console-wave-options>svg{width:36px;height:36px;color:#6de5ff;stroke-width:1.2}
+#page-configure #wind{display:block;appearance:none;-webkit-appearance:none;width:100%;height:5px;border:1px solid #47758d;border-radius:10px;background:linear-gradient(90deg,#4deeff var(--wind-fill,28.57%),#234b64 var(--wind-fill,28.57%));padding:0;margin:11px 0 8px;cursor:pointer}
+#page-configure #wind::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border:1px solid #baffff;border-radius:50%;background:#55eff5;box-shadow:0 0 6px #3ce9f55c}
+#page-configure #wind::-moz-range-thumb{width:18px;height:18px;border:1px solid #baffff;border-radius:50%;background:#55eff5}
+.console-range{display:flex;justify-content:space-between;color:#b6dced;font-size:10px}
+.console-wave-mode{margin-top:20px}
+.console-wave-options{display:grid;grid-template-columns:1fr 1fr 36px;gap:10px;align-items:center}
+#page-configure .console-wave-options button{height:39px;background:#0a354a7a;border:1px solid #74b8d180;border-radius:4px;color:#c6e4f7;font-size:13px}
+#page-configure .console-wave-options button.active{color:#e9feff;border-color:#58eeff;box-shadow:inset 0 0 8px #2bf5ff70,0 0 6px #0bd2e84d;background:linear-gradient(#12647a66,#00445a44);font-weight:600}
+.console-pair{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:17px}
+.console-seed{margin-top:12px}.console-seed[hidden]{display:none}
+.console-solver{padding:17px 30px 23px;border-top:1px solid #80c4db55;flex-shrink:0}
+.console-solver .console-section-head{margin-bottom:15px}
+.console-solver-fields{display:grid;grid-template-columns:1fr 1fr 1.05fr;gap:14px}
+#page-configure .console-solver-fields label{font-size:11px;white-space:nowrap}
+#page-configure .console-solver-fields select{padding:7px 5px;font-size:12px}
+#page-configure #draft-note{margin:0 20px 12px;padding:6px 10px;background:#164b60a8;border-left:2px solid #5ce7f2;color:#bdd9e6;font-size:10px;line-height:1.6}
+.console-scene{min-width:0;min-height:0;position:relative;display:flex;align-items:flex-end;padding:0}
+.console-model-label{position:absolute;right:8px;top:4px;padding:9px 15px;color:#edfaff;font-size:12px;letter-spacing:.5px;background:#032d43a8;backdrop-filter:blur(3px);border:1px solid #89dcf384;border-radius:12px}
+.console-scene-overlay{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+#page-configure .console-scene-overlay{stroke:none}
+.console-scene-note{position:absolute;right:12px;bottom:116px;font-size:9px;color:#caeaff;text-shadow:0 1px 5px #00273d}
+.console-metrics{display:flex;align-items:center;width:100%;min-height:96px;padding:17px 20px;gap:16px;border:1px solid #7ee2f29c;border-radius:22px;background:linear-gradient(110deg,#002b3fe0,#003447bd);backdrop-filter:blur(4px);box-shadow:inset 0 1px #c6ffff1f}
+.console-draft-values{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;flex:1;min-width:0}
+.console-draft-values>div{position:relative;display:flex;flex-direction:column;min-width:0;padding-left:40px;border-right:1px solid #79bbd052}
+.console-draft-values>div:last-child{border:0}
+.console-draft-values svg{position:absolute;left:0;top:11px;width:30px;height:30px;color:#65efff;stroke-width:1.2}
+.console-draft-values span{font-size:11px;color:#b4e9f5;white-space:nowrap}
+.console-draft-values strong{font:600 clamp(20px,2.05vw,34px)/1.4 'Segoe UI',sans-serif;color:#68efff;white-space:nowrap}
+.console-fixed{display:grid;gap:10px;padding-left:12px;border-left:1px solid #76b9d144;font-size:11px;color:#abd8f0;white-space:nowrap}
+.console-fixed b{font-weight:400;color:#bceaff;margin-left:5px}
+.console-dock{display:flex;align-items:center;justify-content:space-between;gap:22px;padding:10px 12px 10px 26px;min-width:0;border:1px solid #80dff4aa;border-radius:24px;background:linear-gradient(110deg,#002b40ed,#003448bd);backdrop-filter:blur(4px);box-shadow:inset 0 1px #95eaff22}
+.console-check{display:flex;align-items:center;gap:12px;flex-shrink:0;color:#78f4ff;max-width:30%}
+.console-check-icon{display:grid;place-items:center;width:29px;height:29px;flex-shrink:0;background:#65effb;color:#003a4b;border-radius:50%;font-weight:700;font-size:16px}
+#page-configure #config-validation{margin:0;color:#8defff;font-size:11px;font-weight:600;line-height:1.6;max-width:180px}
+.console-runtime{display:flex;align-items:center;flex-wrap:wrap;column-gap:8px;flex:1;font-size:11px;color:#c2e6f4;border-left:1px solid #7fcbdf66;padding-left:20px}
+.console-window{white-space:nowrap}
+.console-dock-actions{display:flex;align-items:center;gap:20px;flex-shrink:0}
+#page-configure #reset-config{padding:8px 13px;background:#00364e88;border:1px solid #70c2df88;border-radius:13px;color:#c2eaff;font-size:12px;white-space:nowrap}
+#page-configure #run-button{margin:0;min-width:235px;width:auto;max-width:none;height:52px;padding:11px 24px;color:#003345;background:linear-gradient(110deg,#2ae7ef,#66f5ff);border:1px solid #b4ffff;border-radius:30px;box-shadow:inset 0 0 7px #c1ffff99,0 0 17px #1fe5f34d;font-size:16px;font-weight:600;white-space:nowrap;letter-spacing:1px;display:flex;gap:12px;justify-content:center;align-items:center}
+#page-configure #run-button span{display:none}#page-configure #run-button b{font-size:21px;font-weight:400;margin:0}
+#page-configure .console-dock.invalid #config-validation{color:#ffcfab}
+.console-dock.invalid .console-check-icon{background:#ffc5a2}
+#page-configure .console-service-details{display:none}
+.console-help-dialog{color-scheme:light;width:min(540px,92vw)}
+.console-help-dialog .parameter-notes{border:0;background:none;padding:10px 0}
+.console-help-dialog .parameter-notes summary{display:none}
+.console-help-dialog .parameter-notes p{margin:12px 0;font-size:13px;line-height:1.9}
+@media(min-width:901px) and (max-height:850px){
+ #page-configure.ocean-console{padding-top:66px;grid-template-rows:82px minmax(0,1fr) 65px;gap:14px;min-height:700px}
+ #page-configure .console-heading h1{font-size:33px}.console-heading h1>span{font-size:10px;letter-spacing:3px}#page-configure .console-heading p{font-size:15px;margin-top:9px}
+ .console-environment{padding:18px 22px 14px}.console-section-head{margin-bottom:12px}.console-section-head em{font-size:25px}
+ #page-configure .console-section-head h2{font-size:17px}#page-configure label{font-size:11px;margin-bottom:5px}#page-configure input:not([type=range]),#page-configure select{height:35px;font-size:12px}
+ .console-wind{margin-top:12px}.console-wind-readout strong{font-size:33px}.console-wind-readout strong small{font-size:23px}.console-wave-mode{margin-top:13px}.console-wave-options button{height:34px}.console-pair{margin-top:12px}
+ .console-solver{padding:13px 22px 16px}.console-solver .console-section-head{margin-bottom:10px}.console-metrics{min-height:82px;padding:12px 14px}.console-scene-note{bottom:93px}
+ #page-configure #run-button{height:46px;min-width:190px;font-size:14px}.console-dock{gap:14px;padding-left:20px}.console-dock-actions{gap:12px}
+}
+@media(min-width:901px) and (max-width:1300px){
+ body[data-page=configure] .sidebar{width:180px;padding-left:15px}body[data-page=configure] .sidebar nav{width:144px}body[data-page=configure] .sidebar .nav{font-size:12px;gap:12px}body[data-page=configure] .sidebar .brand-lockup>img{width:133px}
+ body[data-page=configure] .topbar{padding-left:210px;padding-right:265px}body[data-page=configure] .connection{display:none}
+ #page-configure.ocean-console{padding-left:205px;padding-right:22px}.console-layout{grid-template-columns:minmax(340px,42%) minmax(0,1fr);gap:20px}.console-progress{gap:28px}.console-progress button:not(:last-child):after{width:52px}
+ .console-heading h1>span{display:block;margin:5px 0 0}.console-fixed{display:none}.console-draft-values>div{padding-left:0}.console-draft-values svg{display:none}.console-draft-values{gap:10px}
+ .console-check{max-width:27%}#page-configure #config-validation{font-size:10px}.console-runtime{font-size:10px;padding-left:12px}.console-dock{gap:12px}.console-dock-actions{gap:12px}#page-configure #run-button{min-width:175px;font-size:13px;padding:10px 17px}
+}
+@media(max-width:900px){
+ body[data-page=configure] .sidebar{width:144px;padding:24px 10px}body[data-page=configure] .sidebar nav{width:113px;margin-top:30px;gap:5px}body[data-page=configure] .sidebar .nav{font-size:11px;gap:9px;padding:0 5px;height:50px;min-height:50px}body[data-page=configure] .sidebar .brand.brand-lockup{padding:0 2px}body[data-page=configure] .sidebar .brand-lockup>img{width:112px}body[data-page=configure] .sea-nav-caption{left:18px;font-size:9px}
+ body[data-page=configure] .topbar{padding-left:163px;padding-right:20px;height:60px}body[data-page=configure] .breadcrumb{font-size:10px}body[data-page=configure] .top-actions{display:none}body[data-page=configure] .account-toolbar{top:65px;right:18px;gap:5px}body[data-page=configure] .account-toolbar>button{font-size:10px;height:29px}
+ #page-configure.ocean-console{height:auto;min-height:100svh;grid-template-rows:auto auto auto;gap:22px;padding:112px 20px 24px 166px;background-size:auto 100%;background-position:65% center;overflow:visible}
+ .console-heading{display:block}#page-configure .console-heading h1{font-size:32px}.console-heading h1>span{display:block;margin:5px 0 0;font-size:9px;letter-spacing:3px}#page-configure .console-heading p{font-size:13px;margin-top:8px}
+ .console-progress{justify-content:space-between;max-width:330px;padding-top:24px;gap:20px}.console-progress button:not(:last-child):after{display:none}
+ .console-layout{display:flex;flex-direction:column-reverse;gap:20px}.console-scene{height:340px}.console-model-label{top:0;font-size:10px}.console-metrics{min-height:80px;padding:12px}.console-draft-values>div{padding-left:0}.console-draft-values svg{display:none}.console-draft-values strong{font-size:23px}.console-fixed{display:none}.console-scene-note{bottom:90px}
+ .console-parameters{overflow:visible;backdrop-filter:blur(4px)}.console-environment{padding:24px}.console-solver{padding:20px 24px}.console-dock{flex-wrap:wrap;padding:18px;gap:16px}.console-check{max-width:100%}.console-runtime{flex-basis:100%;order:2;border:0;padding:0}.console-dock-actions{flex-basis:100%;justify-content:space-between;order:3;gap:10px}#page-configure #run-button{min-width:0;flex:1;font-size:14px}.console-draft-values span{font-size:10px}
+}
+@media(max-width:600px){
+ body[data-page=configure] .sidebar{width:88px;padding:22px 6px;display:flex}body[data-page=configure] .sidebar nav{width:76px;margin-top:25px;gap:4px}body[data-page=configure] .sidebar .nav{display:flex;flex-direction:column;justify-content:center;font-size:9px;gap:4px;height:57px;min-height:57px;padding:4px}body[data-page=configure] .sidebar .ocean-icon{width:19px;height:19px}body[data-page=configure] .sidebar .brand-lockup>img{width:70px;max-width:70px}body[data-page=configure] .sea-nav-caption{display:none}
+ body[data-page=configure] .topbar{padding:15px 12px 15px 105px}.breadcrumb>span{margin:0 4px}body[data-page=configure] .breadcrumb{font-size:9px}body[data-page=configure] .account-toolbar #account-launch{max-width:105px;padding:0 4px}
+ #page-configure.ocean-console{padding:112px 14px 22px 105px;gap:20px}.console-heading h1>span{font-size:7px;letter-spacing:1.7px}#page-configure .console-heading h1{font-size:29px}#page-configure .console-heading p{font-size:11px;letter-spacing:0}
+ .console-progress{gap:12px}.console-progress button b{width:26px;height:26px;font-size:14px;line-height:24px}#page-configure .console-progress button{font-size:10px}
+ .console-environment{padding:21px 16px}.console-section-head{gap:6px;flex-wrap:wrap}.console-section-head em{font-size:23px;margin-right:10px}#page-configure .console-section-head h2{font-size:16px}#page-configure .console-help{font-size:10px}
+ .console-solver{padding:18px 16px}.console-solver-fields{grid-template-columns:1fr;gap:12px}.console-pair{gap:10px}.console-wave-options{grid-template-columns:1fr 1fr;gap:7px}.console-wave-options>svg{display:none}#page-configure .console-wave-options button{font-size:11px}#page-configure label{font-size:11px}#page-configure input:not([type=range]),#page-configure select{font-size:11px;padding:7px 8px}
+ .console-scene{height:300px}.console-model-label{font-size:8px;padding:7px 9px;right:0}.console-scene-note{font-size:7px}.console-metrics{padding:10px 9px;border-radius:15px}.console-draft-values{gap:7px}.console-draft-values strong{font-size:17px}.console-draft-values span{font-size:8px}.console-draft-values>div{border:0}
+ .console-dock{padding:16px 12px;border-radius:18px}#page-configure #config-validation{font-size:10px}.console-dock-actions{flex-wrap:wrap}#page-configure #run-button{flex-basis:100%;height:46px}#page-configure #reset-config{width:100%;height:36px;font-size:11px}.console-runtime{font-size:10px}
+}

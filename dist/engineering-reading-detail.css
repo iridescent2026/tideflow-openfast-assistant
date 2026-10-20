@@ -1,0 +1,76 @@
+#page-engineering .tidal-reading{background-image:linear-gradient(140deg,#001c2f22,#001c2f5e),url('./assets/tidal-reading-ocean-hd.png')}
+#page-engineering .tidal-step-visual{position:relative;max-width:350px;height:145px}
+.tidal-sprite-window{position:relative;overflow:hidden;width:100%;height:100%;margin:auto;isolation:isolate}
+.tidal-sprite-window{mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
+.tidal-sprite-window img{position:absolute;top:0;left:0;width:300%;max-width:none;height:100%;object-fit:fill;display:block}
+.tidal-sprite-1 img{transform:translateX(-33.333333%)}
+.tidal-sprite-2 img{transform:translateX(-66.666667%)}
+.tidal-sprite-1{width:62%}
+.tidal-sprite-1{clip-path:polygon(15% 0,100% 0,100% 100%,0 100%,0 80%,15% 80%)}
+.tidal-diagram-label{position:absolute;font:8px/1.6 'Microsoft YaHei',sans-serif;color:#bde6f6;border:1px solid #77cee780;border-radius:15px;padding:3px 7px;background:#00344b77;white-space:nowrap}
+.tidal-diagram-label:after{content:'';position:absolute;top:50%;width:22px;height:1px;background:#7acfe680}
+.input-label{left:0;top:24%}.state-label{left:0;top:64%}.control-label{right:0;top:24%}.solver-label{right:0;top:64%}
+.input-label:after,.state-label:after{left:100%}.control-label:after,.solver-label:after{right:100%}
+#page-engineering .tidal-reading .tidal-step .tidal-step-arrow{font:31px/1 Georgia,serif;top:109px;color:#a2e8ff}
+#page-engineering .tidal-reading .atlas-reading{height:290px}
+#page-engineering .tidal-reading .tidal-step p{margin-top:3px}
+.tidal-module-visual .tidal-platform img{width:100%;height:100%;object-fit:contain;display:block;filter:drop-shadow(0 0 7px #5ee7f822)}
+#page-engineering .ocean-scene{background-image:url('./assets/engineering-ocean-tower-hd.png')}
+@media(max-width:900px){#page-engineering .tidal-reading .atlas-reading{height:auto}#page-engineering .tidal-step-visual{height:150px}.tidal-diagram-label{font-size:8px}.tidal-diagram-label:after{width:15px}}
+@media(max-width:600px){#page-engineering .tidal-step-visual{height:135px}.tidal-diagram-label{font-size:7px;padding:2px 5px}.tidal-diagram-label:after{width:9px}}
+
+/* Illustration first; module notes and the live AI discussion share the right column. */
+#page-engineering .tidal-reading .atlas-detail-grid{grid-template-columns:minmax(0,1.13fr) minmax(0,1fr);gap:30px}
+#page-engineering .tidal-reading .tidal-image-card{display:flex;flex-direction:column;padding:34px 32px 28px;min-height:470px}
+#page-engineering .tidal-image-card .tidal-module-visual{flex:1;height:390px;min-height:350px;margin:10px -16px 0}
+#page-engineering .tidal-image-card .tidal-component-label{top:31%;right:6%}
+#page-engineering .tidal-image-card .tidal-module-visual img{transform:scale(1.12)}
+#page-engineering .tidal-image-card .tidal-module-visual>small{bottom:12px;right:6%}
+#page-engineering .tidal-reading .atlas-accordions{padding-top:14px;gap:22px}
+.tidal-section-label{font:10px/1.8 Consolas,monospace;letter-spacing:2px;color:#75d6ed}
+#page-engineering .tidal-module-info h3{font:600 clamp(21px,1.8vw,29px)/1.5 'Microsoft YaHei',sans-serif;color:#effcff;margin:9px 0 10px}
+#page-engineering .tidal-module-info>p{font-size:14px;line-height:1.9;color:#bcdfee;margin:0 0 16px}
+#page-engineering .tidal-module-info dl{margin:0;display:grid}
+#page-engineering .tidal-module-info dl>div{display:grid;grid-template-columns:90px minmax(0,1fr);gap:15px;padding:13px 0;border-top:1px solid #8addec36;align-items:baseline}
+#page-engineering .tidal-module-info dt{color:#9dc8da;font-size:12px}
+#page-engineering .tidal-module-info dd{margin:0;color:#e1f7ff;font-size:14px;line-height:1.6;font-weight:500;overflow-wrap:anywhere}
+.tidal-ask-ai{padding:18px 20px;border:1px solid #6bdbf367;border-radius:20px 6px 20px 6px;background:linear-gradient(125deg,#17607c55,#00283c80);box-shadow:inset 0 1px #a3ebff25}
+.tidal-ai-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}
+#page-engineering .tidal-ai-heading h3{margin:0;color:#b9f5ff;font:600 19px/1.5 'Microsoft YaHei',sans-serif}
+#page-engineering .tidal-ai-connect{border:0;background:transparent;color:#8ee8f4;padding:4px 0;font-size:12px}
+.tidal-ai-hint{font-size:12px;color:#a0c9dc;margin:7px 0 12px}
+.tidal-ai-form textarea{box-sizing:border-box;display:block;width:100%;min-height:66px;resize:vertical;border:1px solid #7bd3ed55;border-radius:9px;padding:11px 12px;background:#001e345e;color:#ecfbff;font:13px/1.7 'Microsoft YaHei',sans-serif}
+.tidal-ai-form textarea::placeholder{color:#8db4c8}
+.tidal-ai-form textarea:focus-visible{outline:2px solid #74efff;outline-offset:2px}
+.tidal-ai-submit{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:11px}
+.tidal-ai-submit small{font-size:10px;line-height:1.7;color:#8eb9ca}
+#page-engineering .tidal-ai-submit button{flex-shrink:0;border:1px solid #6ce4f38c;border-radius:18px;padding:7px 13px;background:#155c7377;color:#bcf8ff;font-size:12px}
+#page-engineering .tidal-ai-submit button:disabled{opacity:.55;cursor:wait}
+.tidal-ai-answer{white-space:pre-wrap;overflow-wrap:anywhere;font-size:13px;line-height:1.9;color:#d2edf7;border-top:1px solid #70d0e533;padding-top:12px;margin:14px 0 0;max-height:260px;overflow:auto}
+#page-engineering .tidal-reading .tidal-reading-tools{padding-top:0}
+#page-engineering .tidal-reading .tidal-reading-tools{flex-wrap:wrap}
+#page-engineering .tidal-reading .tidal-reading-tools .tidal-diagram-button{display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;min-height:48px;padding:11px 17px;border:1px solid #8ce4f5b8;border-radius:24px;background:linear-gradient(125deg,#123f55f5,#06283bf5);color:#f0fcff;font-size:13px;font-weight:600;line-height:1.6;letter-spacing:.3px;text-shadow:0 1px 2px #001522;box-shadow:inset 0 1px 0 #b6f3ff26,0 3px 12px #00142466;transition:background .18s,border-color .18s,box-shadow .18s}
+#page-engineering .tidal-reading .tidal-reading-tools .tidal-diagram-button:hover,#page-engineering .tidal-reading .tidal-reading-tools .tidal-diagram-button[aria-expanded=true]{background:linear-gradient(125deg,#15576cf5,#09364bf5);border-color:#aaf8ff;box-shadow:inset 0 1px 0 #b6f3ff38,0 0 13px #3cd5f330}
+#page-engineering .tidal-reading .tidal-reading-tools .tidal-diagram-button:focus-visible{outline:2px solid #c0fbff;outline-offset:4px}
+@media(min-width:901px){
+ #page-engineering .tidal-reading .atlas-reading{height:320px;padding-top:32px;padding-bottom:60px}
+ #page-engineering .tidal-step-visual{height:130px}
+ #page-engineering .tidal-reading .tidal-step p{font-size:13px;line-height:1.8;margin-top:0}
+ #page-engineering .tidal-chart-note{position:static;align-self:flex-end;margin-top:3px}
+ #page-engineering .sea-mooring{left:auto;right:49.5%;top:69%;max-width:110px;white-space:nowrap;text-align:right;font-size:12px}
+}
+@media(max-width:900px){
+ #page-engineering .tidal-reading .atlas-detail-grid{grid-template-columns:1fr}
+ #page-engineering .tidal-reading .tidal-image-card{min-height:350px;padding:28px}
+ #page-engineering .tidal-image-card .tidal-module-visual{height:300px;min-height:280px}
+ #page-engineering .tidal-chart-note{position:static;margin-top:4px}
+}
+@media(max-width:600px){
+ #page-engineering .tidal-reading .tidal-image-card{min-height:230px;padding:22px 16px}
+ #page-engineering .tidal-image-card .tidal-module-visual{height:200px;min-height:190px}
+ #page-engineering .tidal-module-info h3{font-size:20px}
+ #page-engineering .tidal-module-info>p{font-size:12px}
+ #page-engineering .tidal-module-info dl>div{grid-template-columns:1fr;gap:4px}
+ #page-engineering .tidal-module-info dd{font-size:12px}
+ .tidal-ask-ai{padding:15px 12px}.tidal-ai-submit{align-items:flex-end;flex-wrap:wrap}
+}

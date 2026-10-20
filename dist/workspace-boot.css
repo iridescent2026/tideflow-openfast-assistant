@@ -1,0 +1,4 @@
+html:not([data-workspace-ready]) #page-engineering{visibility:hidden}
+#workspace-loading{position:fixed;z-index:10000;bottom:24px;left:50%;transform:translateX(-50%);max-width:calc(100vw - 32px);padding:14px 22px;border:1px solid #81dce5;border-radius:14px;background:#092e44;color:#e5faff;box-shadow:0 8px 35px #00152380;font:15px/1.6 system-ui}
+#workspace-loading[hidden]{display:none}
+#workspace-loading button{margin-left:16px;padding:7px 14px;border-radius:8px;background:#89eff1;color:#082b40;cursor:pointer}

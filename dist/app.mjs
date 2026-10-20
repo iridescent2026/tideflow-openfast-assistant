@@ -5,11 +5,11 @@ const $=id=>document.getElementById(id),esc=s=>String(s??'').replace(/[&<>"']/g,
 const fmt=(v,d=1)=>Number.isFinite(v)?v.toLocaleString('zh-CN',{minimumFractionDigits:d,maximumFractionDigits:d}):'—';
 const COLORS=['#4e8de5','#58b9bf','#a18ad0','#e2ad66'];
 const STORAGE='tideflow-workspace-v1';
-let runs=[],selected=null,comparison=new Set(),local=false,token=null,active=null,channel='GenPwr',topic='summary',ai=null,aiAbort=null,pollTimer=null,toastTimer=null,imported=[],draft={...DEFAULTS},polling=false,knowledge=[];
+let runs=[],selected=null,comparison=new Set(),local=false,token=null,active=null,channel='GenPwr',topic='summary',ai=null,aiAbort=null,engineeringAbort=null,pollTimer=null,toastTimer=null,imported=[],draft={...DEFAULTS},polling=false,knowledge=[];
 function current(){return runs.find(r=>r.id===selected)||null;}
 function toast(text,error=false){clearTimeout(toastTimer);$('toast').textContent=text;$('toast').className='toast'+(error?' error':'');$('toast').hidden=false;toastTimer=setTimeout(()=>$('toast').hidden=true,6000);}
 function download(name,content,type='application/json'){const url=URL.createObjectURL(new Blob([content],{type})),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),2000);}
-function cancelAI(){if(aiAbort){aiAbort.abort();aiAbort=null;}}
+function cancelAI(){if(aiAbort){aiAbort.abort();aiAbort=null;}engineeringAbort?.abort();}
 function persist(){try{localStorage.setItem(STORAGE,JSON.stringify({selected,comparison:[...comparison],draft,imported}));}catch{toast('浏览器存储空间不足，请导出工作区备份。',true);}}
 function labelSource(r){return r.source_kind==='imported-unverified'?'用户导入 · 待核验':r.source_kind==='bundled-openfast'?'内置真实算例':'本机 OpenFAST';}
 function waveLabel(p){return p.wave_mode==='regular'?'规则波':'JONSWAP';}
@@ -58,6 +58,18 @@ function reportHTML(){const r=current();if(!r?.result)throw Error('请选择已�
 }
 function renderReview(){const r=current(),review=windowReview(r);$('quality-notes').textContent=review.notes.join(' ');$('quality-table').innerHTML=review.channels.length?`<table><thead><tr><th>通道</th><th>前半窗均值</th><th>后半窗均值</th><th>均值变化 / 较大 RMS</th></tr></thead><tbody>${review.channels.map(c=>`<tr><td>${CHANNELS[c.name].label} / ${CHANNELS[c.name].unit}</td><td>${fmt(c.first,3)}</td><td>${fmt(c.second,3)}</td><td>${fmt(c.relative_shift*100,1)}%</td></tr>`).join('')}</tbody></table>`:'';}
 function showReferences(refs){$('ai-references').innerHTML=refs.map(e=>`<p><a href="${esc(e.url)}" target="_blank" rel="noopener">[${esc(e.id)}] ${esc(e.title)} ↗</a><br>${esc(e.summary)}</p>`).join('');}
+window.addEventListener('tideflow:engineering-ask',async e=>{
+ const {requestId,question,module}=e.detail||{};
+ const reply=text=>window.dispatchEvent(new CustomEvent('tideflow:engineering-answer',{detail:{requestId,text}}));
+ if(typeof question!=='string'||!question.trim()||question.length>600)return;
+ engineeringAbort?.abort();
+ if(!ai){reply('请先点击“连接 AI”填写接口、模型和密钥，连接后可继续发送这个问题。');return;}
+ const controller=new AbortController();engineeringAbort=controller;
+ const timer=setTimeout(()=>controller.abort(),45000);
+ try{const text=await requestAI(ai,{question,context:{kind:'工程原理讨论',module,limits:['仅讨论给定模块原理；此处没有真实运行结果，不得编造数值或仿真结论。']},local,token,signal:controller.signal});reply(text);}
+ catch(error){reply(controller.signal.aborted?'请求已取消或超时，请重试。':'AI 暂时无法回答：'+error.message);}
+ finally{clearTimeout(timer);if(engineeringAbort===controller)engineeringAbort=null;}
+});
 async function askAI(q){const r=current();if(!r)return;const context=aiContext(r,q,knowledge,readForm());showReferences(context.references);if(!ai){$('insight-text').textContent=ruleExplanation(r,topic);toast('当前使用规则解释；下方提供相关文档依据。');return;}cancelAI();const controller=new AbortController();aiAbort=controller;const timer=setTimeout(()=>controller.abort(),45000);$('insight-text').textContent='正在结合工况证据与文档摘要请求模型…';
 try{const text=await requestAI(ai,{question:q,context,local,token,signal:controller.signal});if(aiAbort===controller)$('insight-text').textContent=text+'\n\n模型生成解释，引用编号对应下方材料；仍需专业复核。';}catch(error){if(aiAbort===controller){$('insight-text').textContent=ruleExplanation(r,topic);toast((error.name==='AbortError'?'模型请求超时':error.message)+'；已恢复规则解释。',true);}}finally{clearTimeout(timer);if(aiAbort===controller)aiAbort=null;}}
 document.querySelectorAll('.close').forEach(b=>b.onclick=()=>b.closest('dialog').close());document.querySelectorAll('dialog').forEach(d=>d.onclick=e=>{if(e.target===d){const r=d.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)d.close();}});
@@ -91,3 +103,10 @@ async function init(){try{let restored=null;try{const raw=localStorage.getItem(S
  fillForm(current()?.params||draft);render();if(active)pollTimer=setTimeout(poll,1000);
  }catch(error){$('result-title').textContent='数据尚未就绪';$('insight-text').textContent=error.message;$('time-chart').innerHTML='<div class="empty">数据加载失败。请确认通过 HTTP 服务打开，且 samples.json 存在。</div>';$('connection-label').textContent='加载失败';toast(error.message,true);}}
 init();
+
+// Stable UI bridge: enhancements consume the same records and operations as the
+// original workbench, never a second demo dataset or a second polling loop.
+export function workspaceState(){return {runs:[...runs],record:current(),plots:plots(),comparison:[...comparison],local,active};}
+export function workspaceSelect(id){selectRun(id);}
+export function workspaceCompare(ids){comparison=new Set(ids.filter(id=>runs.some(r=>r.id===id&&r.status==='completed')).slice(0,4));render();persist();}
+export function workspaceReport(){return reportHTML();}
