@@ -1,0 +1,4 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {baselinePercent,responseSeries} from '../dist/response-plot.mjs';
+const a={rpm:9,power:1000,pitch:2,surge:5},b={rpm:12,power:2000,pitch:3,surge:6};
+test('three response curves compare different units only as dimensionless percentages',()=>{const curves=responseSeries([a,b],a);assert.equal(curves.length,3);assert.deepEqual(curves.map(c=>c.values[0].value),[0,0,0]);assert.deepEqual(curves.map(c=>c.values[1].value),[100,50,20]);assert.equal(responseSeries([a,b],a,'power')[0].values[1].value,2000);});
+test('zero or invalid baselines cannot produce false percentage curves',()=>{assert.equal(baselinePercent(5,0),null);assert.equal(baselinePercent(NaN,2),null);assert.equal(responseSeries([a,b],{...a,pitch:0}).length,2);});
