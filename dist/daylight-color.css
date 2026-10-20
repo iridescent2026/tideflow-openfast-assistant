@@ -1,0 +1,40 @@
+/* Color correction of existing scene pixels only. No colored overlay or blend. */
+
+/* Isolate the home photograph so its text, controls and original scrim stay intact. */
+body[data-page=home] .ocean-home{background-image:none}
+body[data-page=home] .ocean-home:before{content:'';position:absolute;inset:0;background:url('./assets/ocean-home.png') center/cover no-repeat;filter:brightness(1.5) contrast(1.04) saturate(1.35) hue-rotate(12deg);pointer-events:none}
+@media(max-width:700px){body[data-page=home] .ocean-home:before{background-position:77% center}}
+
+/* The model's WebGL canvas is separate from this photographic environment. */
+body[data-page=model] #page-model .model-stage{background-image:none}
+body[data-page=model] #page-model .model-stage:before{background:url('./assets/model-ocean-environment.png') center/cover no-repeat;mask-image:none;filter:brightness(1.5) contrast(1.03) saturate(1.22);opacity:1}
+
+/* Match the existing sunny engineering reference without changing its composition. */
+body[data-page=engineering] #page-engineering .ocean-scene{filter:brightness(1.02) saturate(1.03)}
+body[data-page=configure] .lab-viewport{filter:brightness(1.07) contrast(1.02) saturate(1.12)}
+
+/* Direct image correction: preserve highlights and the original ocean detail. */
+body[data-page=analysis]::before{background-image:url('./assets/analysis-deepsea.png');filter:contrast(0.82) brightness(1.8) saturate(1.35) hue-rotate(5deg)}
+
+/* Grade the room photographs alone; report paper and log panels are not filtered. */
+body.tidal-navigation:is([data-page=records],[data-page=reports]){background-image:none}
+body.tidal-navigation:is([data-page=records],[data-page=reports])::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;background-position:center top;background-size:100vw 100vh;background-repeat:no-repeat;filter:brightness(1.12) contrast(1.03) saturate(1.22)}
+body.tidal-navigation[data-page=records]::before{background-image:url('./assets/workspace-records.png')}
+body.tidal-navigation[data-page=reports]::before{background-image:url('./assets/workspace-reports.png')}
+
+/* On-screen report preview shares the surrounding marine palette. Export stays unchanged. */
+@media screen{
+ #page-reports .op-paper{background:#20465f;border-color:#6695b2;color:#e2eff8;scrollbar-color:#6795af #20465f}
+ #page-reports .op-paper .report-body{color:#d7e8f4}
+ #page-reports .op-paper .report-body :is(h1,h2,h3){color:#f0f8ff}
+ #page-reports .op-paper .report-body :is(p,ul,li){color:#d0e3f1}
+ #page-reports .op-paper :is(.stamp,.op-document-label){color:#a8d5ed;border-color:#5f8da8}
+ #page-reports .op-paper .report-body :is(th,td){color:#deedf7;border-color:#527c96;background:transparent}
+ #page-reports .op-paper .report-body th{background:#2c5b77;color:#f0f9ff}
+ #page-reports .op-paper .report-body tbody tr:nth-child(2n){background:#afd6ef0a}
+ #page-reports .op-paper .report-body a{color:#91e6f6}
+ #page-reports .op-paper .report-chart{background:#193b53;border-color:#527c96}
+ #page-reports .op-paper .report-chart svg text{fill:#cee4f2}
+ #page-reports .op-paper .report-chart svg line{stroke:#678aa0}
+ #page-reports .op-paper .report-chart svg rect[fill="#edf5fe"]{fill:#315f7c}
+}
